@@ -16,7 +16,35 @@ The following backends are supported:
 > [!NOTE]
 > This project is offered under a [dual-licence](LICENSE) model.
 
-## Examples
+## CLI Usage
+
+Pipe verifier output to `formal-lib` to parse it into structured output:
+
+```bash
+esbmc --k-induction --k-step 2 --max-k-step 10 file.c 2>&1 | formal-lib --esbmc
+```
+
+Output formats can be selected with `-f`:
+
+```bash
+# Pretty-printed (default)
+esbmc file.c 2>&1 | formal-lib --esbmc
+
+# JSON
+esbmc file.c 2>&1 | formal-lib --esbmc -f json
+
+# Compact JSON (single line, no whitespace)
+esbmc file.c 2>&1 | formal-lib --esbmc -f json-compact
+```
+
+Other backends work the same way:
+
+```bash
+clang -fsyntax-only file.c 2>&1 | formal-lib --clang
+pytest tests/ 2>&1 | formal-lib --pytest
+```
+
+## Library Examples
 
 ### Formatting ESBMC output
 
