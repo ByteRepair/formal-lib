@@ -11,8 +11,9 @@ from hashlib import sha256
 import pickle
 import zlib
 
+from dataclasses import dataclass
+
 from platformdirs import user_cache_dir
-from pydantic import BaseModel, DirectoryPath, FilePath, Field
 
 from formal_lib.verifier_output import VerifierOutput
 from formal_lib.issue_parser import IssueRegexSpec, IssueSpecOutputParser
@@ -31,21 +32,25 @@ class VerifierTimedOutException(Exception):
     determined."""
 
 
-class VerifierRunner(BaseModel):
+@dataclass
+class VerifierRunner:
     """Runs an external verifier command and parses its output."""
 
-    base_cmd: FilePath = Field()
+    base_cmd: Path
     """Path to the binary"""
-    exit_success: int = Field(default=0)
+    regex_spec: IssueRegexSpec
+    """Regex specification for parsing verifier output."""
+    exit_success: int = 0
     """Return code that indicates successful verification."""
-    default_timeout: int | None = Field(default=None)
+    default_timeout: int | None = None
     """Default timeout in seconds. Used when verify_source is called without
     an explicit timeout."""
-    enable_cache: bool = Field(default=False)
+    enable_cache: bool = False
     """Whether to enable result caching."""
-    regex_spec: IssueRegexSpec = Field()
-    """Regex specification for parsing verifier output. If None, inferred from
-    source file extensions."""
+
+    def __post_init__(self) -> None:
+        if not self.base_cmd.is_file():
+            raise FileNotFoundError(f"Verifier binary not found: {self.base_cmd}")
 
     def _cache_name_pack(self, properties: Any) -> Any:
         """Packs additional version properties to the cache name in order to ensure
@@ -121,9 +126,9 @@ class VerifierRunner(BaseModel):
 
     def verify_source(
         self,
-        *source_paths: FilePath | DirectoryPath,
-        file_paths: list[FilePath] | None = None,
-        include_paths: list[DirectoryPath] | None = None,
+        *source_paths: Path,
+        file_paths: list[Path] | None = None,
+        include_paths: list[Path] | None = None,
         timeout: int | None = None,
         cwd: Path | None = None,
     ) -> VerifierOutput:
@@ -137,10 +142,10 @@ class VerifierRunner(BaseModel):
             if file_paths
             else False or len(include_paths) if include_paths else False
         )
-        sources: list[FilePath | DirectoryPath] = list(source_paths)
+        sources: list[Path] = list(source_paths)
         if not source_paths:
             assert file_paths and include_paths
-            sources = cast(list[FilePath | DirectoryPath], file_paths + include_paths)
+            sources = cast(list[Path], file_paths + include_paths)
 
         resolved_cwd = cwd or Path(os.getcwd())
 
