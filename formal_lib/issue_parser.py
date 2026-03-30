@@ -172,7 +172,7 @@ class IssueSpecOutputParser:
 
             name_match = re.search(spec.name, entry_text)
             path = Path(path_match.group(1))
-            name = name_match.group(1) if name_match else None
+            name = name_match.group(1) if name_match and name_match.lastindex else None
             line_idx = int(line_idx_match.group(1)) - 1  # Convert to 0-based
 
             if (
