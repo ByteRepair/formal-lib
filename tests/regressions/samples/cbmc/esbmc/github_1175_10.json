@@ -1,0 +1,152 @@
+{
+  "return_code": 0,
+  "issues": [
+    {
+      "error_type": "dereference",
+      "message": "dereference failure: pointer NULL in *ptr",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 6
+        }
+      ],
+      "severity": "error",
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 4,
+          "assignment": "flag=TRUE (00000001)"
+        },
+        {
+          "trace_index": 1,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 5,
+          "assignment": "ptr=((signed int *)NULL) + 1l (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)"
+        }
+      ]
+    },
+    {
+      "error_type": "dereference",
+      "message": "dereference failure: deallocated dynamic object in *ptr",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 6
+        }
+      ],
+      "severity": "error",
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 4,
+          "assignment": "flag=TRUE (00000001)"
+        },
+        {
+          "trace_index": 1,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 5,
+          "assignment": "ptr=((signed int *)NULL) + 1l (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)"
+        }
+      ]
+    },
+    {
+      "error_type": "dereference",
+      "message": "dereference failure: dead object in *ptr",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 6
+        }
+      ],
+      "severity": "error",
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 4,
+          "assignment": "flag=TRUE (00000001)"
+        },
+        {
+          "trace_index": 1,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 5,
+          "assignment": "ptr=((signed int *)NULL) + 1l (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)"
+        }
+      ]
+    },
+    {
+      "error_type": "dereference",
+      "message": "dereference failure: pointer outside object bounds in *ptr",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 6
+        }
+      ],
+      "severity": "error",
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 4,
+          "assignment": "flag=TRUE (00000001)"
+        },
+        {
+          "trace_index": 1,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 5,
+          "assignment": "ptr=((signed int *)NULL) + 1l (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)"
+        }
+      ]
+    },
+    {
+      "error_type": "dereference",
+      "message": "dereference failure: invalid integer address in *ptr",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 6
+        }
+      ],
+      "severity": "error",
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 4,
+          "assignment": "flag=TRUE (00000001)"
+        },
+        {
+          "trace_index": 1,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1175_10/main.c",
+          "name": "main",
+          "line_idx": 5,
+          "assignment": "ptr=((signed int *)NULL) + 1l (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)"
+        }
+      ]
+    }
+  ],
+  "duration": 0.0,
+  "exit_success": 0
+}

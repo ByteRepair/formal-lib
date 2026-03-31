@@ -1,0 +1,36 @@
+{
+  "return_code": 0,
+  "issues": [
+    {
+      "error_type": "array",
+      "message": "array 'F'.arr upper bound in F.arr[(signed long int)10]",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/fam_false_0/main.c",
+          "name": "main",
+          "line_idx": 7
+        }
+      ],
+      "severity": "error",
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/fam_false_0/main.c",
+          "name": "main",
+          "line_idx": 6,
+          "assignment": "F.v=1 (00000000 00000000 00000000 00000001)"
+        },
+        {
+          "trace_index": 1,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/fam_false_0/main.c",
+          "name": "main",
+          "line_idx": 6,
+          "assignment": "F.arr={  } ( })"
+        }
+      ]
+    }
+  ],
+  "duration": 0.0,
+  "exit_success": 0
+}

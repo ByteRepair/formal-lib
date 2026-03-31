@@ -10,10 +10,11 @@ from time import perf_counter
 from formal_lib.issue import VerifierIssue
 from formal_lib.issue_parser import IssueRegexSpec, IssueSpecOutputParser
 from formal_lib.verifier_output import VerifierOutput
-from formal_lib.specs import clang_spec, esbmc_spec, pytest_spec
+from formal_lib.specs import cbmc_spec, clang_spec, esbmc_spec, pytest_spec
 
 SPECS: dict[str, IssueRegexSpec] = {
     "esbmc": esbmc_spec,
+    "cbmc": cbmc_spec,
     "clang": clang_spec,
     "pytest": pytest_spec,
 }

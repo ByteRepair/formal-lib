@@ -1,0 +1,51 @@
+{
+  "return_code": 0,
+  "issues": [
+    {
+      "error_type": "division",
+      "message": "division by zero in 5 / num",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1890_1/main.c",
+          "name": "main",
+          "line_idx": 4
+        }
+      ],
+      "severity": "error",
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1890_1/main.c",
+          "name": "main",
+          "line_idx": 3,
+          "assignment": "num=0 (00000000 00000000 00000000 00000000)"
+        }
+      ]
+    },
+    {
+      "error_type": "division",
+      "message": "division by zero in 5 / num1",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1890_1/main.c",
+          "name": "main",
+          "line_idx": 12
+        }
+      ],
+      "severity": "error",
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/github_1890_1/main.c",
+          "name": "main",
+          "line_idx": 3,
+          "assignment": "num=0 (00000000 00000000 00000000 00000000)"
+        }
+      ]
+    }
+  ],
+  "duration": 0.0,
+  "exit_success": 0
+}

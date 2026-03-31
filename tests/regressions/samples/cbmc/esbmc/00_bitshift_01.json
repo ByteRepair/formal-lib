@@ -1,0 +1,71 @@
+{
+  "return_code": 0,
+  "issues": [
+    {
+      "error_type": "assertion",
+      "message": "assertion 0",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c",
+          "name": "main",
+          "line_idx": 9
+        }
+      ],
+      "severity": "error",
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c",
+          "name": "main",
+          "line_idx": 2,
+          "assignment": "ma=0u (00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 1,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c",
+          "name": "main",
+          "line_idx": 2,
+          "assignment": "mb=0u (00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 2,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c",
+          "name": "main",
+          "line_idx": 3,
+          "assignment": "accu=0ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 3,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c",
+          "name": "main",
+          "line_idx": 4,
+          "assignment": "ea=0 (00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 4,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c",
+          "name": "main",
+          "line_idx": 4,
+          "assignment": "eb=0 (00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 5,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c",
+          "name": "main",
+          "line_idx": 6,
+          "assignment": "accu=0ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 6,
+          "path": "/home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c",
+          "name": "main",
+          "line_idx": 7,
+          "assignment": "accu=0ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)"
+        }
+      ]
+    }
+  ],
+  "duration": 0.0,
+  "exit_success": 0
+}
