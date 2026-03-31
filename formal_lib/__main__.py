@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import re
 import sys
 from subprocess import PIPE, STDOUT, run
 from time import perf_counter
@@ -16,6 +17,16 @@ SPECS: dict[str, IssueRegexSpec] = {
     "clang": clang_spec,
     "pytest": pytest_spec,
 }
+
+
+def detect_spec(output: str) -> IssueRegexSpec:
+    """Auto-detect which spec matches the output using each spec's detect pattern."""
+    for name, spec in SPECS.items():
+        if spec.detect and re.search(spec.detect, output, re.MULTILINE):
+            return spec
+    names = ", ".join(SPECS)
+    print(f"error: could not detect backend from output, use --backend ({names})", file=sys.stderr)
+    sys.exit(1)
 
 
 def pretty_print(result: VerifierOutput) -> None:
@@ -50,15 +61,13 @@ def main() -> None:
         description="Parse verifier output into structured JSON. Reads from stdin, or runs a command directly when given after '--'.",
     )
 
-    spec_group = parser.add_mutually_exclusive_group(required=True)
-    for name in SPECS:
-        spec_group.add_argument(
-            f"--{name}",
-            dest="spec",
-            action="store_const",
-            const=name,
-            help=f"Parse output as {name}.",
-        )
+    parser.add_argument(
+        "-b",
+        "--backend",
+        choices=list(SPECS),
+        default=None,
+        help="Verifier backend. Auto-detected from output when omitted.",
+    )
 
     parser.add_argument(
         "-f",
@@ -76,8 +85,6 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    spec = SPECS[args.spec]
-
     command: list[str] = args.command
     if command and command[0] == "--":
         command = command[1:]
@@ -92,6 +99,8 @@ def main() -> None:
         output = sys.stdin.read()
         return_code = 0
         duration = 0.0
+
+    spec = SPECS[args.backend] if args.backend else detect_spec(output)
 
     result = IssueSpecOutputParser(spec).parse_output(
         exit_success=0,

@@ -100,6 +100,9 @@ class IssueRegexSpec:
     """Nested specification for parsing the stack trace within this issue."""
     severity: str
     """Regex pattern to extract the severity level (e.g., 'error', 'warning', 'info')."""
+    detect: str = ""
+    """Regex pattern to detect if output was produced by this verifier.
+    Matched against the full output with MULTILINE. Empty means no auto-detection."""
     counterexample_spec: CounterexampleRegexSpec | None = None
     """Optional nested specification for parsing counterexample traces."""
     cache_properties: CachePropertiesFn | None = field(default=None)

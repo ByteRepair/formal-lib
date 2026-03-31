@@ -7,6 +7,8 @@ from formal_lib.issue_parser import (
 )
 
 esbmc_spec: IssueRegexSpec = IssueRegexSpec(
+    # Detect ESBMC by its version banner (e.g. "ESBMC version 8.1.0 64-bit x86_64 linux").
+    detect=r"^ESBMC version \d+",
     # Each [Counterexample] section is an issue block.
     # Matches from [Counterexample] to the next one or end of string.
     block=r"\[Counterexample\].*?(?=\[Counterexample\]|\Z)",

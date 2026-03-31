@@ -45,7 +45,7 @@ def test_sample_output_matches_expected(
     expected = json.loads(json_file.read_text())
 
     result = subprocess.run(
-        ["formal-lib", f"--{spec}", "--format", "json-compact"],
+        ["formal-lib", "--backend", spec, "--format", "json-compact"],
         input=log_content,
         capture_output=True,
         text=True,
