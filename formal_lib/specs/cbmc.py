@@ -43,5 +43,6 @@ cbmc_spec: IssueRegexSpec = IssueRegexSpec(
         line_index=r"line\s+(\d+)",
         # Require at least one char so states with no assignment return None.
         assignment=r"\n[-]+\n(.+)",
+        missing="Needs --trace",
     ),
 )

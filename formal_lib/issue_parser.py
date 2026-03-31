@@ -51,6 +51,9 @@ class StackTraceRegexSpec:
     """Regex pattern to extract the function/symbol name from a trace entry."""
     line_index: str
     """Regex pattern to extract the line number from a trace entry."""
+    missing: str = ""
+    """Human-readable hint shown when no traces are found, explaining which
+    verifier flag is needed (e.g. 'Needs --trace')."""
 
 
 @dataclass
@@ -239,7 +242,7 @@ class IssueSpecOutputParser:
             issue_text,
             self.regex_spec.stack_trace_spec,
         )
-
+        stack_trace_hint = self.regex_spec.stack_trace_spec.missing
 
         # Parse counterexample if spec provides one
         ce_spec = self.regex_spec.counterexample_spec
@@ -254,10 +257,12 @@ class IssueSpecOutputParser:
                     error_type=error_type,
                     message=message,
                     stack_trace=stack_trace,
+                    stack_trace_hint=stack_trace_hint,
                     counterexample=cast(
                         list[CounterexampleProgramTrace],
                         counterexample,
                     ),
+                    counterexample_hint=ce_spec.missing,
                     severity=severity,
                 )
 
@@ -265,5 +270,6 @@ class IssueSpecOutputParser:
             error_type=error_type,
             message=message,
             stack_trace=stack_trace,
+            stack_trace_hint=stack_trace_hint,
             severity=severity,
         )

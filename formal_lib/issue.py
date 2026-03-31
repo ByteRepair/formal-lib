@@ -30,6 +30,8 @@ class Issue(BaseModel):
     """Stack trace as structured data."""
     severity: IssueSeverities = Field(default="error", description="Severity level.")
     """Severity level."""
+    stack_trace_hint: str = Field(default="", exclude=True)
+    """Hint explaining why stack_trace may be empty (e.g. missing verifier flag)."""
 
     # Convenience properties
     # Note: All properties derive from the last trace point (stack_trace[-1]) as this
@@ -77,7 +79,8 @@ class Issue(BaseModel):
             at helper in file.c:42
         """
         if not self.stack_trace:
-            return "Not available"
+            hint = f" ({self.stack_trace_hint})" if self.stack_trace_hint else ""
+            return f"Not available{hint}"
         lines = []
         for trace in self.stack_trace:
             func_name = trace.name if trace.name else "<unknown>"
@@ -105,6 +108,8 @@ class VerifierIssue(Issue):
         description="Counterexample demonstrating bug."
     )
     """Counterexample demonstrating bug."""
+    counterexample_hint: str = Field(default="", exclude=True)
+    """Hint explaining why counterexample may be empty (e.g. missing verifier flag)."""
 
     @property
     def counterexample_formatted(self) -> str:
@@ -118,6 +123,9 @@ class VerifierIssue(Issue):
             State 1: at helper in file.c:42
               dist[0] = 2147483647 (01111111 11111111 11111111 11111111)
         """
+        if not self.counterexample:
+            hint = f" ({self.counterexample_hint})" if self.counterexample_hint else ""
+            return f"Not available{hint}"
         lines = []
         for trace in self.counterexample:
             func_name = trace.name if trace.name else "<unknown>"

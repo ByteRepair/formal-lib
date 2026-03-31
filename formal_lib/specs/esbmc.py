@@ -29,6 +29,7 @@ esbmc_spec: IssueRegexSpec = IssueRegexSpec(
         # Extract callee symbol from c:@<letter>@ prefix (e.g. c:@F@main).
         name=r"c:@\w@(\S+)",
         line_index=r"line\s+(\d+)",
+        missing="Needs --show-stacktrace",
     ),
     counterexample_spec=CounterexampleRegexSpec(
         # Counterexample block: from [Counterexample] to Violated property.
