@@ -17,8 +17,8 @@ SPECS: dict[str, IssueRegexSpec] = {
 
 
 def pretty_print(result: VerifierOutput) -> None:
-    status = "SUCCESS" if result.successful else "FAILURE"
-    print(f"Verification: {status} (return code {result.return_code})")
+    status = "SUCCESS" if not result.issues else "FAILURE"
+    print(f"Verification: {status}")
 
     if not result.issues:
         print("No issues found.")
@@ -63,26 +63,15 @@ def main() -> None:
         default="pretty",
         help="Output format (default: pretty).",
     )
-    parser.add_argument(
-        "--return-code",
-        type=int,
-        default=1,
-        help="Return code of the verifier process (default: 1).",
-    )
-    parser.add_argument(
-        "--exit-success",
-        type=int,
-        default=0,
-        help="Return code that indicates successful verification (default: 0).",
-    )
-
     args = parser.parse_args()
 
     output = sys.stdin.read()
     spec = SPECS[args.spec]
+    # CLI only has access to stdout, not the verifier's exit code, so
+    # success is inferred from whether issues were found (see pretty_print).
     result = IssueSpecOutputParser(spec).parse_output(
-        exit_success=args.exit_success,
-        return_code=args.return_code,
+        exit_success=0,
+        return_code=0,
         duration=0.0,
         output=output,
     )
