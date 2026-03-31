@@ -3,6 +3,8 @@
 import argparse
 import json
 import sys
+from subprocess import PIPE, STDOUT, run
+from time import perf_counter
 
 from formal_lib.issue import VerifierIssue
 from formal_lib.issue_parser import IssueRegexSpec, IssueSpecOutputParser
@@ -45,7 +47,7 @@ def pretty_print(result: VerifierOutput) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="formal-lib",
-        description="Parse verifier output from stdin into structured JSON.",
+        description="Parse verifier output into structured JSON. Reads from stdin, or runs a command directly when given after '--'.",
     )
 
     spec_group = parser.add_mutually_exclusive_group(required=True)
@@ -65,16 +67,36 @@ def main() -> None:
         default="pretty",
         help="Output format (default: pretty).",
     )
+
+    parser.add_argument(
+        "command",
+        nargs=argparse.REMAINDER,
+        help="Command to run (after '--'). Captures exit code and duration.",
+    )
+
     args = parser.parse_args()
 
-    output = sys.stdin.read()
     spec = SPECS[args.spec]
-    # CLI only has access to stdout, not the verifier's exit code, so
-    # success is inferred from whether issues were found (see pretty_print).
+
+    command: list[str] = args.command
+    if command and command[0] == "--":
+        command = command[1:]
+
+    if command:
+        start_time = perf_counter()
+        process = run(command, stdout=PIPE, stderr=STDOUT, check=False)
+        duration = perf_counter() - start_time
+        output = process.stdout.decode("utf-8")
+        return_code = process.returncode
+    else:
+        output = sys.stdin.read()
+        return_code = 0
+        duration = 0.0
+
     result = IssueSpecOutputParser(spec).parse_output(
         exit_success=0,
-        return_code=0,
-        duration=0.0,
+        return_code=return_code,
+        duration=duration,
         output=output,
     )
 
