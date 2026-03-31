@@ -24,8 +24,8 @@ esbmc_spec: IssueRegexSpec = IssueRegexSpec(
         trace_entry=r"^[^\n]*\bfile\s+\S+\s+line\s+\d+[^\n]*",
         trace_index=r"^",
         path=r"file\s+(\S+)",
-        # Prefer "function <name>"; fall back to c:@ mangled symbol name.
-        name=r"(?:.*function\s+|c:@\w@)(\S+)",
+        # Extract callee symbol from c:@<letter>@ prefix (e.g. c:@F@main).
+        name=r"c:@\w@(\S+)",
         line_index=r"line\s+(\d+)",
     ),
     counterexample_spec=CounterexampleRegexSpec(

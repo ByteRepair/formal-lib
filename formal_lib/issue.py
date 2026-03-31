@@ -126,5 +126,5 @@ class VerifierIssue(Issue):
             )
             # Add assignment information if available
             if trace.assignment:
-                lines.append(f"\t\t{trace.assignment}")
+                lines.append("\t\t" + trace.assignment.replace("\n", "\n\t\t"))
         return "\n".join(lines)
