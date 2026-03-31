@@ -31,10 +31,12 @@ def pretty_print(result: VerifierOutput) -> None:
         print(f"Type: {issue.error_type}")
         if issue.message:
             print(f"Message: {issue.message}")
-        print(f"Location: {issue.file_path}:{issue.line_number}")
-        if issue.function_name:
-            print(f"Function: {issue.function_name}")
-        print(f"Stack trace:\n{issue.stack_trace_formatted}")
+        if issue.stack_trace:
+            print(f"Location: {issue.file_path}:{issue.line_number}")
+            if issue.function_name:
+                print(f"Function: {issue.function_name}")
+        sep = " " if not issue.stack_trace else "\n"
+        print(f"Stack trace:{sep}{issue.stack_trace_formatted}")
         if isinstance(issue, VerifierIssue):
             print(f"Counterexample:\n{issue.counterexample_formatted}")
         print()

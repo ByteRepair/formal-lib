@@ -237,16 +237,6 @@ class IssueSpecOutputParser:
             self.regex_spec.stack_trace_spec,
         )
 
-        # Ensure at least one trace point exists
-        if not stack_trace:
-            stack_trace.append(
-                ProgramTrace(
-                    trace_index=0,
-                    path=Path("unknown"),
-                    name=None,
-                    line_idx=0,
-                )
-            )
 
         # Parse counterexample if spec provides one
         ce_spec = self.regex_spec.counterexample_spec

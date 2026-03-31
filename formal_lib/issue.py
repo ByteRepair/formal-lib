@@ -25,10 +25,9 @@ class Issue(BaseModel):
     message: str = Field(description="Error description.")
     """Error description."""
     stack_trace: list[ProgramTrace] = Field(
-        min_length=1,
-        description="Stack trace as structured data. At least one trace point required.",
+        description="Stack trace as structured data.",
     )
-    """Stack trace as structured data. At least one trace point required."""
+    """Stack trace as structured data."""
     severity: IssueSeverities = Field(default="error", description="Severity level.")
     """Severity level."""
 
@@ -77,6 +76,8 @@ class Issue(BaseModel):
             at main in file.c:15
             at helper in file.c:42
         """
+        if not self.stack_trace:
+            return "Not available"
         lines = []
         for trace in self.stack_trace:
             func_name = trace.name if trace.name else "<unknown>"
