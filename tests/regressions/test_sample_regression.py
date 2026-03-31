@@ -25,7 +25,7 @@ def discover_samples() -> list[tuple[str, Path, Path]]:
         if not spec_dir.is_dir() or spec_dir.name not in KNOWN_SPECS:
             continue
         spec = spec_dir.name
-        for log_file in sorted(spec_dir.glob("*.log")):
+        for log_file in sorted(spec_dir.glob("**/*.log")):
             json_file = log_file.with_suffix(".json")
             if json_file.exists():
                 pairs.append((spec, log_file, json_file))

@@ -1,0 +1,23 @@
+{
+  "return_code": 0,
+  "issues": [
+    {
+      "error_type": "assertion",
+      "message": "size <= PAGE_SIZE",
+      "stack_trace": [
+        {"trace_index": 0, "path": "test.c", "name": "copy_from_user", "line_idx": 18},
+        {"trace_index": 1, "path": "test.c", "name": "main", "line_idx": 3}
+      ],
+      "severity": "error",
+      "counterexample": [
+        {"trace_index": 0, "path": "test.c", "name": "main", "line_idx": 6, "assignment": "kernel_index = 5903 (00000000 00000000 00010111 00001111)"},
+        {"trace_index": 1, "path": "test.c", "name": "main", "line_idx": 7, "assignment": "user_index = 8191 (00000000 00000000 00011111 11111111)"},
+        {"trace_index": 2, "path": "test.c", "name": "main", "line_idx": 13, "assignment": "kernel_addr = &kernel_memory[0] + 5903"},
+        {"trace_index": 3, "path": "test.c", "name": "main", "line_idx": 14, "assignment": "user_addr = &user_memory[0] + 8191"},
+        {"trace_index": 4, "path": "/home/runner/work/esbmc/esbmc/src/c2goto/library/kernel.c", "name": "copy_from_user", "line_idx": 110, "assignment": null}
+      ]
+    }
+  ],
+  "duration": 0.0,
+  "exit_success": 0
+}
