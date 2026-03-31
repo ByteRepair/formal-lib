@@ -11,22 +11,21 @@ esbmc_spec: IssueRegexSpec = IssueRegexSpec(
     # Matches from [Counterexample] to the next one or end of string.
     block=r"\[Counterexample\].*?(?=\[Counterexample\]|\Z)",
     # Error type from "Stack trace:" section — skip c:@ symbol lines,
-    # take text before the first colon on the error description line.
-    error_type=r"Stack trace:\n(?:\s+c:@\S*[^\n]*\n)*\s+([^:\n]+):",
-    # Error message — text after the colon on the same line.
-    message=r"Stack trace:\n(?:\s+c:@\S*[^\n]*\n)*\s+[^:\n]+:\s*(.+?)$",
+    # first word on the error description line (e.g. "assertion").
+    error_type=r"Stack trace:\n(?:\s+c:@\S*[^\n]*\n)*\s+(\S+)",
+    # Error message — everything after the first word on the same line.
+    message=r"Stack trace:\n(?:\s+c:@\S*[^\n]*\n)*\s+\S+\s+(.+?)$",
     # ESBMC issues are always errors.
     severity=r"(Violated property)",
     stack_trace_spec=StackTraceRegexSpec(
-        # Stack trace section: "Stack trace:" followed by indented lines,
-        # plus "Violated property:" location line before it.
-        block=r"(?:Violated property:\n\s+file[^\n]+\n|Stack trace:\n(?:\s+[^\n]+\n)*)",
-        # Individual trace entries: lines containing "at file ... line ... function ..."
-        # or the violated property location line "file ... line ... function ..."
-        trace_entry=r"(?:at\s+)?file\s+(\S+)\s+line\s+(\d+)[^\n]*function\s+(\S+)",
+        # Stack trace section: "Stack trace:" followed by indented lines.
+        block=r"Stack trace:\n(?:\s+[^\n]+\n)*",
+        # Full lines containing "file <path> line <num>", including any c:@ prefix.
+        trace_entry=r"^[^\n]*\bfile\s+\S+\s+line\s+\d+[^\n]*",
         trace_index=r"^",
         path=r"file\s+(\S+)",
-        name=r"function\s+(\S+)",
+        # Prefer "function <name>"; fall back to c:@ mangled symbol name.
+        name=r"(?:.*function\s+|c:@\w@)(\S+)",
         line_index=r"line\s+(\d+)",
     ),
     counterexample_spec=CounterexampleRegexSpec(
@@ -38,6 +37,7 @@ esbmc_spec: IssueRegexSpec = IssueRegexSpec(
         path=r"file\s+(\S+)",
         name=r"function\s+(\S+)",
         line_index=r"line\s+(\d+)",
-        assignment=r"\n[-]+\n(.*)",
+        # Require at least one char so states with no assignment return None.
+        assignment=r"\n[-]+\n(.+)",
     ),
 )
