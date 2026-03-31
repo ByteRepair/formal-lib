@@ -57,6 +57,16 @@ exclude_lines = [
 [tool.hatch.version]
 path = "formal_lib/__about__.py"
 
+[tool.pytest.ini_options]
+markers = ["regression: data-driven sample regression tests"]
+addopts = "-m 'not regression'"
+
+[tool.hatch.envs.regression]
+extra-dependencies = ["pytest"]
+
+[tool.hatch.envs.regression.scripts]
+test = "pytest -m regression -o 'addopts=' {args}"
+
 [tool.hatch.envs.types]
 extra-dependencies = [
   "mypy>=1.0.0",
