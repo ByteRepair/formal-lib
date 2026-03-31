@@ -4,7 +4,7 @@ from abc import abstractmethod
 from functools import cached_property
 from pathlib import Path
 
-from pydantic import Field, BaseModel
+from pydantic import Field, BaseModel, SerializeAsAny
 
 from formal_lib.program_trace import ProgramTrace
 from formal_lib.issue import Issue, VerifierIssue
@@ -22,7 +22,7 @@ class VerifierOutput(BaseModel):
     """The return code of the verifier."""
     output: str
     """The output of the verifier."""
-    issues: list[Issue] = Field(default_factory=list)
+    issues: list[SerializeAsAny[Issue]] = Field(default_factory=list)
     """List of issues/errors found during verification."""
     duration: float | None = None
     """Execution time in seconds."""
