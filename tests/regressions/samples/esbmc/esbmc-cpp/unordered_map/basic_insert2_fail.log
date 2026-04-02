@@ -1,0 +1,295 @@
+[CONFIG] loaded color = true
+ESBMC version 8.1.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+[1m[38;2;000;000;255m[PROGRESS] [0mParsing main.cpp
+[1m[38;2;000;000;255m[PROGRESS] [0mConverting
+[1m[38;2;255;000;000m[ERROR] [0mconflicting definition for variable 'stdout'
+  /usr/include/stdio.h:150:1: old definition in module stdio:  _IO_FILE *
+  /usr/include/stdio.h:150:1: new definition in module stdio:  struct _IO_FILE *
+[1m[38;2;255;000;000m[ERROR] [0mconflicting definition for variable 'stderr'
+  /usr/include/stdio.h:151:1: old definition in module stdio:  _IO_FILE *
+  /usr/include/stdio.h:151:1: new definition in module stdio:  struct _IO_FILE *
+[1m[38;2;255;000;000m[ERROR] [0mconflicting definition for variable 'stdin'
+  /usr/include/stdio.h:149:1: old definition in module stdio:  _IO_FILE *
+  /usr/include/stdio.h:149:1: new definition in module stdio:  struct _IO_FILE *
+[1m[38;2;255;255;000m[WARNING] [0mextern variable with id c:@N@std@cout not found, initializing value to nondet! This code would not compile with an actual compiler.
+[1m[38;2;255;255;000m[WARNING] [0mextern variable with id c:@N@std@cin not found, initializing value to nondet! This code would not compile with an actual compiler.
+[1m[38;2;255;255;000m[WARNING] [0mextern variable with id c:@errno not found, initializing value to nondet! This code would not compile with an actual compiler.
+[1m[38;2;255;255;000m[WARNING] [0mextern variable with id c:@stdin not found, initializing value to nondet! This code would not compile with an actual compiler.
+[1m[38;2;255;255;000m[WARNING] [0mextern variable with id c:@N@std@cerr not found, initializing value to nondet! This code would not compile with an actual compiler.
+[1m[38;2;255;255;000m[WARNING] [0mextern variable with id c:@stdout not found, initializing value to nondet! This code would not compile with an actual compiler.
+[1m[38;2;255;255;000m[WARNING] [0mextern variable with id c:@stderr not found, initializing value to nondet! This code would not compile with an actual compiler.
+[1m[38;2;000;000;255m[PROGRESS] [0mGenerating GOTO Program
+GOTO program creation time: 0.277s
+GOTO program processing time: 0.005s
+[1m[38;2;000;000;255m[PROGRESS] [0mStarting Bounded Model Checking
+[1m[38;2;255;255;000m[WARNING] [0mno body for function piecewise_construct_t#
+Unwinding loop 3 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 4 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 5 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Not unwinding loop 5 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 3 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 4 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 5 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Not unwinding loop 5 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 3 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 4 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 4 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 33 column 3 function strcpy
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 5 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Not unwinding loop 5 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 3 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 9 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 7   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Not unwinding loop 9 iteration 8   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 5 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Not unwinding loop 5 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 3 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 9 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 7   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Not unwinding loop 9 iteration 8   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 39 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 39 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Not unwinding loop 39 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 182 column 9 function find_index
+Unwinding loop 5 iteration 1   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 2   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 3   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 4   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 5   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 6   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 5 iteration 7   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Not unwinding loop 5 iteration 8   file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1493 column 3 function operator=
+Unwinding loop 3 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 3 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 92 column 3 function strlen
+Unwinding loop 9 iteration 1   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 2   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 3   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 4   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 5   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 6   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Unwinding loop 9 iteration 7   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Not unwinding loop 9 iteration 8   file /home/runner/work/esbmc/esbmc/src/c2goto/library/string.c line 110 column 12 function strcmp
+Symex completed in: 6.099s (4701 assignments)
+Caching time: 1.856s (removed 255 assertions)
+Slicing time: 0.106s (removed 1997 assignments)
+Generated 3672 VCC(s), 1059 remaining after simplification (2449 assignments)
+No solver specified; defaulting to Boolector
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 10.521s
+[1m[38;2;000;000;255m[PROGRESS] [0mSolving with solver Boolector 3.2.4
+Runtime decision procedure: 27.413s
+[1m[38;2;000;000;255m[PROGRESS] [0mBuilding error trace
+[38;2;255;000;000m
+[Counterexample]
+[0m
+
+State 16 file /../lib/gcc/x86_64-redhat-linux/15/../../../../include/c++/15/bits/stl_pair.h line 945 column 2 function operator= thread 0
+----------------------------------------------------
+  this->first = { .data_={ .first=10, .anon_pad$1=0, .second={ .str=&dynamic_2_array[0], ._size=0, .anon_pad$2=0 } }, .size_=0,
+    .hash_function_={}, .equal_function_={} }
+
+State 17 file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1490 column 3 function operator= thread 0
+----------------------------------------------------
+  this->_size = { .data_={ .first=10, .anon_pad$1=0, .second=3 }, .size_=0,
+    .hash_function_={}, .equal_function_={} }
+
+State 18 file /tmp/esbmc-cpp-headers-a176-9da3-3661/string line 1491 column 3 function operator= thread 0
+----------------------------------------------------
+  this->str = { .data_={ .first=10, .anon_pad$1=0, .second=&dynamic_4_array[0] }, .size_=0,
+    .hash_function_={}, .equal_function_={} }
+
+State 45 file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 345 column 9 function insert thread 0
+----------------------------------------------------
+  this->size_ = { .data_=nil
+  * type: , .size_=m.size_ + 1, .hash_function_={},
+    .equal_function_={} }
+
+State 65 file /../lib/gcc/x86_64-redhat-linux/15/../../../../include/c++/15/bits/stl_pair.h line 945 column 2 function operator= thread 0
+----------------------------------------------------
+  this->first = { .data_={ .first=20, .anon_pad$1=0, .second={ .str=&dynamic_2_array[0xFFFFFFFFFFFFFF00], ._size=0,
+    .anon_pad$2=0 } }, .size_=1,
+    .hash_function_={}, .equal_function_={} }
+
+State 153 file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 345 column 9 function insert thread 0
+----------------------------------------------------
+  this->size_ = { .data_=nil
+  * type: , .size_=m.size_ + 1, .hash_function_={},
+    .equal_function_={} }
+
+State 173 file /../lib/gcc/x86_64-redhat-linux/15/../../../../include/c++/15/bits/stl_pair.h line 945 column 2 function operator= thread 0
+----------------------------------------------------
+  this->first = { .data_={ .first=30, .anon_pad$1=0, .second={ .str={ .pointer_object=nil
+  * type: , .pointer_offset=nil
+  * type:  }, ._size=0,
+    .anon_pad$2=0 } }, .size_=2,
+    .hash_function_={}, .equal_function_={} }
+
+State 275 file /tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map line 345 column 9 function insert thread 0
+----------------------------------------------------
+  this->size_ = { .data_=nil
+  * type: , .size_=m.size_ + 1, .hash_function_={},
+    .equal_function_={} }
+
+State 276 file main.cpp line 12 column 5 function main thread 0
+----------------------------------------------------
+  it1 = { .data_=&m, .pos_=1, .size_=3 }
+
+State 362 file main.cpp line 18 column 5 function main thread 0
+----------------------------------------------------
+  it2 = { .data_=&m, .pos_=3, .size_=3 }
+
+State 364 file main.cpp line 22 column 5 function main thread 0
+----------------------------------------------------
+Violated property:
+  file main.cpp line 22 column 5 function main
+Stack trace:
+  c:@F@main# at file main.cpp line 5 column 1
+  assertion m.count(10) == 0
+  return_value$_count$25 == 0
+
+[38;2;255;000;000m
+VERIFICATION FAILED[0m

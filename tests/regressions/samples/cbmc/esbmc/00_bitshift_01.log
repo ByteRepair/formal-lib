@@ -1,0 +1,57 @@
+CBMC version 6.7.1 (4232631-dirty) 64-bit x86_64 linux
+Type-checking main
+file /home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c line 10 function main: function 'assert' is not declared
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Starting Bounded Model Checking
+Passing problem to propositional reduction
+converting SSA
+Running propositional reduction
+SAT checker: instance is SATISFIABLE
+Building error trace
+
+** Results:
+/home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c function main
+[main.assertion.1] line 10 assertion 0: FAILURE
+
+Trace for main.assertion.1:
+
+State 11 file /home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c function main line 3 thread 0
+----------------------------------------------------
+  ma=0u (00000000 00000000 00000000 00000000)
+
+State 12 file /home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c function main line 3 thread 0
+----------------------------------------------------
+  mb=0u (00000000 00000000 00000000 00000000)
+
+State 13 file /home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c function main line 4 thread 0
+----------------------------------------------------
+  accu=0ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 14 file /home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c function main line 5 thread 0
+----------------------------------------------------
+  ea=0 (00000000 00000000 00000000 00000000)
+
+State 15 file /home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c function main line 5 thread 0
+----------------------------------------------------
+  eb=0 (00000000 00000000 00000000 00000000)
+
+State 16 file /home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c function main line 7 thread 0
+----------------------------------------------------
+  accu=0ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+State 17 file /home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c function main line 8 thread 0
+----------------------------------------------------
+  accu=0ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)
+
+Violated property:
+  file /home/yiannis/git/esbmc/regression/esbmc/00_bitshift_01/main.c function main line 10 thread 0
+  assertion 0
+  (__CPROVER_bool)0
+
+
+
+** 1 of 1 failed (2 iterations)
+VERIFICATION FAILED
