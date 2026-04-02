@@ -80,6 +80,8 @@ def main() -> None:
         duration = perf_counter() - start_time
         output = process.stdout.decode("utf-8")
         return_code = process.returncode
+    elif sys.stdin.isatty():
+        parser.error("no input: pipe verifier output or pass a command after '--'")
     else:
         output = sys.stdin.read()
         return_code = 0
