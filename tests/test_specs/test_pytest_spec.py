@@ -20,6 +20,8 @@ from formal_lib.issue_parser import IssueSpecOutputParser
 from formal_lib.verifier_output import IssueSpecOutput
 from formal_lib.specs.pytest import pytest_spec
 
+DATA_DIR = Path(__file__).parent / "data" / "pytest"
+
 
 # =============================================================================
 # Fixtures
@@ -29,7 +31,7 @@ from formal_lib.specs.pytest import pytest_spec
 @pytest.fixture(scope="module")
 def multiple_errors_output() -> IssueSpecOutput:
     """Load the multiple.log sample with 2 collection errors."""
-    with open("./tests/test_specs/data/pytest/multiple.log") as file:
+    with open(DATA_DIR / "multiple.log") as file:
         parser = IssueSpecOutputParser(pytest_spec)
         return parser.parse_output(
             exit_success=0,
@@ -42,14 +44,14 @@ def multiple_errors_output() -> IssueSpecOutput:
 @pytest.fixture(scope="module")
 def multiple_errors_raw_output() -> str:
     """Load raw multiple.log output as string."""
-    with open("./tests/test_specs/data/pytest/multiple.log") as file:
+    with open(DATA_DIR / "multiple.log") as file:
         return file.read()
 
 
 @pytest.fixture(scope="module")
 def successful_output() -> IssueSpecOutput:
     """Load the successful.log sample."""
-    with open("./tests/test_specs/data/pytest/successful.log") as file:
+    with open(DATA_DIR / "successful.log") as file:
         parser = IssueSpecOutputParser(pytest_spec)
         return parser.parse_output(
             exit_success=0,
@@ -62,7 +64,7 @@ def successful_output() -> IssueSpecOutput:
 @pytest.fixture(scope="module")
 def successful_raw_output() -> str:
     """Load raw successful.log output as string."""
-    with open("./tests/test_specs/data/pytest/successful.log") as file:
+    with open(DATA_DIR / "successful.log") as file:
         return file.read()
 
 
@@ -70,7 +72,7 @@ def successful_raw_output() -> str:
 def collection_error_output() -> IssueSpecOutput:
     """Load the multiple_collection_error.log sample with 1 collection error."""
     with open(
-        "./tests/test_specs/data/pytest/multiple_collection_error.log"
+        DATA_DIR / "multiple_collection_error.log"
     ) as file:
         parser = IssueSpecOutputParser(pytest_spec)
         return parser.parse_output(
@@ -85,7 +87,7 @@ def collection_error_output() -> IssueSpecOutput:
 def collection_error_raw_output() -> str:
     """Load raw multiple_collection_error.log output as string."""
     with open(
-        "./tests/test_specs/data/pytest/multiple_collection_error.log"
+        DATA_DIR / "multiple_collection_error.log"
     ) as file:
         return file.read()
 
