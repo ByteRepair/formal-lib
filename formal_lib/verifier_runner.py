@@ -18,7 +18,8 @@ from platformdirs import user_cache_dir
 from formal_lib.verifier_output import VerifierOutput
 from formal_lib.specs.base import IssueRegexSpec
 from formal_lib.issue_parser import IssueSpecOutputParser
-from formal_lib import __version__, logger
+from formal_lib import __version__
+from formal_lib.logging import logger
 
 _PROCESS_TIMEOUT_SLACK_SECONDS: int = 5
 

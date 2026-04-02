@@ -1,8 +1,8 @@
 # Author: Yiannis Charalambous
 
 from formal_lib.__about__ import __version__
-from formal_lib.logging import logger
 from formal_lib.verifier_runner import VerifierRunner
+from formal_lib.issue import Issue, VerifierIssue
 from formal_lib.specs import (
     SPECS,
     detect_spec,
@@ -14,8 +14,9 @@ from formal_lib.specs import (
 
 __all__ = [
     "__version__",
-    "logger",
     "VerifierRunner",
+    "Issue",
+    "VerifierIssue",
     "SPECS",
     "detect_spec",
     "cbmc_spec",
