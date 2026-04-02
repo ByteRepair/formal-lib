@@ -8,14 +8,10 @@ license-files = ["LICENSE"]
 authors = [
   { name = "Yiannis Charalambous", email = "yiannis128@hotmail.com" },
 ]
-keywords = []
+keywords = ["verifier", "parser", "formal-verification", "esbmc", "clang", "pytest", "structured-output"]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
@@ -24,9 +20,9 @@ dependencies = ["platformdirs", "pydantic"]
 dynamic = ["version"]
 
 [project.urls]
-Documentation = "https://github.com/Yiannis Charalambous/formal-lib#readme"
-Issues = "https://github.com/Yiannis Charalambous/formal-lib/issues"
-Source = "https://github.com/Yiannis Charalambous/formal-lib"
+Documentation = "https://github.com/Yiannis128/formal-lib#readme"
+Issues = "https://github.com/Yiannis128/formal-lib/issues"
+Source = "https://github.com/Yiannis128/formal-lib"
 
 [project.scripts]
 pf = "formal_lib.__main__:main"
