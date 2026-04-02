@@ -1,0 +1,136 @@
+name: Weekly Prerelease
+
+# Creates automated weekly prereleases when there are commits since the last release.
+# If no commits are detected, the workflow gracefully skips release creation.
+
+on:
+  schedule:
+    # Run every Sunday at 23:00 UTC
+    - cron: '0 23 * * 0'
+  workflow_dispatch:
+
+jobs:
+  create-prerelease:
+    name: Create Weekly Prerelease
+    runs-on: ubuntu-latest
+
+    # - workflow_dispatch: only run if ref == master
+    # - schedule: GitHub does NOT populate ref, so allow scheduled runs unconditionally
+    if: github.event_name == 'schedule' || github.ref_name == 'master'
+
+    timeout-minutes: 15
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Hatch
+        uses: ./.github/actions/setup-hatch
+
+      - name: Cache Hatch environment
+        uses: actions/cache@v4.2.3
+        with:
+          path: |
+            ~/.cache/hatch
+            ~/.local/share/hatch
+          key: ${{ runner.os }}-hatch-prerelease-${{ hashFiles('**/pyproject.toml') }}
+
+      - name: Get commit messages since last tag
+        id: changelog
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+
+          if [ -z "$LAST_TAG" ]; then
+            COMMITS=$(git log --pretty=format:"- %s (%h)" --no-merges -n 50)
+          else
+            COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
+          fi
+
+          if [ -z "$COMMITS" ]; then
+            echo "No commits since last release. Skipping prerelease creation."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            {
+              echo 'commits<<EOF'
+              echo "$COMMITS"
+              echo 'EOF'
+            } >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate and set prerelease version
+        if: steps.changelog.outputs.skip != 'true'
+        id: version
+        run: |
+          CURRENT_VERSION=$(hatch version)
+          echo "Current version: $CURRENT_VERSION"
+
+          git fetch --tags
+
+          LATEST_DEV=$(git tag -l "v${CURRENT_VERSION}.dev*" --sort=-version:refname | head -n 1)
+          DEV_NUM=${LATEST_DEV##*.dev}
+          NEW_VERSION="${CURRENT_VERSION}.dev$(( ${DEV_NUM:--1} + 1 ))"
+
+          echo "Old: ${LATEST_DEV:-none}"
+          echo "New: ${NEW_VERSION}"
+
+          echo "version=v${NEW_VERSION}" >> $GITHUB_OUTPUT
+          echo "version_no_v=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Get current date
+        if: steps.changelog.outputs.skip != 'true'
+        id: date
+        run: echo "date=$(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_OUTPUT
+
+      - name: Update version in __about__.py for build
+        if: steps.changelog.outputs.skip != 'true'
+        run: |
+          sed -i 's/__version__ = ".*"/__version__ = "${{ steps.version.outputs.version_no_v }}"/' formal_lib/__about__.py
+          echo "Updated __about__.py to version ${{ steps.version.outputs.version_no_v }}"
+          cat formal_lib/__about__.py
+
+      - name: Build package
+        if: steps.changelog.outputs.skip != 'true'
+        run: hatch build
+
+      - name: Publish to PyPI
+        if: steps.changelog.outputs.skip != 'true' && secrets.PYPI_TOKEN != ''
+        run: hatch publish
+        env:
+          HATCH_INDEX_USER: __token__
+          HATCH_INDEX_AUTH: ${{ secrets.PYPI_TOKEN }}
+
+      - name: Create GitHub Prerelease
+        if: steps.changelog.outputs.skip != 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: "Weekly ${{ steps.version.outputs.version }}"
+          body: |
+            ## Automated Weekly Prerelease
+
+            This is an automated prerelease build from the master branch.
+
+            **Version:** ${{ steps.version.outputs.version }}
+            **Build Date:** ${{ steps.date.outputs.date }}
+
+            ### Changes since last release:
+
+            ${{ steps.changelog.outputs.commits }}
+
+            ---
+
+            > ⚠️ **Note:** This is a prerelease version and may contain unstable features.
+            > Use at your own risk in production environments.
+          files: |
+            dist/*
+          prerelease: true
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
