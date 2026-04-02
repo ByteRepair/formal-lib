@@ -17,6 +17,7 @@ from platformdirs import user_cache_dir
 
 from formal_lib.verifier_output import VerifierOutput
 from formal_lib.specs.base import IssueRegexSpec
+from formal_lib.specs import detect_spec
 from formal_lib.issue_parser import IssueSpecOutputParser
 from formal_lib import __version__
 from formal_lib.logging import logger
@@ -30,8 +31,9 @@ class VerifierRunner:
 
     base_cmd: Path
     """Path to the binary"""
-    regex_spec: IssueRegexSpec
-    """Regex specification for parsing verifier output."""
+    regex_spec: IssueRegexSpec | None = None
+    """Regex specification for parsing verifier output. If None, auto-detected
+    from the output."""
     exit_success: int = 0
     """Return code that indicates successful verification."""
     default_timeout: int | None = None
@@ -124,7 +126,9 @@ class VerifierRunner:
         timeout: int | None = None,
         cwd: Path | None = None,
     ) -> VerifierOutput:
-        """Verifies source_file."""
+        """Verifies source_file. If regex_spec is None, the spec is
+        auto-detected from the command output. Cache lookup is skipped
+        when auto-detecting since the output must be produced first."""
 
         timeout = timeout or self.default_timeout
 
@@ -141,14 +145,13 @@ class VerifierRunner:
 
         resolved_cwd = cwd or Path(os.getcwd())
 
-        if self.regex_spec.cache_properties:
+        cache_props: Any = [str(self.base_cmd), timeout, [str(s) for s in sources]]
+        if self.regex_spec is not None and self.regex_spec.cache_properties:
             cache_props = self.regex_spec.cache_properties(
                 self.base_cmd, sources, timeout, resolved_cwd
             )
-        else:
-            cache_props = [str(self.base_cmd), timeout, [str(s) for s in sources]]
 
-        if self.enable_cache:
+        if self.enable_cache and self.regex_spec is not None:
             cached = self._load_cached(cache_props)
             if cached is not None:
                 return cached
@@ -161,10 +164,13 @@ class VerifierRunner:
             process_timeout=timeout,
         )
 
-        output = IssueSpecOutputParser(self.regex_spec).parse_output(
+        stdout = result.stdout.decode("utf-8")
+        spec = self.regex_spec or detect_spec(stdout)
+
+        output = IssueSpecOutputParser(spec).parse_output(
             exit_success=self.exit_success,
             return_code=result.returncode,
-            output=result.stdout.decode("utf-8"),
+            output=stdout,
             duration=duration,
         )
 
