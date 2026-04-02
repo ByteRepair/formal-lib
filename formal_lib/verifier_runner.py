@@ -16,20 +16,11 @@ from dataclasses import dataclass
 from platformdirs import user_cache_dir
 
 from formal_lib.verifier_output import VerifierOutput
-from formal_lib.issue_parser import IssueRegexSpec, IssueSpecOutputParser
+from formal_lib.specs.base import IssueRegexSpec
+from formal_lib.issue_parser import IssueSpecOutputParser
 from formal_lib import __version__, logger
 
 _PROCESS_TIMEOUT_SLACK_SECONDS: int = 5
-
-
-class SourceCodeParseError(Exception):
-    """Error that means that SolutionGenerator could not parse the source code
-    to return the right format."""
-
-
-class VerifierTimedOutException(Exception):
-    """Error that means that the verifier timed out and so the error could not be
-    determined."""
 
 
 @dataclass

@@ -2,36 +2,14 @@
 
 import argparse
 import json
-import re
 import sys
 from subprocess import PIPE, STDOUT, run
 from time import perf_counter
 
 from formal_lib.issue import VerifierIssue
-from formal_lib.issue_parser import IssueRegexSpec, IssueSpecOutputParser
+from formal_lib.issue_parser import IssueSpecOutputParser
 from formal_lib.verifier_output import VerifierOutput
-from formal_lib.specs import cbmc_spec, clang_spec, esbmc_spec, pytest_spec
-
-SPECS: dict[str, IssueRegexSpec] = {
-    "esbmc": esbmc_spec,
-    "cbmc": cbmc_spec,
-    "clang": clang_spec,
-    "pytest": pytest_spec,
-}
-"""Specs that the frontend currently supports."""
-
-
-def detect_spec(output: str) -> IssueRegexSpec:
-    """Auto-detect which spec matches the output using each spec's detect pattern."""
-    for _, spec in SPECS.items():
-        if spec.detect and re.search(spec.detect, output, re.MULTILINE):
-            return spec
-    names = ", ".join(SPECS)
-    print(
-        f"error: could not detect backend from output, use --backend ({names})",
-        file=sys.stderr,
-    )
-    sys.exit(1)
+from formal_lib.specs import SPECS, detect_spec
 
 
 def pretty_print(result: VerifierOutput) -> None:

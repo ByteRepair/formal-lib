@@ -4,7 +4,7 @@ from hashlib import sha256
 from pathlib import Path
 from typing import Any
 
-from formal_lib.issue_parser import IssueRegexSpec, StackTraceRegexSpec
+from formal_lib.specs.base import IssueRegexSpec, StackTraceRegexSpec
 
 
 def _pytest_cache_properties(

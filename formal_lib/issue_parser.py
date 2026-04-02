@@ -3,114 +3,18 @@
 """Regex-based parser for extracting structured issues from verifier output."""
 
 import re
-from typing import Any, Protocol, override, cast
-from dataclasses import dataclass, field
+from typing import cast
 from pathlib import Path
 
-from pydantic import Field
-
 from formal_lib.program_trace import ProgramTrace, CounterexampleProgramTrace
-from formal_lib.verifier_output import VerifierOutput
+from formal_lib.verifier_output import VerifierOutput, IssueSpecOutput
 from formal_lib.issue import Issue, IssueSeverities, VerifierIssue
-
-
-class IssueSpecOutput(VerifierOutput):
-    """Verifier output that works with issue specs."""
-
-    exit_success: int = Field(default=0)
-    """Code for successful exit."""
-
-    @property
-    @override
-    def successful(self) -> bool:
-        """Returns true if return code matches success return code."""
-        return self.return_code == self.exit_success
-
-
-@dataclass
-class StackTraceRegexSpec:
-    """
-    Regex specification for parsing stack traces within an issue.
-
-    The hierarchy is:
-    1. `block` - Selects the entire stack trace block from within an issue
-    2. `trace_entry` - Matches individual trace entries within the block
-    3. Individual field patterns extract properties from each trace entry
-    """
-
-    block: str
-    """Regex pattern to select the entire stack trace block within an issue."""
-    trace_entry: str
-    """Regex pattern to match individual trace entries within the block.
-    Each entry may span multiple lines (e.g., GCC shows source snippets)."""
-    trace_index: str
-    """Regex pattern to extract the trace position/index from a trace entry."""
-    path: str
-    """Regex pattern to extract the file path from a trace entry."""
-    name: str
-    """Regex pattern to extract the function/symbol name from a trace entry."""
-    line_index: str
-    """Regex pattern to extract the line number from a trace entry."""
-    missing: str = ""
-    """Human-readable hint shown when no traces are found, explaining which
-    verifier flag is needed (e.g. 'Needs --trace')."""
-
-
-@dataclass
-class CounterexampleRegexSpec(StackTraceRegexSpec):
-    """
-    Regex specification for parsing counterexample traces within an issue.
-
-    Extends StackTraceRegexSpec with an assignment pattern for extracting
-    variable assignments from counterexample state entries.
-    """
-
-    assignment: str = ""
-    """Regex pattern to extract the variable assignment from a trace entry."""
-
-
-class CachePropertiesFn(Protocol):
-    """Protocol for computing cache properties from verify_source args."""
-
-    def __call__(
-        self,
-        base_cmd: Path,
-        sources: list[Path],
-        timeout: int | None,
-        cwd: Path,
-    ) -> Any: ...
-
-
-@dataclass
-class IssueRegexSpec:
-    """
-    Regex specification for parsing individual issues from verifier output.
-
-    The hierarchy is:
-    1. `block` - Selects individual issue blocks from the entire output
-    2. Individual field patterns extract properties from within each issue block
-    3. `stack_trace_spec` - Nested spec for parsing stack traces within the issue
-    4. `counterexample_spec` - Optional nested spec for parsing counterexamples
-    """
-
-    block: str
-    """Regex pattern to select individual issue blocks from the verifier output."""
-    error_type: str
-    """Regex pattern to extract the error type (e.g., 'TypeError', 'AssertionError')."""
-    message: str
-    """Regex pattern to extract the error message/description."""
-    stack_trace_spec: StackTraceRegexSpec
-    """Nested specification for parsing the stack trace within this issue."""
-    severity: str
-    """Regex pattern to extract the severity level (e.g., 'error', 'warning', 'info')."""
-    detect: str = ""
-    """Regex pattern to detect if output was produced by this verifier.
-    Matched against the full output with MULTILINE. Empty means no auto-detection."""
-    counterexample_spec: CounterexampleRegexSpec | None = None
-    """Optional nested specification for parsing counterexample traces."""
-    cache_properties: CachePropertiesFn | None = field(default=None)
-    """Optional function to compute cache properties from verify_source args.
-    When None, default properties are used."""
+from formal_lib.regex import ANSI_ESCAPE_PATTERN
+from formal_lib.specs.base import (
+    CounterexampleRegexSpec,
+    IssueRegexSpec,
+    StackTraceRegexSpec,
+)
 
 
 class IssueSpecOutputParser:
@@ -128,6 +32,9 @@ class IssueSpecOutputParser:
     def parse_output(
         self, exit_success: int, return_code: int, duration: float, output: str
     ) -> VerifierOutput:
+        # Strip ANSI escape codes in case the tool emits colored output.
+        output = ANSI_ESCAPE_PATTERN.sub("", output)
+
         # Extract all issue blocks from the output
         issue_blocks: list[str] = []
         for match in re.finditer(

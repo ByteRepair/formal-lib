@@ -1,6 +1,6 @@
 # Author: Yiannis Charalambous
 
-from formal_lib.issue_parser import (
+from formal_lib.specs.base import (
     CounterexampleRegexSpec,
     IssueRegexSpec,
     StackTraceRegexSpec,

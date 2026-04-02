@@ -16,7 +16,8 @@ import pytest
 
 from formal_lib.issue import Issue
 from formal_lib.program_trace import ProgramTrace
-from formal_lib.issue_parser import IssueSpecOutputParser, IssueSpecOutput
+from formal_lib.issue_parser import IssueSpecOutputParser
+from formal_lib.verifier_output import IssueSpecOutput
 from formal_lib.specs.pytest import pytest_spec
 
 

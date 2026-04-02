@@ -1,8 +1,8 @@
 # Author: Yiannis Charalambous
 
-from abc import abstractmethod
 from functools import cached_property
 from pathlib import Path
+from typing import override
 
 from pydantic import Field, BaseModel, SerializeAsAny
 
@@ -106,3 +106,16 @@ class VerifierOutput(BaseModel):
             filtered_issues.append(new_issue)
 
         return self.model_copy(update={"issues": filtered_issues})
+
+
+class IssueSpecOutput(VerifierOutput):
+    """Verifier output that works with issue specs."""
+
+    exit_success: int = Field(default=0)
+    """Code for successful exit."""
+
+    @property
+    @override
+    def successful(self) -> bool:
+        """Returns true if return code matches success return code."""
+        return self.return_code == self.exit_success

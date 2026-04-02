@@ -1,0 +1,93 @@
+# Author: Yiannis Charalambous
+
+"""Base dataclasses that define the regex specification contract for verifier backends."""
+
+from typing import Any, Protocol
+from dataclasses import dataclass, field
+from pathlib import Path
+
+
+@dataclass
+class StackTraceRegexSpec:
+    """
+    Regex specification for parsing stack traces within an issue.
+
+    The hierarchy is:
+    1. `block` - Selects the entire stack trace block from within an issue
+    2. `trace_entry` - Matches individual trace entries within the block
+    3. Individual field patterns extract properties from each trace entry
+    """
+
+    block: str
+    """Regex pattern to select the entire stack trace block within an issue."""
+    trace_entry: str
+    """Regex pattern to match individual trace entries within the block.
+    Each entry may span multiple lines (e.g., GCC shows source snippets)."""
+    trace_index: str
+    """Regex pattern to extract the trace position/index from a trace entry."""
+    path: str
+    """Regex pattern to extract the file path from a trace entry."""
+    name: str
+    """Regex pattern to extract the function/symbol name from a trace entry."""
+    line_index: str
+    """Regex pattern to extract the line number from a trace entry."""
+    missing: str = ""
+    """Human-readable hint shown when no traces are found, explaining which
+    verifier flag is needed (e.g. 'Needs --trace')."""
+
+
+@dataclass
+class CounterexampleRegexSpec(StackTraceRegexSpec):
+    """
+    Regex specification for parsing counterexample traces within an issue.
+
+    Extends StackTraceRegexSpec with an assignment pattern for extracting
+    variable assignments from counterexample state entries.
+    """
+
+    assignment: str = ""
+    """Regex pattern to extract the variable assignment from a trace entry."""
+
+
+class CachePropertiesFn(Protocol):
+    """Protocol for computing cache properties from verify_source args."""
+
+    def __call__(
+        self,
+        base_cmd: Path,
+        sources: list[Path],
+        timeout: int | None,
+        cwd: Path,
+    ) -> Any: ...
+
+
+@dataclass
+class IssueRegexSpec:
+    """
+    Regex specification for parsing individual issues from verifier output.
+
+    The hierarchy is:
+    1. `block` - Selects individual issue blocks from the entire output
+    2. Individual field patterns extract properties from within each issue block
+    3. `stack_trace_spec` - Nested spec for parsing stack traces within the issue
+    4. `counterexample_spec` - Optional nested spec for parsing counterexamples
+    """
+
+    block: str
+    """Regex pattern to select individual issue blocks from the verifier output."""
+    error_type: str
+    """Regex pattern to extract the error type (e.g., 'TypeError', 'AssertionError')."""
+    message: str
+    """Regex pattern to extract the error message/description."""
+    stack_trace_spec: StackTraceRegexSpec
+    """Nested specification for parsing the stack trace within this issue."""
+    severity: str
+    """Regex pattern to extract the severity level (e.g., 'error', 'warning', 'info')."""
+    detect: str = ""
+    """Regex pattern to detect if output was produced by this verifier.
+    Matched against the full output with MULTILINE. Empty means no auto-detection."""
+    counterexample_spec: CounterexampleRegexSpec | None = None
+    """Optional nested specification for parsing counterexample traces."""
+    cache_properties: CachePropertiesFn | None = field(default=None)
+    """Optional function to compute cache properties from verify_source args.
+    When None, default properties are used."""

@@ -1,6 +1,6 @@
 # Author: Yiannis Charalambous
 
-from formal_lib.issue_parser import IssueRegexSpec, StackTraceRegexSpec
+from formal_lib.specs.base import IssueRegexSpec, StackTraceRegexSpec
 
 clang_spec: IssueRegexSpec = IssueRegexSpec(
     # Detect clang/gcc diagnostics by the "file:line:col: error/warning:" pattern.
