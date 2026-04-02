@@ -18,15 +18,19 @@ SPECS: dict[str, IssueRegexSpec] = {
     "clang": clang_spec,
     "pytest": pytest_spec,
 }
+"""Specs that the frontend currently supports."""
 
 
 def detect_spec(output: str) -> IssueRegexSpec:
     """Auto-detect which spec matches the output using each spec's detect pattern."""
-    for name, spec in SPECS.items():
+    for _, spec in SPECS.items():
         if spec.detect and re.search(spec.detect, output, re.MULTILINE):
             return spec
     names = ", ".join(SPECS)
-    print(f"error: could not detect backend from output, use --backend ({names})", file=sys.stderr)
+    print(
+        f"error: could not detect backend from output, use --backend ({names})",
+        file=sys.stderr,
+    )
     sys.exit(1)
 
 
@@ -58,8 +62,10 @@ def pretty_print(result: VerifierOutput) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        prog="formal-lib",
-        description="Parse verifier output into structured JSON. Reads from stdin, or runs a command directly when given after '--'.",
+        prog="Pretty Formal",
+        description="CLI tool for the formal-lib library. Provides a frontend "
+        "that parses verifier output into structured different formats. Reads "
+        "from stdin, or runs a command directly when given after '--'.",
     )
 
     parser.add_argument(
