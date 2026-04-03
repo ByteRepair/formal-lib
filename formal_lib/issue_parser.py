@@ -11,6 +11,7 @@ from formal_lib.verifier_output import VerifierOutput
 from formal_lib.issue import Issue, IssueSeverities, VerifierIssue
 from formal_lib.regex import ANSI_ESCAPE_PATTERN
 from formal_lib.specs.base import (
+    AnnotatedPattern,
     CounterexampleRegexSpec,
     IssueRegexSpec,
     StackTraceRegexSpec,
@@ -18,13 +19,7 @@ from formal_lib.specs.base import (
 
 
 class IssueSpecOutputParser:
-    """
-    Oracle output parser using regex. Defines the following regex field hierarchy:
-    * Issue start
-    * Issue severity, issue error type, issue message, issue stack trace
-
-    Need to figure out correct way to express this...
-    """
+    """Parses raw verifier output into structured issues using an IssueRegexSpec."""
 
     def __init__(self, regex_spec: IssueRegexSpec) -> None:
         self.regex_spec: IssueRegexSpec = regex_spec
@@ -51,12 +46,27 @@ class IssueSpecOutputParser:
         # Parse each issue block to extract individual issues
         issues: list[Issue] = [self._parse_issue(block) for block in issue_blocks]
 
+        # Collect hints from annotated blocks that failed to match.
+        hints: list[str] = []
+        if not successful and not issues:
+            self._collect_hint(hints, spec.block)
+
         return VerifierOutput(
             successful=successful,
             issues=issues,
             output=output,
             duration=duration,
+            hints=hints,
         )
+
+    @staticmethod
+    def _collect_hint(hints: list[str], pattern: str) -> None:
+        if isinstance(pattern, AnnotatedPattern):
+            hints.append(pattern.hint)
+
+    @staticmethod
+    def _get_hint(pattern: str) -> str:
+        return pattern.hint if isinstance(pattern, AnnotatedPattern) else ""
 
     @staticmethod
     def _parse_traces(
@@ -150,11 +160,9 @@ class IssueSpecOutputParser:
         severity: IssueSeverities = cast(IssueSeverities, severity_str)
 
         # Extract stack trace
-        stack_trace: list[ProgramTrace] = self._parse_traces(
-            issue_text,
-            self.regex_spec.stack_trace_spec,
-        )
-        stack_trace_hint = self.regex_spec.stack_trace_spec.missing
+        st_spec = self.regex_spec.stack_trace_spec
+        stack_trace: list[ProgramTrace] = self._parse_traces(issue_text, st_spec)
+        stack_trace_hint = self._get_hint(st_spec.block) if not stack_trace else ""
 
         # Parse counterexample if spec provides one
         ce_spec = self.regex_spec.counterexample_spec
@@ -163,6 +171,9 @@ class IssueSpecOutputParser:
                 issue_text,
                 ce_spec,
                 as_counterexample=True,
+            )
+            counterexample_hint = (
+                self._get_hint(ce_spec.block) if not counterexample else ""
             )
             if counterexample:
                 return VerifierIssue(
@@ -174,7 +185,7 @@ class IssueSpecOutputParser:
                         list[CounterexampleProgramTrace],
                         counterexample,
                     ),
-                    counterexample_hint=ce_spec.missing,
+                    counterexample_hint=counterexample_hint,
                     severity=severity,
                 )
 

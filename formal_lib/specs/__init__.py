@@ -5,10 +5,12 @@
 import re
 
 from .base import (
+    AnnotatedPattern,
     CachePropertiesFn,
     CounterexampleRegexSpec,
     IssueRegexSpec,
     StackTraceRegexSpec,
+    missing_hint,
 )
 from .cbmc import cbmc_spec
 from .clang import clang_spec
@@ -34,6 +36,7 @@ def detect_spec(output: str) -> IssueRegexSpec:
 
 
 __all__ = [
+    "AnnotatedPattern",
     "CachePropertiesFn",
     "CounterexampleRegexSpec",
     "IssueRegexSpec",
@@ -43,5 +46,6 @@ __all__ = [
     "clang_spec",
     "detect_spec",
     "esbmc_spec",
+    "missing_hint",
     "pytest_spec",
 ]

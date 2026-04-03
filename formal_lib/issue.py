@@ -31,7 +31,7 @@ class Issue(BaseModel):
     severity: IssueSeverities = Field(default="error", description="Severity level.")
     """Severity level."""
     stack_trace_hint: str = Field(default="", exclude=True)
-    """Hint explaining why stack_trace may be empty (e.g. missing verifier flag)."""
+    """Hint shown inline when stack_trace is empty (e.g. missing verifier flag)."""
 
     # Convenience properties
     # Note: All properties derive from the last trace point (stack_trace[-1]) as this
@@ -109,7 +109,7 @@ class VerifierIssue(Issue):
     )
     """Counterexample demonstrating bug."""
     counterexample_hint: str = Field(default="", exclude=True)
-    """Hint explaining why counterexample may be empty (e.g. missing verifier flag)."""
+    """Hint shown inline when counterexample is empty (e.g. missing verifier flag)."""
 
     @property
     def counterexample_formatted(self) -> str:

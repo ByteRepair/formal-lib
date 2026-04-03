@@ -32,7 +32,7 @@ hatch build
 
 The library uses a **specification-driven regex parsing** pattern with three layers:
 
-1. **Specs** (`formal_lib/specs/`) — Each verifier backend defines an `IssueRegexSpec` containing regex patterns for extracting issue blocks, error types, messages, severity, and nested `StackTraceRegexSpec`/`CounterexampleRegexSpec` for traces. Specs also define a `success` pattern to determine verification outcome from the output text (with `negate_success` for backends where absence of failure indicates success). Specs are plain dataclass instances (e.g., `esbmc_spec`, `cbmc_spec`, `clang_spec`, `pytest_spec`).
+1. **Specs** (`formal_lib/specs/`) — Each verifier backend defines an `IssueRegexSpec` containing regex patterns for extracting issue blocks, error types, messages, severity, and nested `StackTraceRegexSpec`/`CounterexampleRegexSpec` for traces. Specs also define a `success` pattern to determine verification outcome from the output text (with `negate_success` for backends where absence of failure indicates success). Specs are plain dataclass instances (e.g., `esbmc_spec`, `cbmc_spec`, `clang_spec`, `pytest_spec`). Any `block` pattern can be wrapped with `missing_hint("Needs --flag")(pattern)` to annotate it — when the block fails to match and verification failed, the hint is collected into `VerifierOutput.hints` and displayed by the CLI.
 
 2. **Parser** (`formal_lib/issue_parser.py`) — `IssueSpecOutputParser` applies a spec's regex hierarchy to raw output: the `success` pattern determines the `successful` flag, the block pattern finds issue boundaries, then field patterns extract structured data from each block. Traces are parsed via a nested block→entry→fields hierarchy.
 
@@ -52,4 +52,4 @@ The library uses a **specification-driven regex parsing** pattern with three lay
 
 ## Adding a New Verifier Backend
 
-Create a new `IssueRegexSpec` instance in `formal_lib/specs/`, including a `success` pattern for determining verification outcome. Export it from `formal_lib/specs/__init__.py`, add it to the `SPECS` dict, and add a CLI flag in `__main__.py`.
+Create a new `IssueRegexSpec` instance in `formal_lib/specs/`, including a `success` pattern for determining verification outcome. Wrap any `block` pattern with `missing_hint("Needs --flag")(pattern)` when the verifier requires a specific flag for that data. Export it from `formal_lib/specs/__init__.py`, add it to the `SPECS` dict, and add a CLI flag in `__main__.py`.

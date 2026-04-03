@@ -4,6 +4,7 @@ from formal_lib.specs.base import (
     CounterexampleRegexSpec,
     IssueRegexSpec,
     StackTraceRegexSpec,
+    missing_hint,
 )
 
 cbmc_spec: IssueRegexSpec = IssueRegexSpec(
@@ -12,7 +13,9 @@ cbmc_spec: IssueRegexSpec = IssueRegexSpec(
     success=r"^VERIFICATION SUCCESSFUL$",
     # Each "Trace for <id>:" section is an issue block.
     # Matches from the header to the next trace header, results summary, or end of string.
-    block=r"Trace for [^\n]+:\n.*?(?=Trace for [^\n]+:\n|\*\* \d+ of \d+|\Z)",
+    block=missing_hint("Needs --trace")(
+        r"Trace for [^\n]+:\n.*?(?=Trace for [^\n]+:\n|\*\* \d+ of \d+|\Z)"
+    ),
     # Greedy (?s).* skips to LAST "Violated property:" in block (CBMC accumulates them).
     # Captures first word of description line: "assertion", "arithmetic", "array", etc.
     error_type=r"(?s).*Violated property:\n\s+[^\n]+\n\s+(\S+)",
@@ -44,6 +47,5 @@ cbmc_spec: IssueRegexSpec = IssueRegexSpec(
         line_index=r"line\s+(\d+)",
         # Require at least one char so states with no assignment return None.
         assignment=r"\n[-]+\n(.+)",
-        missing="Needs --trace",
     ),
 )

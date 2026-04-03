@@ -25,6 +25,8 @@ class VerifierOutput(BaseModel):
     """List of issues/errors found during verification."""
     duration: float | None = None
     """Execution time in seconds."""
+    hints: list[str] = Field(default_factory=list, exclude=True)
+    """Hints explaining missing data (e.g. verifier flags needed). Display only."""
 
     @property
     def issue_count(self) -> int:

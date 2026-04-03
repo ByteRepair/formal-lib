@@ -7,6 +7,32 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 
+class AnnotatedPattern(str):
+    """A regex pattern string annotated with a hint for when it fails to match."""
+
+    hint: str
+
+    def __new__(cls, pattern: str, hint: str) -> "AnnotatedPattern":
+        instance = super().__new__(cls, pattern)
+        instance.hint = hint
+        return instance
+
+
+class missing_hint:
+    """Annotate a block pattern with a hint shown when the block fails to match.
+
+    Usage in spec definitions::
+
+        block=missing_hint("Needs --trace")(r"Trace for [^\\n]+:\\n...")
+    """
+
+    def __init__(self, hint: str) -> None:
+        self.hint = hint
+
+    def __call__(self, pattern: str) -> AnnotatedPattern:
+        return AnnotatedPattern(pattern, self.hint)
+
+
 @dataclass
 class StackTraceRegexSpec:
     """
@@ -31,9 +57,6 @@ class StackTraceRegexSpec:
     """Regex pattern to extract the function/symbol name from a trace entry."""
     line_index: str
     """Regex pattern to extract the line number from a trace entry."""
-    missing: str = ""
-    """Human-readable hint shown when no traces are found, explaining which
-    verifier flag is needed (e.g. 'Needs --trace')."""
 
 
 @dataclass

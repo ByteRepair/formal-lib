@@ -18,6 +18,8 @@ def pretty_print(result: VerifierOutput) -> None:
 
     if not result.issues:
         print("No issues found.")
+        for hint in result.hints:
+            print(f"Hint: {hint}")
         return
 
     print(f"Issues: {result.issue_count}\n")

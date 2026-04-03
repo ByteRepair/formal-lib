@@ -4,6 +4,7 @@ from formal_lib.specs.base import (
     CounterexampleRegexSpec,
     IssueRegexSpec,
     StackTraceRegexSpec,
+    missing_hint,
 )
 
 esbmc_spec: IssueRegexSpec = IssueRegexSpec(
@@ -22,7 +23,9 @@ esbmc_spec: IssueRegexSpec = IssueRegexSpec(
     severity=r"(Violated property)",
     stack_trace_spec=StackTraceRegexSpec(
         # Stack trace section: "Stack trace:" followed by indented lines.
-        block=r"Stack trace:\n(?:\s+[^\n]+\n)*",
+        block=missing_hint("Needs --show-stacktrace")(
+            r"Stack trace:\n(?:\s+[^\n]+\n)*"
+        ),
         # Full lines containing "file <path> line <num>", including any c:@ prefix.
         trace_entry=r"^[^\n]*\bfile\s+\S+\s+line\s+\d+[^\n]*",
         trace_index=r"^",
@@ -30,7 +33,6 @@ esbmc_spec: IssueRegexSpec = IssueRegexSpec(
         # Extract callee symbol from c:@<letter>@ prefix (e.g. c:@F@main).
         name=r"c:@\w@(\S+)",
         line_index=r"line\s+(\d+)",
-        missing="Needs --show-stacktrace",
     ),
     counterexample_spec=CounterexampleRegexSpec(
         # Counterexample block: from [Counterexample] to Violated property.
