@@ -7,52 +7,58 @@ output.
 
 The following backends are supported:
 
-- ESBMC (+Fallback to Clang)
+- ESBMC
+- CBMC
 - Clang
 - PyTest
 
 ## License
 
-> [!NOTE]
-> This project is offered under a [dual-licence](LICENSE) model.
+> [!NOTE] This project is offered under a [dual-licence](LICENSE) model.
 
-## CLI Usage
+## Frontend
 
-Pipe verifier output to `formal-lib` to parse it into structured output:
+`pf` (Pretty Format) is the frontend for `formal-lib`. It can be invoked from
+the CLI to get formatted output from any supported backends. There are two ways
+to invoke `pf`:
 
-```bash
-esbmc --k-induction --k-step 2 --max-k-step 10 file.c 2>&1 | formal-lib --esbmc
-```
+1. **Preferred:** Using the `--` separator and specifying the command
+2. Pipe
 
-Output formats can be selected with `-f`:
+### Using the `--` Separator
 
-```bash
-# Pretty-printed (default)
-esbmc file.c 2>&1 | formal-lib --esbmc
-
-# JSON
-esbmc file.c 2>&1 | formal-lib --esbmc -f json
-
-# Compact JSON (single line, no whitespace)
-esbmc file.c 2>&1 | formal-lib --esbmc -f json-compact
-```
-
-Other backends work the same way:
+The `pf` can invoke the command by specifying `--` and the command:
 
 ```bash
-clang -fsyntax-only file.c 2>&1 | formal-lib --clang
-pytest tests/ 2>&1 | formal-lib --pytest
+pf -- esbmc --k-induction --k-step 2 --max-k-step 10 file.c
 ```
+
+This makes it easier for some backends that use `stderr` like ESBMC as you don't
+need to redirect `stderr` to `stdout` before piping.
+
+### Pipe
+
+Pipe verifier output to `pf` to parse it into structured output:
+
+```bash
+esbmc --k-induction --k-step 2 --max-k-step 10 file.c 2>&1 | pf
+```
+
+Unfortunatley piping as a method of invocation comes with the following
+limitations as `pf` only receives textual content from `stdin`:
+
+1. Cannot read the exit code
+2. Cannot read duration of execution
+
+These details will be omitted from the output.
 
 ## Library Examples
 
 ### Formatting ESBMC output
 
-```python
+```py
 from pathlib import Path
-from formal_lib import VerifierRunner
-from formal_lib.specs import esbmc_spec
-from formal_lib.issue import VerifierIssue
+from formal_lib import VerifierRunner, VerifierIssue, esbmc_spec
 
 verifier = VerifierRunner(
     base_cmd=Path("/usr/bin/esbmc"),
@@ -72,9 +78,36 @@ if not result.successful:
             print(issue.counterexample_formatted)
 ```
 
+### Running a verifier with auto-detection
+
+```py
+from pathlib import Path
+from formal_lib import VerifierRunner
+
+verifier = VerifierRunner(base_cmd=Path("/usr/bin/esbmc"), default_timeout=120)
+result = verifier.verify_source(Path("main.c"))
+
+for issue in result.issues:
+    print(f"[{issue.severity}] {issue.error_type}: {issue.message}")
+```
+
+### Analyzing output with auto-detection
+
+```py
+from formal_lib import detect_spec, IssueSpecOutputParser
+
+output = open("verifier.log").read()
+spec = detect_spec(output)
+parser = IssueSpecOutputParser(spec)
+result = parser.parse_output(exit_success=0, return_code=1, duration=0, output=output)
+
+for issue in result.issues:
+    print(f"[{issue.severity}] {issue.error_type}: {issue.message}")
+```
+
 ### Filtering traces to specific files
 
-```python
+```py
 result = verifier.verify_source(Path("main.c"), Path("lib/"))
 
 # Drop traces from system headers or other files not in your project
@@ -84,7 +117,7 @@ result = result.filter_traces(project_files)
 
 ### Passing ESBMC output to LiteLLM
 
-````python
+````py
 from pathlib import Path
 import litellm
 from formal_lib import VerifierRunner

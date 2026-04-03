@@ -14,10 +14,8 @@ from pathlib import Path
 
 import pytest
 
-from formal_lib.issue import Issue
-from formal_lib.program_trace import ProgramTrace
-from formal_lib.issue_parser import IssueSpecOutputParser
-from formal_lib.verifier_output import IssueSpecOutput
+from formal_lib import IssueSpecOutputParser
+from formal_lib import VerifierOutput
 from formal_lib.specs.pytest import pytest_spec
 
 DATA_DIR = Path(__file__).parent / "data" / "pytest"
@@ -29,7 +27,7 @@ DATA_DIR = Path(__file__).parent / "data" / "pytest"
 
 
 @pytest.fixture(scope="module")
-def multiple_errors_output() -> IssueSpecOutput:
+def multiple_errors_output() -> VerifierOutput:
     """Load the multiple.log sample with 2 collection errors."""
     with open(DATA_DIR / "multiple.log") as file:
         parser = IssueSpecOutputParser(pytest_spec)
@@ -49,7 +47,7 @@ def multiple_errors_raw_output() -> str:
 
 
 @pytest.fixture(scope="module")
-def successful_output() -> IssueSpecOutput:
+def successful_output() -> VerifierOutput:
     """Load the successful.log sample."""
     with open(DATA_DIR / "successful.log") as file:
         parser = IssueSpecOutputParser(pytest_spec)
@@ -69,11 +67,9 @@ def successful_raw_output() -> str:
 
 
 @pytest.fixture(scope="module")
-def collection_error_output() -> IssueSpecOutput:
+def collection_error_output() -> VerifierOutput:
     """Load the multiple_collection_error.log sample with 1 collection error."""
-    with open(
-        DATA_DIR / "multiple_collection_error.log"
-    ) as file:
+    with open(DATA_DIR / "multiple_collection_error.log") as file:
         parser = IssueSpecOutputParser(pytest_spec)
         return parser.parse_output(
             exit_success=0,
@@ -86,9 +82,7 @@ def collection_error_output() -> IssueSpecOutput:
 @pytest.fixture(scope="module")
 def collection_error_raw_output() -> str:
     """Load raw multiple_collection_error.log output as string."""
-    with open(
-        DATA_DIR / "multiple_collection_error.log"
-    ) as file:
+    with open(DATA_DIR / "multiple_collection_error.log") as file:
         return file.read()
 
 
@@ -98,14 +92,14 @@ def collection_error_raw_output() -> str:
 
 
 def test_successful_output_has_no_issues(
-    successful_output: IssueSpecOutput,
+    successful_output: VerifierOutput,
 ) -> None:
     """Test that successful.log has 0 issues."""
     assert len(successful_output.issues) == 0
 
 
 def test_successful_output_is_successful(
-    successful_output: IssueSpecOutput,
+    successful_output: VerifierOutput,
 ) -> None:
     """Test that successful.log verification is successful."""
     assert successful_output.successful is True
@@ -117,21 +111,21 @@ def test_successful_output_is_successful(
 
 
 def test_multiple_errors_output_has_5_issues(
-    multiple_errors_output: IssueSpecOutput,
+    multiple_errors_output: VerifierOutput,
 ) -> None:
     """Test that multiple.log has 5 issues."""
     assert len(multiple_errors_output.issues) == 5
 
 
 def test_multiple_errors_output_is_not_successful(
-    multiple_errors_output: IssueSpecOutput,
+    multiple_errors_output: VerifierOutput,
 ) -> None:
     """Test that multiple.log verification is not successful."""
     assert multiple_errors_output.successful is False
 
 
 def test_multiple_errors_output_stack_traces(
-    multiple_errors_output: IssueSpecOutput,
+    multiple_errors_output: VerifierOutput,
 ) -> None:
     """Test that each issue has the correct stack trace location.
 
@@ -163,7 +157,7 @@ def test_multiple_errors_output_stack_traces(
 
 
 def test_multiple_errors_output_error_types(
-    multiple_errors_output: IssueSpecOutput,
+    multiple_errors_output: VerifierOutput,
 ) -> None:
     """Test that all issues have AssertionError as error type."""
     for issue in multiple_errors_output.issues:
@@ -171,7 +165,7 @@ def test_multiple_errors_output_error_types(
 
 
 def test_multiple_errors_output_severity(
-    multiple_errors_output: IssueSpecOutput,
+    multiple_errors_output: VerifierOutput,
 ) -> None:
     """Test that all issues have 'error' severity."""
     for issue in multiple_errors_output.issues:
@@ -179,7 +173,7 @@ def test_multiple_errors_output_severity(
 
 
 def test_multiple_errors_output_messages_not_empty(
-    multiple_errors_output: IssueSpecOutput,
+    multiple_errors_output: VerifierOutput,
 ) -> None:
     """Test that all issues have non-empty messages."""
     for issue in multiple_errors_output.issues:
@@ -192,21 +186,21 @@ def test_multiple_errors_output_messages_not_empty(
 
 
 def test_collection_error_output_has_1_issue(
-    collection_error_output: IssueSpecOutput,
+    collection_error_output: VerifierOutput,
 ) -> None:
     """Test that multiple_collection_error.log has 1 issue."""
     assert len(collection_error_output.issues) == 1
 
 
 def test_collection_error_output_is_not_successful(
-    collection_error_output: IssueSpecOutput,
+    collection_error_output: VerifierOutput,
 ) -> None:
     """Test that collection error verification is not successful."""
     assert collection_error_output.successful is False
 
 
 def test_collection_error_output_error_type(
-    collection_error_output: IssueSpecOutput,
+    collection_error_output: VerifierOutput,
 ) -> None:
     """Test that the collection error has SyntaxError as error type."""
     assert len(collection_error_output.issues) == 1
@@ -214,7 +208,7 @@ def test_collection_error_output_error_type(
 
 
 def test_collection_error_output_message(
-    collection_error_output: IssueSpecOutput,
+    collection_error_output: VerifierOutput,
 ) -> None:
     """Test that the collection error has the correct message."""
     assert len(collection_error_output.issues) == 1
@@ -222,7 +216,7 @@ def test_collection_error_output_message(
 
 
 def test_collection_error_output_stack_trace(
-    collection_error_output: IssueSpecOutput,
+    collection_error_output: VerifierOutput,
 ) -> None:
     """Test that the collection error has a stack trace.
 
@@ -244,7 +238,7 @@ def test_collection_error_output_stack_trace(
 
 
 def test_collection_error_output_severity(
-    collection_error_output: IssueSpecOutput,
+    collection_error_output: VerifierOutput,
 ) -> None:
     """Test that the collection error has 'error' severity."""
     assert len(collection_error_output.issues) == 1

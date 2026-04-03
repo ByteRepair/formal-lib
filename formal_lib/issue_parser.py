@@ -7,7 +7,7 @@ from typing import cast
 from pathlib import Path
 
 from formal_lib.program_trace import ProgramTrace, CounterexampleProgramTrace
-from formal_lib.verifier_output import VerifierOutput, IssueSpecOutput
+from formal_lib.verifier_output import VerifierOutput
 from formal_lib.issue import Issue, IssueSeverities, VerifierIssue
 from formal_lib.regex import ANSI_ESCAPE_PATTERN
 from formal_lib.specs.base import (
@@ -45,7 +45,7 @@ class IssueSpecOutputParser:
         # Parse each issue block to extract individual issues
         issues: list[Issue] = [self._parse_issue(block) for block in issue_blocks]
 
-        return IssueSpecOutput(
+        return VerifierOutput(
             exit_success=exit_success,
             return_code=return_code,
             issues=issues,
