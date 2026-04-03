@@ -42,10 +42,12 @@ def pretty_print(result: VerifierOutput) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        prog="Pretty Formal",
-        description="CLI tool for the formal-lib library. Provides a frontend "
-        "that parses verifier output into structured different formats. Reads "
-        "from stdin, or runs a command directly when given after '--'.",
+        prog="pf",
+        epilog="Made by Yiannis Charalambous (https://yiannis.info) for academia",
+        description="Pretty Formal: CLI frontend for the formal-lib library. "
+        "Provides a frontend that parses verifier output into structured "
+        "different formats. Reads from stdin, or runs a command directly when "
+        "given after '--'.",
     )
 
     parser.add_argument(
