@@ -12,9 +12,10 @@ cbmc_spec: IssueRegexSpec = IssueRegexSpec(
     detect=r"^CBMC version \d+",
     success=r"^VERIFICATION SUCCESSFUL$",
     # Each "Trace for <id>:" section is an issue block.
+    # With --stop-on-fail, CBMC uses "Counterexample:" instead of "Trace for <id>:".
     # Matches from the header to the next trace header, results summary, or end of string.
     block=missing_hint("Needs --trace")(
-        r"Trace for [^\n]+:\n.*?(?=Trace for [^\n]+:\n|\*\* \d+ of \d+|\Z)"
+        r"(?:Trace for [^\n]+|Counterexample):\n.*?(?=Trace for [^\n]+:\n|Counterexample:\n|\*\* \d+ of \d+|\Z)"
     ),
     # Greedy (?s).* skips to LAST "Violated property:" in block (CBMC accumulates them).
     # Captures first word of description line: "assertion", "arithmetic", "array", etc.
@@ -37,8 +38,8 @@ cbmc_spec: IssueRegexSpec = IssueRegexSpec(
         line_index=r"line\s+(\d+)",
     ),
     counterexample_spec=CounterexampleRegexSpec(
-        # States between "Trace for X:" header and first "Violated property:".
-        block=r"Trace for [^\n]+:\n(.*?)(?=Violated property:|\Z)",
+        # States between trace header and first "Violated property:".
+        block=r"(?:Trace for [^\n]+|Counterexample):\n(.*?)(?=Violated property:|\Z)",
         # Each state entry: header + separator + assignment.
         trace_entry=r"State\s+\d+\s+file\s+\S+\s+function\s+\S+\s+line\s+\d+[^\n]*thread\s+\d+\n[-]+\n.*?(?=\nState\s|\nViolated|\n\n|\Z)",
         trace_index=r"State\s+(\d+)",
