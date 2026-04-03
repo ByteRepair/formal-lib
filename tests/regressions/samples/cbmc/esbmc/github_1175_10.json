@@ -3,7 +3,7 @@
   "issues": [
     {
       "error_type": "dereference",
-      "message": "dereference failure: pointer NULL in *ptr",
+      "message": "dereference failure: pointer NULL in *ptr. The Violated Property is: !(__CPROVER_POINTER_OBJECT(((signed int *)NULL)) == __CPROVER_POINTER_OBJECT(ptr))",
       "stack_trace": [
         {
           "trace_index": 0,
@@ -32,7 +32,7 @@
     },
     {
       "error_type": "dereference",
-      "message": "dereference failure: deallocated dynamic object in *ptr",
+      "message": "dereference failure: deallocated dynamic object in *ptr. The Violated Property is: !(__CPROVER_POINTER_OBJECT(ptr) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))",
       "stack_trace": [
         {
           "trace_index": 0,
@@ -61,7 +61,7 @@
     },
     {
       "error_type": "dereference",
-      "message": "dereference failure: dead object in *ptr",
+      "message": "dereference failure: dead object in *ptr. The Violated Property is: !(__CPROVER_POINTER_OBJECT(ptr) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))",
       "stack_trace": [
         {
           "trace_index": 0,
@@ -90,7 +90,7 @@
     },
     {
       "error_type": "dereference",
-      "message": "dereference failure: pointer outside object bounds in *ptr",
+      "message": "dereference failure: pointer outside object bounds in *ptr. The Violated Property is: (unsigned __CPROVER_bitvector[65])__CPROVER_OBJECT_SIZE(ptr) >= (unsigned __CPROVER_bitvector[65])__CPROVER_POINTER_OFFSET(ptr) + 4",
       "stack_trace": [
         {
           "trace_index": 0,
@@ -119,7 +119,7 @@
     },
     {
       "error_type": "dereference",
-      "message": "dereference failure: invalid integer address in *ptr",
+      "message": "dereference failure: invalid integer address in *ptr. The Violated Property is: !(__CPROVER_POINTER_OBJECT(((signed int *)NULL)) == __CPROVER_POINTER_OBJECT(ptr)) || ptr == ((signed int *)NULL)",
       "stack_trace": [
         {
           "trace_index": 0,

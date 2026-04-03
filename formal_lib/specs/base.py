@@ -2,6 +2,7 @@
 
 """Base dataclasses that define the regex specification contract for verifier backends."""
 
+from collections.abc import Callable
 from typing import Any, Protocol
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -16,6 +17,32 @@ class AnnotatedPattern(str):
         instance = super().__new__(cls, pattern)
         instance.hint = hint
         return instance
+
+
+class FormattedPattern(str):
+    """A regex pattern string with a post-processing formatter for captured values."""
+
+    formatter: Callable[[str], str]
+
+    def __new__(cls, pattern: str, formatter: Callable[[str], str]) -> "FormattedPattern":
+        instance = super().__new__(cls, pattern)
+        instance.formatter = formatter
+        return instance
+
+
+class format_match:
+    """Annotate a field pattern with a post-processing formatter.
+
+    Usage in spec definitions::
+
+        message=format_match(lambda v: v.replace("\\n", " "))(r"pattern")
+    """
+
+    def __init__(self, formatter: Callable[[str], str]) -> None:
+        self.formatter = formatter
+
+    def __call__(self, pattern: str) -> FormattedPattern:
+        return FormattedPattern(pattern, self.formatter)
 
 
 class missing_hint:

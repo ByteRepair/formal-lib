@@ -3,7 +3,7 @@
   "issues": [
     {
       "error_type": "assertion",
-      "message": "m.count(10) == 0",
+      "message": "m.count(10) == 0. The Violated Property is: return_value$_count$25 == 0",
       "stack_trace": [
         {
           "trace_index": 0,

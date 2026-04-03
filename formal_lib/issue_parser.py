@@ -13,6 +13,7 @@ from formal_lib.regex import ANSI_ESCAPE_PATTERN
 from formal_lib.specs.base import (
     AnnotatedPattern,
     CounterexampleRegexSpec,
+    FormattedPattern,
     IssueRegexSpec,
     StackTraceRegexSpec,
 )
@@ -64,6 +65,10 @@ class IssueSpecOutputParser:
     @staticmethod
     def _get_hint(pattern: str) -> str:
         return pattern.hint if isinstance(pattern, AnnotatedPattern) else ""
+
+    @staticmethod
+    def _apply_format(pattern: str, value: str) -> str:
+        return pattern.formatter(value) if isinstance(pattern, FormattedPattern) else value
 
     @staticmethod
     def _parse_traces(
@@ -146,6 +151,8 @@ class IssueSpecOutputParser:
         # Extract message
         message_match = re.search(self.regex_spec.message, issue_text, re.MULTILINE)
         message = message_match.group(1) if message_match else ""
+        message = self._apply_format(self.regex_spec.message, message)
+        message = re.sub(r"\s*\n\s*", " ", message)
 
         # Extract severity
         severity_match = re.search(self.regex_spec.severity, issue_text, re.MULTILINE)

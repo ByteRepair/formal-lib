@@ -3,7 +3,7 @@
   "issues": [
     {
       "error_type": "assertion",
-      "message": "assertion 0",
+      "message": "assertion 0. The Violated Property is: (__CPROVER_bool)0",
       "stack_trace": [
         {
           "trace_index": 0,

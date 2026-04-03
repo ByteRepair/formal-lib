@@ -1,9 +1,12 @@
 # Author: Yiannis Charalambous
 
+import re
+
 from formal_lib.specs.base import (
     CounterexampleRegexSpec,
     IssueRegexSpec,
     StackTraceRegexSpec,
+    format_match,
     missing_hint,
 )
 
@@ -20,8 +23,10 @@ cbmc_spec: IssueRegexSpec = IssueRegexSpec(
     # Greedy (?s).* skips to LAST "Violated property:" in block (CBMC accumulates them).
     # Captures first word of description line: "assertion", "arithmetic", "array", etc.
     error_type=r"(?s).*Violated property:\n\s+[^\n]+\n\s+(\S+)",
-    # Full description line from last Violated property.
-    message=r"(?s).*Violated property:\n\s+[^\n]+\n\s+(.+?)$",
+    # Description + condition from last Violated property (condition line optional).
+    message=format_match(
+        lambda v: re.sub(r"\s*\n\s*", ". The Violated Property is: ", v)
+    )(r"(?s).*Violated property:\n\s+[^\n]+\n\s+(.+?(?:\n\s+.+?)?)$"),
     # Always "error" — "Violated property" doesn't match IssueSeverities, triggers fallback.
     severity=r"(Violated property)",
     stack_trace_spec=StackTraceRegexSpec(

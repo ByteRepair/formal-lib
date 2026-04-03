@@ -1,9 +1,12 @@
 # Author: Yiannis Charalambous
 
+import re
+
 from formal_lib.specs.base import (
     CounterexampleRegexSpec,
     IssueRegexSpec,
     StackTraceRegexSpec,
+    format_match,
     missing_hint,
 )
 
@@ -17,8 +20,10 @@ esbmc_spec: IssueRegexSpec = IssueRegexSpec(
     # Error type from "Stack trace:" section — skip c:@ symbol lines,
     # first word on the error description line (e.g. "assertion").
     error_type=r"Stack trace:\n(?:\s+c:@\S*[^\n]*\n)*\s+(\S+)",
-    # Error message — everything after the first word on the same line.
-    message=r"Stack trace:\n(?:\s+c:@\S*[^\n]*\n)*\s+\S+\s+(.+?)$",
+    # Error message — everything after the first word, plus optional condition line.
+    message=format_match(
+        lambda v: re.sub(r"\s*\n\s*", ". The Violated Property is: ", v)
+    )(r"Stack trace:\n(?:\s+c:@\S*[^\n]*\n)*\s+\S+\s+(.+?(?:\n\s+.+?)?)$"),
     # ESBMC issues are always errors.
     severity=r"(Violated property)",
     stack_trace_spec=StackTraceRegexSpec(

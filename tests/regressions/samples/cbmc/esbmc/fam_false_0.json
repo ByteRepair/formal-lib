@@ -3,7 +3,7 @@
   "issues": [
     {
       "error_type": "array",
-      "message": "array 'F'.arr upper bound in F.arr[(signed long int)10]",
+      "message": "array 'F'.arr upper bound in F.arr[(signed long int)10]. The Violated Property is: FALSE",
       "stack_trace": [
         {
           "trace_index": 0,

@@ -3,7 +3,7 @@
   "issues": [
     {
       "error_type": "assertion",
-      "message": "size <= PAGE_SIZE",
+      "message": "size <= PAGE_SIZE. The Violated Property is: size <= 4096",
       "stack_trace": [
         {
           "trace_index": 0,

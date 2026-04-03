@@ -3,7 +3,7 @@
   "issues": [
     {
       "error_type": "division",
-      "message": "division by zero in 5 / num",
+      "message": "division by zero in 5 / num. The Violated Property is: !(num == 0)",
       "stack_trace": [
         {
           "trace_index": 0,
@@ -25,7 +25,7 @@
     },
     {
       "error_type": "division",
-      "message": "division by zero in 5 / num1",
+      "message": "division by zero in 5 / num1. The Violated Property is: !(num1 == 0)",
       "stack_trace": [
         {
           "trace_index": 0,

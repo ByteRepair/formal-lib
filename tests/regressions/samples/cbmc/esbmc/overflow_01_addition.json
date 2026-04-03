@@ -3,7 +3,7 @@
   "issues": [
     {
       "error_type": "arithmetic",
-      "message": "arithmetic overflow on signed + in a + b",
+      "message": "arithmetic overflow on signed + in a + b. The Violated Property is: !overflow(\"+\", signed int, a, b)",
       "stack_trace": [
         {
           "trace_index": 0,

@@ -8,8 +8,10 @@ from .base import (
     AnnotatedPattern,
     CachePropertiesFn,
     CounterexampleRegexSpec,
+    FormattedPattern,
     IssueRegexSpec,
     StackTraceRegexSpec,
+    format_match,
     missing_hint,
 )
 from .cbmc import cbmc_spec
@@ -39,6 +41,7 @@ __all__ = [
     "AnnotatedPattern",
     "CachePropertiesFn",
     "CounterexampleRegexSpec",
+    "FormattedPattern",
     "IssueRegexSpec",
     "SPECS",
     "StackTraceRegexSpec",
@@ -46,6 +49,7 @@ __all__ = [
     "clang_spec",
     "detect_spec",
     "esbmc_spec",
+    "format_match",
     "missing_hint",
     "pytest_spec",
 ]
