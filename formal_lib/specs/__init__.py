@@ -3,7 +3,6 @@
 """Contains specs for different oracles."""
 
 import re
-import sys
 
 from .base import (
     CachePropertiesFn,
@@ -31,11 +30,7 @@ def detect_spec(output: str) -> IssueRegexSpec:
         if spec.detect and re.search(spec.detect, output, re.MULTILINE):
             return spec
     names = ", ".join(SPECS)
-    print(
-        f"error: could not detect backend from output, use --backend ({names})",
-        file=sys.stderr,
-    )
-    sys.exit(1)
+    raise ValueError(f"could not detect backend from output (known: {names})")
 
 
 __all__ = [

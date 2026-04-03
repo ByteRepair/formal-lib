@@ -85,7 +85,10 @@ def main() -> None:
         output = sys.stdin.read()
         duration = 0.0
 
-    spec = SPECS[args.backend] if args.backend else detect_spec(output)
+    try:
+        spec = SPECS[args.backend] if args.backend else detect_spec(output)
+    except ValueError as e:
+        parser.error(str(e))
 
     result = IssueSpecOutputParser(spec).parse_output(
         output=output,
