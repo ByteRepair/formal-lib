@@ -99,12 +99,12 @@ jobs:
         if: steps.changelog.outputs.skip != 'true'
         run: hatch build
 
-      - name: Publish to PyPI
-        if: ${{ steps.changelog.outputs.skip != 'true' && secrets.PYPI_TOKEN != '' }}
-        run: hatch publish
-        env:
-          HATCH_INDEX_USER: __token__
-          HATCH_INDEX_AUTH: ${{ secrets.PYPI_TOKEN }}
+      # - name: Publish to PyPI
+      #   if: steps.changelog.outputs.skip != 'true'
+      #   run: hatch publish
+      #   env:
+      #     HATCH_INDEX_USER: __token__
+      #     HATCH_INDEX_AUTH: ${{ secrets.PYPI_TOKEN }}
 
       - name: Create GitHub Prerelease
         if: steps.changelog.outputs.skip != 'true'
