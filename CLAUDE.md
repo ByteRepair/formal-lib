@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-formal-lib is a Python library that parses unstructured output from software verifiers (ESBMC, Clang, PyTest) into structured JSON with issues, stack traces, and counterexamples. It provides both a CLI (`formal-lib`) and a programmatic API (`VerifierRunner`).
+formal-lib is a Python library that parses unstructured output from software verifiers (ESBMC, CBMC, Clang, PyTest) into structured JSON with issues, stack traces, and counterexamples. It provides both a CLI (`pf` / `formal-lib`) and a programmatic API (`VerifierRunner`).
 
 ## Commands
 
@@ -32,18 +32,18 @@ hatch build
 
 The library uses a **specification-driven regex parsing** pattern with three layers:
 
-1. **Specs** (`formal_lib/specs/`) — Each verifier backend defines an `IssueRegexSpec` containing regex patterns for extracting issue blocks, error types, messages, severity, and nested `StackTraceRegexSpec`/`CounterexampleRegexSpec` for traces. Specs are plain dataclass instances (e.g., `esbmc_spec`, `clang_spec`, `pytest_spec`).
+1. **Specs** (`formal_lib/specs/`) — Each verifier backend defines an `IssueRegexSpec` containing regex patterns for extracting issue blocks, error types, messages, severity, and nested `StackTraceRegexSpec`/`CounterexampleRegexSpec` for traces. Specs also define a `success` pattern to determine verification outcome from the output text (with `negate_success` for backends where absence of failure indicates success). Specs are plain dataclass instances (e.g., `esbmc_spec`, `cbmc_spec`, `clang_spec`, `pytest_spec`).
 
-2. **Parser** (`formal_lib/issue_parser.py`) — `IssueSpecOutputParser` applies a spec's regex hierarchy to raw output: block pattern finds issue boundaries, then field patterns extract structured data from each block. Traces are parsed via a nested block→entry→fields hierarchy.
+2. **Parser** (`formal_lib/issue_parser.py`) — `IssueSpecOutputParser` applies a spec's regex hierarchy to raw output: the `success` pattern determines the `successful` flag, the block pattern finds issue boundaries, then field patterns extract structured data from each block. Traces are parsed via a nested block→entry→fields hierarchy.
 
 3. **Runner** (`formal_lib/verifier_runner.py`) — `VerifierRunner` executes a verifier command, feeds output to the parser, and optionally caches results using content-based hashing (zlib.adler32 + pickle).
 
 **Data models** (all Pydantic `BaseModel`):
 - `Issue` / `VerifierIssue` (`issue.py`) — error type, message, severity, stack trace; `VerifierIssue` adds counterexample traces
 - `ProgramTrace` / `CounterexampleProgramTrace` (`program_trace.py`) — file path, line number, function name; counterexample variant adds variable assignments
-- `VerifierOutput` / `IssueSpecOutput` (`verifier_output.py`) — result container with issues list, convenience properties for primary issue access
+- `VerifierOutput` (`verifier_output.py`) — result container with `successful` bool, issues list, convenience properties for primary issue access
 
-**CLI** (`__main__.py`) — reads from stdin, selects spec via `--esbmc`/`--clang`/`--pytest`, outputs in `pretty`/`json`/`json-compact` format.
+**CLI** (`__main__.py`) — reads from stdin or runs a command after `--`, selects spec via `--backend` (auto-detected when omitted), outputs in `pretty`/`json`/`json-compact` format.
 
 ## Testing
 
@@ -52,4 +52,4 @@ The library uses a **specification-driven regex parsing** pattern with three lay
 
 ## Adding a New Verifier Backend
 
-Create a new `IssueRegexSpec` instance in `formal_lib/specs/`, export it from `formal_lib/specs/__init__.py`, and add a CLI flag in `__main__.py`.
+Create a new `IssueRegexSpec` instance in `formal_lib/specs/`, including a `success` pattern for determining verification outcome. Export it from `formal_lib/specs/__init__.py`, add it to the `SPECS` dict, and add a CLI flag in `__main__.py`.
