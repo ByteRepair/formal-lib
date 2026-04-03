@@ -88,6 +88,12 @@ class IssueRegexSpec:
     Matched against the full output with MULTILINE. Empty means no auto-detection."""
     counterexample_spec: CounterexampleRegexSpec | None = None
     """Optional nested specification for parsing counterexample traces."""
+    success: str = ""
+    """Regex pattern for determining verification success from output text.
+    Matched with re.MULTILINE against the full output."""
+    negate_success: bool = False
+    """When False, a match means success. When True, a match means failure
+    (i.e. success is the absence of the pattern)."""
     cache_properties: CachePropertiesFn | None = field(default=None)
     """Optional function to compute cache properties from verify_source args.
     When None, default properties are used."""

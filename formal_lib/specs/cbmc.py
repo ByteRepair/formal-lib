@@ -9,6 +9,7 @@ from formal_lib.specs.base import (
 cbmc_spec: IssueRegexSpec = IssueRegexSpec(
     # Detect CBMC by its version banner (e.g. "CBMC version 6.7.1 64-bit x86_64 linux").
     detect=r"^CBMC version \d+",
+    success=r"^VERIFICATION SUCCESSFUL$",
     # Each "Trace for <id>:" section is an issue block.
     # Matches from the header to the next trace header, results summary, or end of string.
     block=r"Trace for [^\n]+:\n.*?(?=Trace for [^\n]+:\n|\*\* \d+ of \d+|\Z)",

@@ -44,13 +44,8 @@ Pipe verifier output to `pf` to parse it into structured output:
 esbmc --k-induction --k-step 2 --max-k-step 10 file.c 2>&1 | pf
 ```
 
-Unfortunatley piping as a method of invocation comes with the following
-limitations as `pf` only receives textual content from `stdin`:
-
-1. Cannot read the exit code
-2. Cannot read duration of execution
-
-These details will be omitted from the output.
+Piping as a method of invocation cannot measure the duration of
+execution, so that detail will be omitted from the output.
 
 ## Library Examples
 
@@ -99,7 +94,7 @@ from formal_lib import detect_spec, IssueSpecOutputParser
 output = open("verifier.log").read()
 spec = detect_spec(output)
 parser = IssueSpecOutputParser(spec)
-result = parser.parse_output(exit_success=0, return_code=1, duration=0, output=output)
+result = parser.parse_output(output=output)
 
 for issue in result.issues:
     print(f"[{issue.severity}] {issue.error_type}: {issue.message}")

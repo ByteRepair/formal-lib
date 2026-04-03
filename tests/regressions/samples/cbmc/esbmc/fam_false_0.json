@@ -1,5 +1,5 @@
 {
-  "return_code": 0,
+  "successful": false,
   "issues": [
     {
       "error_type": "array",
@@ -31,6 +31,5 @@
       ]
     }
   ],
-  "duration": 0.0,
-  "exit_success": 0
+  "duration": 0.0
 }

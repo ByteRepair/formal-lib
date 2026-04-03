@@ -1,28 +1,98 @@
 {
-  "return_code": 0,
+  "successful": false,
   "issues": [
     {
       "error_type": "assertion",
       "message": "m.count(10) == 0",
       "stack_trace": [
-        {"trace_index": 0, "path": "main.cpp", "name": "main#", "line_idx": 4}
+        {
+          "trace_index": 0,
+          "path": "main.cpp",
+          "name": "main#",
+          "line_idx": 4
+        }
       ],
       "severity": "error",
       "counterexample": [
-        {"trace_index": 0, "path": "/../lib/gcc/x86_64-redhat-linux/15/../../../../include/c++/15/bits/stl_pair.h", "name": "operator=", "line_idx": 944, "assignment": "this->first = { .data_={ .first=10, .anon_pad$1=0, .second={ .str=&dynamic_2_array[0], ._size=0, .anon_pad$2=0 } }, .size_=0,\n    .hash_function_={}, .equal_function_={} }"},
-        {"trace_index": 1, "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/string", "name": "operator=", "line_idx": 1489, "assignment": "this->_size = { .data_={ .first=10, .anon_pad$1=0, .second=3 }, .size_=0,\n    .hash_function_={}, .equal_function_={} }"},
-        {"trace_index": 2, "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/string", "name": "operator=", "line_idx": 1490, "assignment": "this->str = { .data_={ .first=10, .anon_pad$1=0, .second=&dynamic_4_array[0] }, .size_=0,\n    .hash_function_={}, .equal_function_={} }"},
-        {"trace_index": 3, "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map", "name": "insert", "line_idx": 344, "assignment": "this->size_ = { .data_=nil\n  * type: , .size_=m.size_ + 1, .hash_function_={},\n    .equal_function_={} }"},
-        {"trace_index": 4, "path": "/../lib/gcc/x86_64-redhat-linux/15/../../../../include/c++/15/bits/stl_pair.h", "name": "operator=", "line_idx": 944, "assignment": "this->first = { .data_={ .first=20, .anon_pad$1=0, .second={ .str=&dynamic_2_array[0xFFFFFFFFFFFFFF00], ._size=0,\n    .anon_pad$2=0 } }, .size_=1,\n    .hash_function_={}, .equal_function_={} }"},
-        {"trace_index": 5, "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map", "name": "insert", "line_idx": 344, "assignment": "this->size_ = { .data_=nil\n  * type: , .size_=m.size_ + 1, .hash_function_={},\n    .equal_function_={} }"},
-        {"trace_index": 6, "path": "/../lib/gcc/x86_64-redhat-linux/15/../../../../include/c++/15/bits/stl_pair.h", "name": "operator=", "line_idx": 944, "assignment": "this->first = { .data_={ .first=30, .anon_pad$1=0, .second={ .str={ .pointer_object=nil\n  * type: , .pointer_offset=nil\n  * type:  }, ._size=0,\n    .anon_pad$2=0 } }, .size_=2,\n    .hash_function_={}, .equal_function_={} }"},
-        {"trace_index": 7, "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map", "name": "insert", "line_idx": 344, "assignment": "this->size_ = { .data_=nil\n  * type: , .size_=m.size_ + 1, .hash_function_={},\n    .equal_function_={} }"},
-        {"trace_index": 8, "path": "main.cpp", "name": "main", "line_idx": 11, "assignment": "it1 = { .data_=&m, .pos_=1, .size_=3 }"},
-        {"trace_index": 9, "path": "main.cpp", "name": "main", "line_idx": 17, "assignment": "it2 = { .data_=&m, .pos_=3, .size_=3 }"},
-        {"trace_index": 10, "path": "main.cpp", "name": "main", "line_idx": 21, "assignment": null}
+        {
+          "trace_index": 0,
+          "path": "/../lib/gcc/x86_64-redhat-linux/15/../../../../include/c++/15/bits/stl_pair.h",
+          "name": "operator=",
+          "line_idx": 944,
+          "assignment": "this->first = { .data_={ .first=10, .anon_pad$1=0, .second={ .str=&dynamic_2_array[0], ._size=0, .anon_pad$2=0 } }, .size_=0,\n    .hash_function_={}, .equal_function_={} }"
+        },
+        {
+          "trace_index": 1,
+          "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/string",
+          "name": "operator=",
+          "line_idx": 1489,
+          "assignment": "this->_size = { .data_={ .first=10, .anon_pad$1=0, .second=3 }, .size_=0,\n    .hash_function_={}, .equal_function_={} }"
+        },
+        {
+          "trace_index": 2,
+          "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/string",
+          "name": "operator=",
+          "line_idx": 1490,
+          "assignment": "this->str = { .data_={ .first=10, .anon_pad$1=0, .second=&dynamic_4_array[0] }, .size_=0,\n    .hash_function_={}, .equal_function_={} }"
+        },
+        {
+          "trace_index": 3,
+          "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map",
+          "name": "insert",
+          "line_idx": 344,
+          "assignment": "this->size_ = { .data_=nil\n  * type: , .size_=m.size_ + 1, .hash_function_={},\n    .equal_function_={} }"
+        },
+        {
+          "trace_index": 4,
+          "path": "/../lib/gcc/x86_64-redhat-linux/15/../../../../include/c++/15/bits/stl_pair.h",
+          "name": "operator=",
+          "line_idx": 944,
+          "assignment": "this->first = { .data_={ .first=20, .anon_pad$1=0, .second={ .str=&dynamic_2_array[0xFFFFFFFFFFFFFF00], ._size=0,\n    .anon_pad$2=0 } }, .size_=1,\n    .hash_function_={}, .equal_function_={} }"
+        },
+        {
+          "trace_index": 5,
+          "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map",
+          "name": "insert",
+          "line_idx": 344,
+          "assignment": "this->size_ = { .data_=nil\n  * type: , .size_=m.size_ + 1, .hash_function_={},\n    .equal_function_={} }"
+        },
+        {
+          "trace_index": 6,
+          "path": "/../lib/gcc/x86_64-redhat-linux/15/../../../../include/c++/15/bits/stl_pair.h",
+          "name": "operator=",
+          "line_idx": 944,
+          "assignment": "this->first = { .data_={ .first=30, .anon_pad$1=0, .second={ .str={ .pointer_object=nil\n  * type: , .pointer_offset=nil\n  * type:  }, ._size=0,\n    .anon_pad$2=0 } }, .size_=2,\n    .hash_function_={}, .equal_function_={} }"
+        },
+        {
+          "trace_index": 7,
+          "path": "/tmp/esbmc-cpp-headers-a176-9da3-3661/unordered_map",
+          "name": "insert",
+          "line_idx": 344,
+          "assignment": "this->size_ = { .data_=nil\n  * type: , .size_=m.size_ + 1, .hash_function_={},\n    .equal_function_={} }"
+        },
+        {
+          "trace_index": 8,
+          "path": "main.cpp",
+          "name": "main",
+          "line_idx": 11,
+          "assignment": "it1 = { .data_=&m, .pos_=1, .size_=3 }"
+        },
+        {
+          "trace_index": 9,
+          "path": "main.cpp",
+          "name": "main",
+          "line_idx": 17,
+          "assignment": "it2 = { .data_=&m, .pos_=3, .size_=3 }"
+        },
+        {
+          "trace_index": 10,
+          "path": "main.cpp",
+          "name": "main",
+          "line_idx": 21,
+          "assignment": null
+        }
       ]
     }
   ],
-  "duration": 0.0,
-  "exit_success": 0
+  "duration": 0.0
 }

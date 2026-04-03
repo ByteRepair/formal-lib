@@ -13,7 +13,7 @@ from formal_lib.specs import SPECS, detect_spec
 
 
 def pretty_print(result: VerifierOutput) -> None:
-    status = "SUCCESS" if not result.issues else "FAILURE"
+    status = "SUCCESS" if result.successful else "FAILURE"
     print(f"Verification: {status}")
 
     if not result.issues:
@@ -79,21 +79,17 @@ def main() -> None:
         process = run(command, stdout=PIPE, stderr=STDOUT, check=False)
         duration = perf_counter() - start_time
         output = process.stdout.decode("utf-8")
-        return_code = process.returncode
     elif sys.stdin.isatty():
         parser.error("no input: pipe verifier output or pass a command after '--'")
     else:
         output = sys.stdin.read()
-        return_code = 0
         duration = 0.0
 
     spec = SPECS[args.backend] if args.backend else detect_spec(output)
 
     result = IssueSpecOutputParser(spec).parse_output(
-        exit_success=0,
-        return_code=return_code,
-        duration=duration,
         output=output,
+        duration=duration,
     )
 
     match args.format:

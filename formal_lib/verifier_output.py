@@ -17,26 +17,19 @@ class VerifierOutput(BaseModel):
     and convenient property access for single-error scenarios.
     """
 
-    return_code: int
-    """The return code of the verifier."""
     output: str
     """The output of the verifier."""
+    successful: bool = True
+    """Whether the verification was successful, determined from output text."""
     issues: list[SerializeAsAny[Issue]] = Field(default_factory=list)
     """List of issues/errors found during verification."""
     duration: float | None = None
     """Execution time in seconds."""
-    exit_success: int = Field(default=0)
-    """Code for successful exit."""
 
     @property
     def issue_count(self) -> int:
         """Total number of issues found."""
         return len(self.issues)
-
-    @property
-    def successful(self) -> bool:
-        """Returns true if return code matches success return code."""
-        return self.return_code == self.exit_success
 
     # Convenience methods
 

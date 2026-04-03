@@ -3,7 +3,7 @@
 """Regex-based parser for extracting structured issues from verifier output."""
 
 import re
-from typing import cast
+from typing import cast, get_args
 from pathlib import Path
 
 from formal_lib.program_trace import ProgramTrace, CounterexampleProgramTrace
@@ -30,24 +30,29 @@ class IssueSpecOutputParser:
         self.regex_spec: IssueRegexSpec = regex_spec
 
     def parse_output(
-        self, exit_success: int, return_code: int, duration: float, output: str
+        self, output: str, duration: float = 0.0
     ) -> VerifierOutput:
         # Strip ANSI escape codes in case the tool emits colored output.
         output = ANSI_ESCAPE_PATTERN.sub("", output)
 
+        # Determine success from the spec's success pattern.
+        spec = self.regex_spec
+        if spec.success:
+            matched = bool(re.search(spec.success, output, re.MULTILINE))
+            successful = not matched if spec.negate_success else matched
+        else:
+            successful = True
+
         # Extract all issue blocks from the output
         issue_blocks: list[str] = []
-        for match in re.finditer(
-            self.regex_spec.block, output, re.DOTALL | re.MULTILINE
-        ):
+        for match in re.finditer(spec.block, output, re.DOTALL | re.MULTILINE):
             issue_blocks.append(match.group(0))
 
         # Parse each issue block to extract individual issues
         issues: list[Issue] = [self._parse_issue(block) for block in issue_blocks]
 
         return VerifierOutput(
-            exit_success=exit_success,
-            return_code=return_code,
+            successful=successful,
             issues=issues,
             output=output,
             duration=duration,
@@ -139,7 +144,7 @@ class IssueSpecOutputParser:
         severity_match = re.search(self.regex_spec.severity, issue_text, re.MULTILINE)
         severity_str = severity_match.group(1).lower() if severity_match else "error"
         # Convert to valid severity literal
-        if severity_str not in IssueSeverities:
+        if severity_str not in get_args(IssueSeverities):
             severity_str = "error"
         # Type cast after validation
         severity: IssueSeverities = cast(IssueSeverities, severity_str)

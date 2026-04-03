@@ -32,10 +32,8 @@ def multiple_errors_output() -> VerifierOutput:
     with open(DATA_DIR / "multiple.log") as file:
         parser = IssueSpecOutputParser(pytest_spec)
         return parser.parse_output(
-            exit_success=0,
-            return_code=1,
-            duration=2.79,
             output=file.read(),
+            duration=2.79,
         )
 
 
@@ -52,10 +50,8 @@ def successful_output() -> VerifierOutput:
     with open(DATA_DIR / "successful.log") as file:
         parser = IssueSpecOutputParser(pytest_spec)
         return parser.parse_output(
-            exit_success=0,
-            return_code=0,
-            duration=2.03,
             output=file.read(),
+            duration=2.03,
         )
 
 
@@ -72,10 +68,8 @@ def collection_error_output() -> VerifierOutput:
     with open(DATA_DIR / "multiple_collection_error.log") as file:
         parser = IssueSpecOutputParser(pytest_spec)
         return parser.parse_output(
-            exit_success=0,
-            return_code=1,
-            duration=2.03,
             output=file.read(),
+            duration=2.03,
         )
 
 

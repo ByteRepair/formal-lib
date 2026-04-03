@@ -34,8 +34,6 @@ class VerifierRunner:
     regex_spec: IssueRegexSpec | None = None
     """Regex specification for parsing verifier output. If None, auto-detected
     from the output."""
-    exit_success: int = 0
-    """Return code that indicates successful verification."""
     default_timeout: int | None = None
     """Default timeout in seconds. Used when verify_source is called without
     an explicit timeout."""
@@ -168,8 +166,6 @@ class VerifierRunner:
         spec = self.regex_spec or detect_spec(stdout)
 
         output = IssueSpecOutputParser(spec).parse_output(
-            exit_success=self.exit_success,
-            return_code=result.returncode,
             output=stdout,
             duration=duration,
         )
