@@ -100,7 +100,7 @@ jobs:
         run: hatch build
 
       - name: Publish to PyPI
-        if: steps.changelog.outputs.skip != 'true' && secrets.PYPI_TOKEN != ''
+        if: ${{ steps.changelog.outputs.skip != 'true' && secrets.PYPI_TOKEN != '' }}
         run: hatch publish
         env:
           HATCH_INDEX_USER: __token__
