@@ -49,7 +49,9 @@ class IssueSpecOutputParser:
         # Collect hints from annotated blocks that failed to match.
         hints: list[str] = []
         if not successful and not issues:
-            self._collect_hint(hints, spec.block)
+            hint = self._get_hint(spec.block)
+            if hint:
+                hints.append(hint)
 
         return VerifierOutput(
             successful=successful,
@@ -58,11 +60,6 @@ class IssueSpecOutputParser:
             duration=duration,
             hints=hints,
         )
-
-    @staticmethod
-    def _collect_hint(hints: list[str], pattern: str) -> None:
-        if isinstance(pattern, AnnotatedPattern):
-            hints.append(pattern.hint)
 
     @staticmethod
     def _get_hint(pattern: str) -> str:
@@ -175,19 +172,18 @@ class IssueSpecOutputParser:
             counterexample_hint = (
                 self._get_hint(ce_spec.block) if not counterexample else ""
             )
-            if counterexample:
-                return VerifierIssue(
-                    error_type=error_type,
-                    message=message,
-                    stack_trace=stack_trace,
-                    stack_trace_hint=stack_trace_hint,
-                    counterexample=cast(
-                        list[CounterexampleProgramTrace],
-                        counterexample,
-                    ),
-                    counterexample_hint=counterexample_hint,
-                    severity=severity,
-                )
+            return VerifierIssue(
+                error_type=error_type,
+                message=message,
+                stack_trace=stack_trace,
+                stack_trace_hint=stack_trace_hint,
+                counterexample=cast(
+                    list[CounterexampleProgramTrace],
+                    counterexample,
+                ),
+                counterexample_hint=counterexample_hint,
+                severity=severity,
+            )
 
         return Issue(
             error_type=error_type,
