@@ -44,8 +44,8 @@ Pipe verifier output to `pf` to parse it into structured output:
 esbmc --k-induction --k-step 2 --max-k-step 10 file.c 2>&1 | pf
 ```
 
-Piping as a method of invocation cannot measure the duration of
-execution, so that detail will be omitted from the output.
+Piping as a method of invocation cannot measure the duration of execution, so
+that detail will be omitted from the output.
 
 ## Library Examples
 
