@@ -1,0 +1,26 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "Same object violation",
+      "message": "SAME-OBJECT(src, dst)",
+      "stack_trace": [],
+      "severity": "error",
+      "error_location": {
+        "path": "corepdk/modules/spdm/src/app/libspdm/os_stub/memlib/copy_mem.c",
+        "line_idx": 24,
+        "column_idx": 4
+      },
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "corepdk/modules/spdm/src/app/libspdm/os_stub/memlib/copy_mem.c",
+          "name": "libspdm_copy_mem",
+          "line_idx": 24,
+          "assignment": null
+        }
+      ]
+    }
+  ],
+  "duration": 0.0
+}

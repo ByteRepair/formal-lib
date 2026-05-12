@@ -1,0 +1,39 @@
+ESBMC version 8.2.0 64-bit x86_64 linux
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing corepdk/modules/spdm/src/app/libspdm/os_stub/memlib/copy_mem.c
+Parsing harness/libspdm_copy_mem/main.c
+Converting
+Generating GOTO Program
+GOTO program creation time: 0.136s
+Enforcing annotated contracts for 1 function(s)
+Enforced contract for function c:@F@libspdm_copy_mem
+GOTO program processing time: 0.000s
+Checking base case, k = 1
+Starting Bounded Model Checking
+WARNING: no body for function libspdm_debug_assert
+WARNING: no body for function libspdm_debug_assert
+Not unwinding loop 3 iteration 1   file corepdk/modules/spdm/src/app/libspdm/os_stub/memlib/copy_mem.c line 33 column 5 function libspdm_copy_mem
+Symex completed in: 0.013s (45 assignments)
+Slicing time: 0.000s (removed 39 assignments)
+Generated 10 VCC(s), 5 remaining after simplification (6 assignments)
+No solver specified; defaulting to Boolector
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.000s
+Solving with solver Boolector 3.2.4
+Runtime decision procedure: 0.009s
+Building error trace
+
+[Counterexample]
+
+
+State 1 file corepdk/modules/spdm/src/app/libspdm/os_stub/memlib/copy_mem.c line 25 column 5 function libspdm_copy_mem thread 0
+----------------------------------------------------
+Violated property:
+  file corepdk/modules/spdm/src/app/libspdm/os_stub/memlib/copy_mem.c line 25 column 5 function libspdm_copy_mem
+  Same object violation
+  SAME-OBJECT(src, dst)
+
+
+VERIFICATION FAILED
+
+Bug found (k = 1)

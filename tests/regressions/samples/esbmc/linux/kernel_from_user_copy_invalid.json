@@ -2,23 +2,28 @@
   "successful": false,
   "issues": [
     {
-      "error_type": "assertion",
-      "message": "size <= PAGE_SIZE. The Violated Property is: size <= 4096",
+      "error_type": "assertion size <= PAGE_SIZE",
+      "message": "size <= 4096",
       "stack_trace": [
         {
           "trace_index": 0,
           "path": "test.c",
-          "name": "copy_from_user",
-          "line_idx": 18
+          "name": "main",
+          "line_idx": 3
         },
         {
           "trace_index": 1,
           "path": "test.c",
-          "name": "main",
-          "line_idx": 3
+          "name": "copy_from_user",
+          "line_idx": 18
         }
       ],
       "severity": "error",
+      "error_location": {
+        "path": "/home/runner/work/esbmc/esbmc/src/c2goto/library/kernel.c",
+        "line_idx": 110,
+        "column_idx": 2
+      },
       "counterexample": [
         {
           "trace_index": 0,

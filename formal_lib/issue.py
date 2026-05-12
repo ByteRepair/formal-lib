@@ -11,13 +11,36 @@ from formal_lib.program_trace import ProgramTrace, CounterexampleProgramTrace
 IssueSeverities = Literal["error", "warning", "info"]
 
 
+class ErrorLocation(BaseModel):
+    """Explicit error-location header captured from the verifier's output.
+
+    Some verifiers print a dedicated "this is where the failure is" line
+    separate from any call stack (ESBMC's ``Violated property:``, clang's
+    diagnostic header, etc.). When the spec captures one, the parsed
+    ``ErrorLocation`` is the canonical violation site — preferred over
+    the stack trace's last frame for ``file_path`` / ``line_index`` /
+    ``line_number`` resolution.
+
+    Distinct from ``ProgramTrace`` because the violation site is a
+    location, not a call frame: it has no caller relationship, no symbol
+    resolution, and exists once per issue, not once per visited frame.
+    """
+
+    path: Path = Field()
+    """The source file the violation is reported in."""
+    line_idx: int = Field()
+    """The 0-based line index of the violation."""
+    column_idx: int | None = Field(default=None)
+    """Optional 0-based column index, when the verifier prints one."""
+
+
 class Issue(BaseModel):
     """Generic issue/error representation.
 
-    Uses stack_trace as the single source of truth for location information.
-    All issues must have at least one trace point describing the error location.
-    Simple errors have a single trace point, while complex errors have multiple
-    trace points.
+    Location data is taken from ``error_location`` when the spec captured
+    one (the verifier's explicit error-location header), falling back to
+    ``stack_trace[-1]`` otherwise. ``stack_trace`` continues to describe
+    the call chain leading to the failure.
     """
 
     error_type: str = Field(description="Category/type of error.")
@@ -32,15 +55,28 @@ class Issue(BaseModel):
     """Severity level."""
     stack_trace_hint: str = Field(default="", exclude=True)
     """Hint shown inline when stack_trace is empty (e.g. missing verifier flag)."""
+    error_location: ErrorLocation | None = Field(default=None)
+    """Explicit error-location header parsed from the verifier output, when
+    the spec provides one. ``Issue`` location properties prefer this over
+    the stack trace's last frame."""
 
-    # Convenience properties
-    # Note: All properties derive from the last trace point (stack_trace[-1]) as this
-    # represents the point of failure in the stack trace. Earlier trace points show
-    # the call chain leading to the error.
+    # Convenience properties.
+    # Location-bearing properties read from ``error_location`` when the
+    # spec captured one, else fall back to ``stack_trace[-1]``. Defined
+    # via _loc to keep the five primitive accessors uniform — adding a
+    # sixth means one line, not another if/else.
+
+    def _loc(self, el_attr: str, frame_attr: str):
+        """Return ``error_location.<el_attr>`` if set, else
+        ``stack_trace[-1].<frame_attr>``. Raises ``IndexError`` if both
+        are absent — callers that need a None-safe fallback should guard
+        on ``stack_trace`` themselves."""
+        if self.error_location is not None:
+            return getattr(self.error_location, el_attr)
+        return getattr(self.stack_trace[-1], frame_attr)
 
     @property
     def severity_level(self) -> int:
-        """Returns the severity as an int."""
         match self.severity:
             case "info":
                 return 0
@@ -51,23 +87,47 @@ class Issue(BaseModel):
 
     @property
     def file_path(self) -> Path:
-        """Path to file with issue (derived from last trace point)."""
-        return self.stack_trace[-1].path
+        return self._loc("path", "path")
 
     @property
     def line_index(self) -> int:
-        """Line index where the error occurred (derived from last trace point, 0-based)"""
-        return self.stack_trace[-1].line_idx
+        return self._loc("line_idx", "line_idx")
 
     @property
     def line_number(self) -> int:
-        """Line number where error occurred (derived from last trace point, 1-based)."""
-        return self.stack_trace[-1].line_idx + 1
+        return self.line_index + 1
+
+    @property
+    def column_index(self) -> int | None:
+        # Stack-trace frames don't carry columns, so this is error_location-only.
+        return self.error_location.column_idx if self.error_location else None
+
+    @property
+    def column_number(self) -> int | None:
+        idx = self.column_index
+        return idx + 1 if idx is not None else None
 
     @property
     def function_name(self) -> str | None:
-        """Function name where error occurred (derived from last trace point)."""
-        return self.stack_trace[-1].name
+        """Function name at the violation site.
+
+        When ``error_location`` is set, prefer a stack frame whose path
+        matches and whose ``name`` is non-None — this skips wrapper /
+        instrumentation frames at the top of the trace (e.g. ESBMC's
+        ``__ESBMC_contracts_original_*`` under --enforce-contracts, whose
+        name doesn't resolve via the spec's name regex). Otherwise the
+        innermost frame's name is the right answer.
+        """
+        if self.error_location is not None:
+            for frame in reversed(self.stack_trace):
+                if (
+                    frame.path == self.error_location.path
+                    and frame.name is not None
+                ):
+                    return frame.name
+        if self.stack_trace:
+            return self.stack_trace[-1].name
+        return None
 
     @property
     def stack_trace_formatted(self) -> str:

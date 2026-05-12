@@ -30,6 +30,32 @@ class FormattedPattern(str):
         return instance
 
 
+class DeepestFirstPattern(str):
+    """A trace_entry pattern whose match order lists deepest frames first.
+
+    The parser detects this subclass and reverses the captured trace list so
+    consumers can rely on the convention "stack_trace[-1] is the failure
+    frame" regardless of how the verifier prints frames in its raw output.
+    """
+
+
+class MultiPattern(str):
+    """A field pattern that delegates to one of N regexes, tried in order.
+
+    The str value is the primary so a bare ``re.search(spec.field, text)``
+    hits the primary — preserves back-compat for any consumer that doesn't
+    know about MultiPattern. The parser dispatches on the subclass via
+    ``isinstance`` and iterates ``patterns`` (primary first, then fallbacks).
+    """
+
+    patterns: tuple[str, ...]
+
+    def __new__(cls, primary: str, fallbacks: tuple[str, ...]) -> "MultiPattern":
+        instance = super().__new__(cls, primary)
+        instance.patterns = (primary,) + fallbacks
+        return instance
+
+
 class format_match:
     """Annotate a field pattern with a post-processing formatter.
 
@@ -60,6 +86,45 @@ class missing_hint:
         return AnnotatedPattern(pattern, self.hint)
 
 
+def try_patterns(primary: str, *fallbacks: str) -> MultiPattern:
+    """Wrap a primary pattern with one or more fallbacks tried in order.
+
+    Usage in spec definitions::
+
+        error_type=try_patterns(
+            r"Violated property:\\n\\s+file[^\\n]*\\n\\s+([^\\n]+?)\\s*$",
+            r"Stack trace:\\n(?:\\s+c:@\\S*[^\\n]*\\n)*\\s+(\\S+)",
+        ),
+
+    Each pattern is matched independently — no negative lookaheads needed
+    between branches. Patterns may individually be wrapped with
+    ``format_match`` to attach a per-pattern formatter; the parser dispatches
+    on whichever branch matched.
+
+    Pattern priority should reflect production reality: the shape that fires
+    most often in real usage goes first.
+    """
+    return MultiPattern(primary, fallbacks)
+
+
+class deepest_first:
+    """Annotate a trace_entry pattern: parsed traces will be reversed.
+
+    Use when the verifier prints stack frames deepest-first (ESBMC, CBMC,
+    GDB-style traces). pytest / Python tracebacks print outermost-first
+    and don't need this. Without the annotation, the parser stores frames
+    in source order; with it, the parser reverses the list once after
+    building it so ``stack_trace[-1]`` is always the failure frame.
+
+    Usage in spec definitions::
+
+        trace_entry=deepest_first()(r"^[^\\n]*\\bfile\\s+\\S+\\s+line\\s+\\d+[^\\n]*"),
+    """
+
+    def __call__(self, pattern: str) -> DeepestFirstPattern:
+        return DeepestFirstPattern(pattern)
+
+
 @dataclass
 class StackTraceRegexSpec:
     """
@@ -84,6 +149,41 @@ class StackTraceRegexSpec:
     """Regex pattern to extract the function/symbol name from a trace entry."""
     line_index: str
     """Regex pattern to extract the line number from a trace entry."""
+
+
+@dataclass
+class ErrorLocationRegexSpec:
+    """Regex specification for the verifier's explicit error-location header.
+
+    Some verifiers print a dedicated "this is where the failure is" line
+    that's separate from any call stack — ESBMC's ``Violated property:``
+    block, clang's ``<file>:<line>:<col>: error:`` diagnostic header, etc.
+    When a spec fills this in, ``Issue.file_path`` / ``line_index`` /
+    ``line_number`` prefer the captured location over the stack trace's
+    last frame. This matters for verifiers (like ESBMC under
+    ``--enforce-contract``) where contract instrumentation can pin the
+    visible stack frames to a wrapper line that isn't where execution
+    actually failed.
+
+    Optional. When the field is None on an ``IssueRegexSpec``, the
+    parser doesn't run the regex and ``Issue.error_location`` stays
+    None — consumers fall back to the stack-trace-derived location.
+    """
+
+    block: str = ""
+    """Optional scoping regex; ``""`` (the default) means "scan the whole
+    issue text." This differs from :class:`StackTraceRegexSpec.block`, which
+    is mandatory and always names a sub-block — error locations are usually
+    a single header line and don't need a containing scope, but specs can
+    opt into one (e.g. to refuse matches outside a ``Violated property:``
+    region) by setting this."""
+    path: str = ""
+    """Regex with one capture group for the file path."""
+    line_index: str = ""
+    """Regex with one capture group for the 1-based line number."""
+    column_index: str = ""
+    """Optional regex with one capture group for the 1-based column.
+    Empty string means no column extracted."""
 
 
 @dataclass
@@ -138,6 +238,11 @@ class IssueRegexSpec:
     Matched against the full output with MULTILINE. Empty means no auto-detection."""
     counterexample_spec: CounterexampleRegexSpec | None = None
     """Optional nested specification for parsing counterexample traces."""
+    error_location: ErrorLocationRegexSpec | None = None
+    """Optional nested specification for the verifier's explicit error-location
+    header (e.g. ESBMC's ``Violated property:`` block, clang's diagnostic
+    header). When set, ``Issue`` properties prefer this location over the
+    stack trace's last frame."""
     success: str = ""
     """Regex pattern for determining verification success from output text.
     Matched with re.MULTILINE against the full output."""

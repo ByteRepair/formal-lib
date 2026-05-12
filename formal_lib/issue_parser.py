@@ -8,13 +8,16 @@ from pathlib import Path
 
 from formal_lib.program_trace import ProgramTrace, CounterexampleProgramTrace
 from formal_lib.verifier_output import VerifierOutput
-from formal_lib.issue import Issue, IssueSeverities, VerifierIssue
+from formal_lib.issue import ErrorLocation, Issue, IssueSeverities, VerifierIssue
 from formal_lib.regex import ANSI_ESCAPE_PATTERN
 from formal_lib.specs.base import (
     AnnotatedPattern,
     CounterexampleRegexSpec,
+    DeepestFirstPattern,
+    ErrorLocationRegexSpec,
     FormattedPattern,
     IssueRegexSpec,
+    MultiPattern,
     StackTraceRegexSpec,
 )
 
@@ -67,8 +70,28 @@ class IssueSpecOutputParser:
         return pattern.hint if isinstance(pattern, AnnotatedPattern) else ""
 
     @staticmethod
-    def _apply_format(pattern: str, value: str) -> str:
+    def _apply_format(pattern: str | None, value: str) -> str:
         return pattern.formatter(value) if isinstance(pattern, FormattedPattern) else value
+
+    @staticmethod
+    def _search_field(
+        pattern: str, text: str
+    ) -> tuple[re.Match[str] | None, str | None]:
+        """Try each alternative in a ``MultiPattern`` until one matches; for a
+        plain str pattern, behave like a single ``re.search``.
+
+        Returns ``(None, None)`` when nothing matched; otherwise the match
+        and the specific alternative that produced it (so per-branch
+        ``FormattedPattern.formatter`` dispatch works inside a MultiPattern).
+        """
+        candidates: tuple[str, ...] = (
+            pattern.patterns if isinstance(pattern, MultiPattern) else (pattern,)
+        )
+        for p in candidates:
+            m = re.search(p, text, re.MULTILINE)
+            if m is not None:
+                return m, p
+        return None, None
 
     @staticmethod
     def _parse_traces(
@@ -137,21 +160,72 @@ class IssueSpecOutputParser:
                     )
                 )
 
+        # Some verifiers (ESBMC, CBMC, GDB-style) print frames deepest-first.
+        # The deepest_first wrapper on trace_entry signals "reverse the
+        # captured list" so consumers always see stack_trace[-1] as the
+        # failure frame regardless of source-format direction. Re-index
+        # after reversal so trace_index reflects post-reverse position.
+        if isinstance(spec.trace_entry, DeepestFirstPattern):
+            traces.reverse()
+            for new_index, trace in enumerate(traces):
+                trace.trace_index = new_index
+
         return traces
+
+    @staticmethod
+    def _parse_error_location(
+        text: str, spec: ErrorLocationRegexSpec
+    ) -> ErrorLocation | None:
+        """Apply an ErrorLocationRegexSpec; return None when no match.
+
+        Scopes path/line/column extraction to ``spec.block`` when the
+        block regex is non-empty, else searches the whole issue text.
+        Both ``path`` and ``line_index`` must capture for an
+        ``ErrorLocation`` to be produced — a half-match returns None
+        and the caller falls back to the stack trace.
+        """
+        scope = text
+        if spec.block:
+            block_match = re.search(spec.block, text, re.MULTILINE)
+            if not block_match:
+                return None
+            scope = block_match.group(0)
+
+        path_match = re.search(spec.path, scope) if spec.path else None
+        line_match = re.search(spec.line_index, scope) if spec.line_index else None
+        if not (path_match and line_match):
+            return None
+
+        column_idx: int | None = None
+        if spec.column_index:
+            col_match = re.search(spec.column_index, scope)
+            if col_match:
+                column_idx = int(col_match.group(1)) - 1
+
+        return ErrorLocation(
+            path=Path(path_match.group(1)),
+            line_idx=int(line_match.group(1)) - 1,
+            column_idx=column_idx,
+        )
 
     def _parse_issue(self, issue_text: str) -> Issue:
         """Function that parses a single issue and returns it."""
 
-        # Extract error type
-        error_type_match = re.search(
-            self.regex_spec.error_type, issue_text, re.MULTILINE
+        # Extract error type. The formatter is dispatched on the *matched*
+        # alternative so MultiPattern branches can each carry their own
+        # format_match (or none). _apply_format is a no-op when nothing matched.
+        error_type_match, matched_et_pattern = self._search_field(
+            self.regex_spec.error_type, issue_text
         )
         error_type = error_type_match.group(1) if error_type_match else "Unknown"
+        error_type = self._apply_format(matched_et_pattern, error_type)
 
-        # Extract message
-        message_match = re.search(self.regex_spec.message, issue_text, re.MULTILINE)
+        # Extract message — same matched-pattern dispatch as error_type.
+        message_match, matched_msg_pattern = self._search_field(
+            self.regex_spec.message, issue_text
+        )
         message = message_match.group(1) if message_match else ""
-        message = self._apply_format(self.regex_spec.message, message)
+        message = self._apply_format(matched_msg_pattern, message)
         message = re.sub(r"\s*\n\s*", " ", message)
 
         # Extract severity
@@ -167,6 +241,14 @@ class IssueSpecOutputParser:
         st_spec = self.regex_spec.stack_trace_spec
         stack_trace: list[ProgramTrace] = self._parse_traces(issue_text, st_spec)
         stack_trace_hint = self._get_hint(st_spec.block) if not stack_trace else ""
+
+        # Extract explicit error-location header when the spec defines one.
+        # When None on the spec or no match in the text, error_location stays
+        # None and Issue.file_path falls back to stack_trace[-1].
+        el_spec = self.regex_spec.error_location
+        error_location: ErrorLocation | None = (
+            self._parse_error_location(issue_text, el_spec) if el_spec else None
+        )
 
         # Parse counterexample if spec provides one
         ce_spec = self.regex_spec.counterexample_spec
@@ -190,6 +272,7 @@ class IssueSpecOutputParser:
                 ),
                 counterexample_hint=counterexample_hint,
                 severity=severity,
+                error_location=error_location,
             )
 
         return Issue(
@@ -198,4 +281,5 @@ class IssueSpecOutputParser:
             stack_trace=stack_trace,
             stack_trace_hint=stack_trace_hint,
             severity=severity,
+            error_location=error_location,
         )

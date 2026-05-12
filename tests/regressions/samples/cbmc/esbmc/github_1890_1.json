@@ -13,6 +13,7 @@
         }
       ],
       "severity": "error",
+      "error_location": null,
       "counterexample": [
         {
           "trace_index": 0,
@@ -35,6 +36,7 @@
         }
       ],
       "severity": "error",
+      "error_location": null,
       "counterexample": [
         {
           "trace_index": 0,

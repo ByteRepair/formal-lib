@@ -1,0 +1,39 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "dereference failure: array bounds violated",
+      "message": "",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/tmp/strlen-diag/string.c",
+          "name": "strlen",
+          "line_idx": 87
+        },
+        {
+          "trace_index": 1,
+          "path": "/tmp/strlen-diag/string.c",
+          "name": null,
+          "line_idx": 87
+        }
+      ],
+      "severity": "error",
+      "error_location": {
+        "path": "/tmp/strlen-diag/string.c",
+        "line_idx": 100,
+        "column_idx": 2
+      },
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/tmp/strlen-diag/string.c",
+          "name": "strlen",
+          "line_idx": 100,
+          "assignment": null
+        }
+      ]
+    }
+  ],
+  "duration": 0.0
+}

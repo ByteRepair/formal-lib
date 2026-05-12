@@ -1,0 +1,153 @@
+[CONFIG] loaded show-stacktrace = true
+Target: 64-bit little-endian x86_64-unknown-linux with esbmclibc
+Parsing /tmp/strlen-diag/string.c
+/tmp/strlen-diag/string.c:92:39: warning: passing 'const char *' to parameter of type 'void *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+   92 |     __ESBMC_requires(__ESBMC_is_fresh(s, (size_t)100));
+      |                                       ^
+esbmc_intrinsics.h:35:29: note: passing argument to parameter here
+   35 | _Bool __ESBMC_is_fresh(void*, __SIZE_TYPE__);
+      |                             ^
+Converting
+WARNING: function 'strchr' in module 'string' is shadowed by a definition in module 'string'
+  /tmp/strlen-diag/string.c:158:1: location of the old definition
+  /home/yiannis/git/esbmc/src/c2goto/library/string.c:138:1: location of the new definition
+WARNING: function 'memset' in module 'string' is shadowed by a definition in module 'string'
+  /tmp/strlen-diag/string.c:323:1: location of the old definition
+  /home/yiannis/git/esbmc/src/c2goto/library/string.c:303:1: location of the new definition
+WARNING: function '__memset_impl' in module 'string' is shadowed by a definition in module 'string'
+  /tmp/strlen-diag/string.c:314:1: location of the old definition
+  /home/yiannis/git/esbmc/src/c2goto/library/string.c:294:1: location of the new definition
+Generating GOTO Program
+GOTO program creation time: 0.214s
+Enforcing contracts for 1 function(s)
+WARNING: Could not find definition for temporary variable: c:@F@strlen::$tmp::return_value$___ESBMC_is_fresh$1
+Enforced contract for function strlen
+GOTO program processing time: 0.003s
+Starting Bounded Model Checking
+Unwinding loop 37 iteration 1   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 2   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 3   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 4   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 5   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 6   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 7   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 8   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 9   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 10   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 11   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 12   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 13   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 14   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 15   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 16   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 17   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 18   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 19   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 20   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 21   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 22   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 23   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 24   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 25   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 26   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 27   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 28   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 29   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 30   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 31   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 32   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 33   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 34   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 35   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 36   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 37   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 38   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 39   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 40   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 41   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 42   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 43   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 44   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 45   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 46   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 47   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 48   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 49   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 50   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 51   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 52   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 53   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 54   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 55   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 56   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 57   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 58   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 59   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 60   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 61   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 62   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 63   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 64   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 65   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 66   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 67   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 68   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 69   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 70   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 71   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 72   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 73   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 74   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 75   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 76   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 77   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 78   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 79   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 80   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 81   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 82   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 83   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 84   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 85   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 86   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 87   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 88   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 89   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 90   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 91   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 92   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 93   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 94   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 95   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 96   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 97   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 98   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 99   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Unwinding loop 37 iteration 100   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Not unwinding loop 37 iteration 101   file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Symex completed in: 0.040s (633 assignments)
+Caching time: 0.022s (removed 0 assertions)
+Slicing time: 0.013s (removed 118 assignments)
+Generated 508 VCC(s), 305 remaining after simplification (515 assignments)
+No solver specified; defaulting to z3
+Encoding remaining VCC(s) using bit-vector/floating-point arithmetic
+Encoding to solver time: 0.012s
+Solving with solver Z3 v4.15.8
+Runtime decision procedure: 0.376s
+Building error trace
+
+[Counterexample]
+
+
+State 305 file /tmp/strlen-diag/string.c line 101 column 3 function strlen thread 0
+----------------------------------------------------
+Violated property:
+  file /tmp/strlen-diag/string.c line 101 column 3 function strlen
+Stack trace:
+  __ESBMC_contracts_original_strlen at file /tmp/strlen-diag/string.c line 88 column 1
+  c:@F@strlen at file /tmp/strlen-diag/string.c line 88 column 1
+  dereference failure: array bounds violated
+
+
+VERIFICATION FAILED
+ESBMC version 8.2.0 64-bit x86_64 linux

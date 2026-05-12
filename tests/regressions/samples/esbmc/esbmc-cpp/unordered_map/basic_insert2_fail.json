@@ -2,8 +2,8 @@
   "successful": false,
   "issues": [
     {
-      "error_type": "assertion",
-      "message": "m.count(10) == 0. The Violated Property is: return_value$_count$25 == 0",
+      "error_type": "assertion m.count(10) == 0",
+      "message": "return_value$_count$25 == 0",
       "stack_trace": [
         {
           "trace_index": 0,
@@ -13,6 +13,11 @@
         }
       ],
       "severity": "error",
+      "error_location": {
+        "path": "main.cpp",
+        "line_idx": 21,
+        "column_idx": 4
+      },
       "counterexample": [
         {
           "trace_index": 0,
