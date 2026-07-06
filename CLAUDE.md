@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-formal-lib is a Python library that parses unstructured output from software verifiers (ESBMC, CBMC, Clang, PyTest) into structured JSON with issues, stack traces, and counterexamples. It provides both a CLI (`pf` / `formal-lib`) and a programmatic API (`VerifierRunner`).
+formal-lib is a Python library that parses unstructured output from software verifiers (ESBMC, CBMC, Clang, PyTest) into structured JSON with issues, stack traces, and counterexamples. It provides both a CLI (`pf`) and a programmatic API (`VerifierRunner`).
 
 ## Commands
 

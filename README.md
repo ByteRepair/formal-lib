@@ -14,7 +14,14 @@ The following backends are supported:
 
 ## License
 
-> [!NOTE] This project is offered under a [dual-licence](LICENSE) model.
+Copyright © 2026 The University of Manchester. Authored by Yiannis Charalambous.
+
+> [!NOTE]
+> This project is offered under a [dual-licence](LICENSE) model: the open-source
+> **GNU AGPL-3.0**, or a separate **commercial licence** for proprietary use.
+
+For a commercial licence, contact UOM Innovation Factory (the commercialisation
+subsidiary of The University of Manchester) at contact@uominnovationfactory.com.
 
 ## Frontend
 
