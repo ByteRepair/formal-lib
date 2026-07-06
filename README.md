@@ -3,6 +3,14 @@
 A Python library that provides structured representations of software verifier
 output.
 
+## Installation
+
+- [PyPi](https://pypi.org/project/formal-lib/)
+
+```sh
+pip install formal-lib
+```
+
 ## Backends
 
 The following backends are supported:
