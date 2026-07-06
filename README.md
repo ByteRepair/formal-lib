@@ -5,11 +5,8 @@ output.
 
 ## Installation
 
-- [PyPi](https://pypi.org/project/formal-lib/)
-
-```sh
-pip install formal-lib
-```
+- [PyPI](https://pypi.org/project/formal-lib/) _(Recommended)_
+- [GitHub Releases](https://github.com/ByteRepair/formal-lib/releases/latest)
 
 ## Backends
 
@@ -20,29 +17,16 @@ The following backends are supported:
 - Clang
 - PyTest
 
-## License
-
-Copyright © 2026 The University of Manchester. Authored by Yiannis Charalambous.
-
-> [!NOTE]
-> This project is offered under a [dual-licence](LICENSE) model: the open-source
-> **GNU AGPL-3.0**, or a separate **commercial licence** for proprietary use.
-
-For a commercial licence, contact UOM Innovation Factory (the commercialisation
-subsidiary of The University of Manchester) at contact@uominnovationfactory.com.
-
 ## Frontend
 
-`pf` (Pretty Format) is the frontend for `formal-lib`. It can be invoked from
+`pf` (Pretty Format) is a CLI frontend for `formal-lib`. It can be invoked from
 the CLI to get formatted output from any supported backends. There are two ways
-to invoke `pf`:
+to invoke `pf`; detailed below.
 
-1. **Preferred:** Using the `--` separator and specifying the command
-2. Pipe
+### Using the `--` Separator (Recommeded)
 
-### Using the `--` Separator
-
-The `pf` can invoke the command by specifying `--` and the command:
+The verifier command is specified after the `--` separator. Any builtin backend
+can be specified. For example:
 
 ```bash
 pf -- esbmc --k-induction --k-step 2 --max-k-step 10 file.c
@@ -64,31 +48,10 @@ that detail will be omitted from the output.
 
 ## Library Examples
 
-### Formatting ESBMC output
+The following section shows some simple examples of the capability of
+`formal-lib`.
 
-```py
-from pathlib import Path
-from formal_lib import VerifierRunner, VerifierIssue, esbmc_spec
-
-verifier = VerifierRunner(
-    base_cmd=Path("/usr/bin/esbmc"),
-    regex_spec=esbmc_spec,
-    default_timeout=120,
-)
-
-result = verifier.verify_source(Path("main.c"), include_paths=[Path("include/")])
-
-if not result.successful:
-    for issue in result.issues:
-        print(f"[{issue.severity}] {issue.error_type}: {issue.message}")
-        print(f"  Location: {issue.file_path}:{issue.line_number}")
-        print(issue.stack_trace_formatted)
-
-        if isinstance(issue, VerifierIssue):
-            print(issue.counterexample_formatted)
-```
-
-### Running a verifier with auto-detection
+### Running a Verifier
 
 ```py
 from pathlib import Path
@@ -101,7 +64,7 @@ for issue in result.issues:
     print(f"[{issue.severity}] {issue.error_type}: {issue.message}")
 ```
 
-### Analyzing output with auto-detection
+### Analyzing Verifier Output
 
 ```py
 from formal_lib import detect_spec, IssueSpecOutputParser
@@ -111,18 +74,12 @@ spec = detect_spec(output)
 parser = IssueSpecOutputParser(spec)
 result = parser.parse_output(output=output)
 
-for issue in result.issues:
-    print(f"[{issue.severity}] {issue.error_type}: {issue.message}")
-```
-
-### Filtering traces to specific files
-
-```py
-result = verifier.verify_source(Path("main.c"), Path("lib/"))
-
 # Drop traces from system headers or other files not in your project
 project_files = {Path("main.c"), Path("lib/utils.c")}
 result = result.filter_traces(project_files)
+
+for issue in result.issues:
+    print(f"[{issue.severity}] {issue.error_type}: {issue.message}")
 ```
 
 ### Passing ESBMC output to LiteLLM
@@ -162,3 +119,14 @@ if not result.successful:
     )
     print(response.choices[0].message.content)
 ````
+
+## License
+
+Copyright © 2026 The University of Manchester. Authored by Yiannis Charalambous.
+
+> [!NOTE] This project is offered under a [dual-licence](LICENSE) model: the
+> open-source **GNU AGPL-3.0**, or a separate **commercial licence** for
+> proprietary use.
+
+For a commercial licence, contact UOM Innovation Factory (the commercialisation
+subsidiary of The University of Manchester) at contact@uominnovationfactory.com.
