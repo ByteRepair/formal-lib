@@ -1,4 +1,4 @@
-# formal-lib
+# `formal-lib`
 
 A Python library that provides structured representations of software verifier
 output.
