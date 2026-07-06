@@ -43,29 +43,10 @@ jobs:
 
       - name: Get commit messages since last tag
         id: changelog
-        run: |
-          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-
-          if [ -z "$LAST_TAG" ]; then
-            COMMITS=$(git log --pretty=format:"- %s (%h)" --no-merges -n 50)
-          else
-            COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
-          fi
-
-          if [ -z "$COMMITS" ]; then
-            echo "No commits since last release. Skipping prerelease creation."
-            echo "skip=true" >> $GITHUB_OUTPUT
-          else
-            echo "skip=false" >> $GITHUB_OUTPUT
-            {
-              echo 'commits<<EOF'
-              echo "$COMMITS"
-              echo 'EOF'
-            } >> $GITHUB_OUTPUT
-          fi
+        uses: ./.github/actions/changelog
 
       - name: Generate and set prerelease version
-        if: steps.changelog.outputs.skip != 'true'
+        if: steps.changelog.outputs.commits != ''
         id: version
         run: |
           CURRENT_VERSION=$(hatch version)
@@ -84,19 +65,19 @@ jobs:
           echo "version_no_v=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Get current date
-        if: steps.changelog.outputs.skip != 'true'
+        if: steps.changelog.outputs.commits != ''
         id: date
         run: echo "date=$(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_OUTPUT
 
       - name: Update version in __about__.py for build
-        if: steps.changelog.outputs.skip != 'true'
+        if: steps.changelog.outputs.commits != ''
         run: |
           sed -i 's/__version__ = ".*"/__version__ = "${{ steps.version.outputs.version_no_v }}"/' formal_lib/__about__.py
           echo "Updated __about__.py to version ${{ steps.version.outputs.version_no_v }}"
           cat formal_lib/__about__.py
 
       - name: Build package
-        if: steps.changelog.outputs.skip != 'true'
+        if: steps.changelog.outputs.commits != ''
         run: hatch build
 
       # Prereleases are published to GitHub only, not PyPI. Final releases go to
@@ -104,7 +85,7 @@ jobs:
       # GitHub Release is published.
 
       - name: Create GitHub Prerelease
-        if: steps.changelog.outputs.skip != 'true'
+        if: steps.changelog.outputs.commits != ''
         uses: softprops/action-gh-release@v3.0.1
         with:
           tag_name: ${{ steps.version.outputs.version }}

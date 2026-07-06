@@ -1,0 +1,31 @@
+name: Changelog
+description: Build a markdown list of commits since the last tag.
+
+outputs:
+  commits:
+    description: Markdown bullet list of commits since the last tag (empty when there are none).
+    value: ${{ steps.log.outputs.commits }}
+
+runs:
+  using: composite
+  steps:
+    # Requires the caller to check out with `fetch-depth: 0` so the full history
+    # and all tags are available to `git describe` / `git log`.
+    - id: log
+      shell: bash
+      run: |
+        LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+
+        if [ -z "$LAST_TAG" ]; then
+          COMMITS=$(git log --pretty=format:"- %s (%h)" --no-merges -n 50)
+        else
+          COMMITS=$(git log "${LAST_TAG}..HEAD" --pretty=format:"- %s (%h)" --no-merges)
+        fi
+
+        if [ -n "$COMMITS" ]; then
+          {
+            echo 'commits<<EOF'
+            echo "$COMMITS"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+        fi
