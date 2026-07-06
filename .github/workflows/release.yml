@@ -17,8 +17,14 @@ on:
     types: [published]
 
 jobs:
+  test:
+    # Gate the release on the same test suite CI runs; skip for prereleases.
+    if: ${{ !github.event.release.prerelease }}
+    uses: ./.github/workflows/test.yml
+
   publish:
     name: Publish to PyPI
+    needs: test
     if: ${{ !github.event.release.prerelease }}
     runs-on: ubuntu-latest
     environment: pypi

@@ -8,17 +8,4 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7.0.0
-      - uses: ./.github/actions/setup-hatch
-      - name: Run unit tests
-        run: hatch test
-
-  regression:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7.0.0
-      - uses: ./.github/actions/setup-hatch
-      - name: Run regression tests
-        run: hatch run regression:test
+    uses: ./.github/workflows/test.yml
