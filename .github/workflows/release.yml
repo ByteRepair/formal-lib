@@ -1,0 +1,39 @@
+name: Release
+
+# Publishes to PyPI when a (non-prerelease) GitHub Release is published.
+# Uses PyPI Trusted Publishing (OIDC) — no API token is stored in the repo.
+#
+# One-time setup on PyPI (https://pypi.org/manage/account/publishing/):
+#   Add a "pending" trusted publisher for the "formal-lib" project with:
+#     Owner:        Yiannis128
+#     Repository:   formal-lib
+#     Workflow:     release.yml
+#     Environment:  pypi
+# The weekly `.dev` prereleases are marked prerelease and are skipped by the
+# `if` guard below, so only final releases reach PyPI.
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    name: Publish to PyPI
+    if: ${{ !github.event.release.prerelease }}
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write # required for OIDC trusted publishing
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v7.0.0
+
+      - name: Setup Hatch
+        uses: ./.github/actions/setup-hatch
+
+      - name: Build package
+        run: hatch build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

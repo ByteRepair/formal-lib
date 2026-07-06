@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v7.0.0
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/actions/setup-hatch
 
       - name: Cache Hatch environment
-        uses: actions/cache@v4.2.3
+        uses: actions/cache@v6.1.0
         with:
           path: |
             ~/.cache/hatch
@@ -99,16 +99,13 @@ jobs:
         if: steps.changelog.outputs.skip != 'true'
         run: hatch build
 
-      # - name: Publish to PyPI
-      #   if: steps.changelog.outputs.skip != 'true'
-      #   run: hatch publish
-      #   env:
-      #     HATCH_INDEX_USER: __token__
-      #     HATCH_INDEX_AUTH: ${{ secrets.PYPI_TOKEN }}
+      # Prereleases are published to GitHub only, not PyPI. Final releases go to
+      # PyPI via release.yml (Trusted Publishing / OIDC) when a non-prerelease
+      # GitHub Release is published.
 
       - name: Create GitHub Prerelease
         if: steps.changelog.outputs.skip != 'true'
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3.0.1
         with:
           tag_name: ${{ steps.version.outputs.version }}
           name: "Weekly ${{ steps.version.outputs.version }}"
