@@ -30,9 +30,9 @@ classifiers = [
 ]
 dynamic = [ "version" ]
 dependencies = [ "platformdirs>=3", "pydantic>=2" ]
-urls.Documentation = "https://github.com/Yiannis128/formal-lib#readme"
-urls.Issues = "https://github.com/Yiannis128/formal-lib/issues"
-urls.Source = "https://github.com/Yiannis128/formal-lib"
+urls.Documentation = "https://github.com/ByteRepair/formal-lib#readme"
+urls.Issues = "https://github.com/ByteRepair/formal-lib/issues"
+urls.Source = "https://github.com/ByteRepair/formal-lib"
 scripts.pf = "formal_lib.__main__:main"
 
 [tool.hatch]

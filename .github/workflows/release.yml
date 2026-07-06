@@ -5,7 +5,7 @@ name: Release
 #
 # One-time setup on PyPI (https://pypi.org/manage/account/publishing/):
 #   Add a "pending" trusted publisher for the "formal-lib" project with:
-#     Owner:        Yiannis128
+#     Owner:        ByteRepair
 #     Repository:   formal-lib
 #     Workflow:     release.yml
 #     Environment:  pypi
