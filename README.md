@@ -1,5 +1,7 @@
 # `formal-lib`
 
+[![CI](https://github.com/ByteRepair/formal-lib/actions/workflows/ci.yml/badge.svg)](https://github.com/ByteRepair/formal-lib/actions/workflows/ci.yml)
+
 A Python library that provides structured representations of software verifier
 output.
 
