@@ -1,73 +1,66 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [ "hatchling" ]
+
 [project]
 name = "formal-lib"
-description = "Contains a formalization of different software verifiers"
+description = "Contains a shared interface of different software verifiers"
 readme = "README.md"
-requires-python = ">=3.12"
-license = "AGPL-3.0-only AND LicenseRef-Commercial"
-license-files = ["LICENSE"]
+keywords = [ "clang", "esbmc", "formal-verification", "parser", "pytest", "structured-output", "verifier" ]
+license = "AGPL-3.0-only OR LicenseRef-Commercial"
+license-files = [ "LICENSE" ]
 authors = [
   { name = "Yiannis Charalambous", email = "yiannis128@hotmail.com" },
 ]
-keywords = ["verifier", "parser", "formal-verification", "esbmc", "clang", "pytest", "structured-output"]
+requires-python = ">=3.12"
 classifiers = [
   "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
   "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Software Development :: Testing",
 ]
-dependencies = ["platformdirs", "pydantic"]
-dynamic = ["version"]
+dynamic = [ "version" ]
+dependencies = [ "platformdirs>=3", "pydantic>=2" ]
+urls.Documentation = "https://github.com/Yiannis128/formal-lib#readme"
+urls.Issues = "https://github.com/Yiannis128/formal-lib/issues"
+urls.Source = "https://github.com/Yiannis128/formal-lib"
+scripts.pf = "formal_lib.__main__:main"
 
-[project.urls]
-Documentation = "https://github.com/Yiannis128/formal-lib#readme"
-Issues = "https://github.com/Yiannis128/formal-lib/issues"
-Source = "https://github.com/Yiannis128/formal-lib"
-
-[project.scripts]
-pf = "formal_lib.__main__:main"
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.coverage.run]
-source_pkgs = ["formal_lib", "tests"]
-branch = true
-parallel = true
-omit = [
-  "formal_lib/__about__.py",
-]
-
-[tool.coverage.paths]
-formal_lib = ["formal_lib"]
-tests = ["tests", "*/formal-lib/tests"]
-
-[tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
-
-[tool.hatch.version]
-path = "formal_lib/__about__.py"
-
-[tool.pytest.ini_options]
-markers = ["regression: data-driven sample regression tests"]
-addopts = "-m 'not regression'"
-
-[tool.hatch.envs.regression]
-extra-dependencies = ["pytest"]
-
-[tool.hatch.envs.regression.scripts]
-test = "pytest -m regression -o 'addopts=' {args}"
-
-[tool.hatch.envs.types]
-extra-dependencies = [
+[tool.hatch]
+envs.regression.extra-dependencies = [ "pytest" ]
+envs.regression.scripts.test = "pytest -m regression -o 'addopts=' {args}"
+envs.types.extra-dependencies = [
   "mypy>=1.0.0",
   "pytest",
 ]
+envs.types.scripts.check = "mypy --install-types --non-interactive {args:formal_lib tests}"
+version.path = "formal_lib/__about__.py"
+build.targets.sdist.only-include = [ "formal_lib", "tests", "README.md", "LICENSE", "pyproject.toml" ]
 
-[tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:formal_lib tests}"
+[tool.pytest]
+ini_options.markers = [ "regression: data-driven sample regression tests" ]
+ini_options.addopts = "-m 'not regression'"
+
+[tool.coverage]
+run.branch = true
+run.omit = [
+  "formal_lib/__about__.py",
+]
+run.parallel = true
+run.source_pkgs = [ "formal_lib", "tests" ]
+paths.formal_lib = [ "formal_lib" ]
+paths.tests = [ "tests", "*/formal-lib/tests" ]
+report.exclude_lines = [
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "no cov",
+]
