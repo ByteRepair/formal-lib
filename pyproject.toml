@@ -36,8 +36,6 @@ urls.Source = "https://github.com/ByteRepair/formal-lib"
 scripts.pf = "formal_lib.__main__:main"
 
 [tool.hatch]
-envs.regression.extra-dependencies = [ "pytest" ]
-envs.regression.scripts.test = "pytest -m regression -o 'addopts=' {args}"
 envs.types.extra-dependencies = [
   "mypy>=1.0.0",
   "pytest",

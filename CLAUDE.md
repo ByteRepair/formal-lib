@@ -19,7 +19,7 @@ hatch test
 hatch test tests/test_specs/test_pytest_spec.py::test_function_name
 
 # Run regression tests (data-driven .log/.json pairs)
-hatch run regression:test
+hatch test -- tests/regressions/ -m regression -o "addopts="
 
 # Type checking
 hatch run types:check

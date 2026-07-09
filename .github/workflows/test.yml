@@ -25,4 +25,4 @@ jobs:
       - uses: actions/checkout@v7.0.0
       - uses: ./.github/actions/setup-hatch
       - name: Run regression tests
-        run: hatch run regression:test
+        run: hatch test -- tests/regressions/ -m regression -o "addopts="
