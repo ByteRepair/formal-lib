@@ -122,6 +122,22 @@ if not result.successful:
     print(response.choices[0].message.content)
 ````
 
+## Cite
+
+If you use formal-lib in your work, please cite it using the following BibTeX entry:
+
+```bib
+@misc{charalambous2026formallib,
+  author       = {Charalambous, Yiannis},
+  title        = {formal-lib: A shared interface for software verifier output},
+  year         = {2026},
+  howpublished = {\url{https://github.com/ByteRepair/formal-lib}},
+}
+```
+
+Please cite the version you used; see the
+[Releases](https://github.com/ByteRepair/formal-lib/releases) page.
+
 ## License
 
 Copyright © 2026 The University of Manchester. Authored by Yiannis Charalambous.
