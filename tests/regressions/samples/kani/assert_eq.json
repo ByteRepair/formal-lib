@@ -1,0 +1,21 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "assertion",
+      "message": "assertion failed: x == y. The Violated Property is: var_8 != FALSE",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/assert_eq.rs",
+          "name": "main",
+          "line_idx": 17
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    }
+  ],
+  "duration": 0.0
+}

@@ -1,0 +1,24 @@
+Kani Rust Verifier 0.67.0 (standalone)
+Checking harness check_assert...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/one_assert__RNvCs1gu7dml64z_10one_assert12check_assert.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Runtime Symex: 0.0020286s
+size of program expression: 93 steps
+slicing removed 49 assignments
+Generated 1 VCC(s), 0 remaining after simplification
+Runtime Postprocess Equation: 1.5203e-05s
+
+** Results:
+/home/user/kani/one_assert.rs function check_assert
+[check_assert.assertion.1] line 8 assertion failed: x == y: SUCCESS
+
+** 0 of 1 failed (1 iterations)
+VERIFICATION SUCCESSFUL
+Manual Harness Summary:
+Complete - 1 successfully verified harnesses, 0 failures, 1 total.

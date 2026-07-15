@@ -1,0 +1,52 @@
+Kani Rust Verifier 0.67.0 (standalone)
+Checking harness check_assert...
+CBMC 6.8.0 (cbmc-6.8.0)
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/assert_fail__RNvCsit2hxvGx7fl_11assert_fail12check_assert.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Runtime Symex: 0.00284127s
+size of program expression: 90 steps
+slicing removed 40 assignments
+Generated 2 VCC(s), 2 remaining after simplification
+Runtime Postprocess Equation: 3.5941e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.000259613s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 8.046e-06s
+Solving with CaDiCaL 2.0.0
+102 variables, 141 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 7.9089e-05s
+Runtime decision procedure: 0.00039437s
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+103 variables, 142 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 3.4698e-05s
+Runtime decision procedure: 5.3559e-05s
+
+RESULTS:
+Check 1: check_assert.assertion.1
+	 - Status: FAILURE
+	 - Description: ""x should be small""
+	 - Location: ../../../../home/user/kani/assert_fail.rs:5:5 in function check_assert
+
+
+SUMMARY:
+ ** 1 of 1 failed
+Failed Checks: "x should be small"
+ File: "/home/user/kani/assert_fail.rs", line 5, in check_assert
+
+VERIFICATION:- FAILED
+Verification Time: 0.04155671s
+
+Manual Harness Summary:
+Verification failed for - check_assert
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.

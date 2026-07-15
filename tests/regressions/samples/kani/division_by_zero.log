@@ -1,0 +1,121 @@
+Kani Rust Verifier 0.67.0 (standalone)
+Checking harness main...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/div_zero_fail__RNvCsc9TbXWb6bsT_13div_zero_fail4main.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Runtime Symex: 0.00110378s
+size of program expression: 73 steps
+slicing removed 24 assignments
+Generated 2 VCC(s), 2 remaining after simplification
+Runtime Postprocess Equation: 1.5627e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.000118068s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 2.859e-06s
+Solving with CaDiCaL 2.0.0
+27 variables, 47 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 2.3016e-05s
+Runtime decision procedure: 0.00016269s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+28 variables, 48 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 6.328e-06s
+Runtime decision procedure: 1.5812e-05s
+
+** Results:
+/home/user/kani/div_zero_fail.rs function main
+[main.assertion.1] line 13 attempt to divide by zero: FAILURE
+[main.assertion.2] line 13 attempt to divide with overflow: SUCCESS
+
+Trace for main.assertion.1:
+
+State 12 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<i8> line 349 thread 0
+----------------------------------------------------
+  var_0=-128 (10000000)
+
+State 13 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<i8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalaECsc9TbXWb6bsT_13div_zero_fail=-128 (10000000)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <i8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=-128 (10000000)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <i8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXsd_Cs1xmhYfHElKw_4kaniaNtB5_9Arbitrary3any=-128 (10000000)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<i8> line 278 thread 0
+----------------------------------------------------
+  var_0=-128 (10000000)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<i8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyaECsc9TbXWb6bsT_13div_zero_fail=-128 (10000000)
+
+State 21 file /home/user/kani/div_zero_fail.rs function main line 10 thread 0
+----------------------------------------------------
+  a=-128 (10000000)
+
+State 28 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<i8> line 349 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 29 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<i8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalaECsc9TbXWb6bsT_13div_zero_fail=0 (00000000)
+
+State 31 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <i8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 32 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <i8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXsd_Cs1xmhYfHElKw_4kaniaNtB5_9Arbitrary3any=0 (00000000)
+
+State 34 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<i8> line 278 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 35 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<i8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyaECsc9TbXWb6bsT_13div_zero_fail=0 (00000000)
+
+State 37 file /home/user/kani/div_zero_fail.rs function main line 11 thread 0
+----------------------------------------------------
+  b=0 (00000000)
+
+State 38 file /home/user/kani/div_zero_fail.rs function main line 12 thread 0
+----------------------------------------------------
+  var_4=TRUE (00000001)
+
+Assumption:
+  file /home/user/kani/div_zero_fail.rs line 12 column 5 function main
+  var_4 != FALSE
+
+State 40 file /home/user/kani/div_zero_fail.rs function main line 13 thread 0
+----------------------------------------------------
+  var_5=TRUE (00000001)
+
+Violated property:
+  file /home/user/kani/div_zero_fail.rs function main line 13 thread 0
+  attempt to divide by zero
+  !(var_5 != FALSE)
+
+
+
+** 1 of 2 failed (2 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - main
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.

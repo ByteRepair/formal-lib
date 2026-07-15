@@ -1,0 +1,305 @@
+Kani Rust Verifier 0.67.0 (standalone)
+Checking harness check_unreachable...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/unreachable_msg__RNvCs3eqqiSGeWBX_15unreachable_msg17check_unreachable.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 14 column 14 function check_unreachable thread 0
+aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 13 column 14 function check_unreachable thread 0
+aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 12 column 14 function check_unreachable thread 0
+aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 11 column 14 function check_unreachable thread 0
+aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 10 column 14 function check_unreachable thread 0
+aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 9 column 14 function check_unreachable thread 0
+Runtime Symex: 0.0107936s
+size of program expression: 481 steps
+slicing removed 229 assignments
+Generated 6 VCC(s), 6 remaining after simplification
+Runtime Postprocess Equation: 4.8758e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.000275531s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 3.126e-06s
+Solving with CaDiCaL 2.0.0
+40 variables, 138 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 3.1817e-05s
+Runtime decision procedure: 0.000346183s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+41 variables, 139 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 1.8777e-05s
+Runtime decision procedure: 2.7302e-05s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+42 variables, 140 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 7.522e-06s
+Runtime decision procedure: 1.3623e-05s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+43 variables, 141 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 6.528e-06s
+Runtime decision procedure: 1.2102e-05s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+44 variables, 142 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 6.51e-06s
+Runtime decision procedure: 1.1115e-05s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+45 variables, 143 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 4.712e-06s
+Runtime decision procedure: 1.2336e-05s
+Building error trace
+
+** Results:
+/home/user/kani/unreachable_msg.rs function check_unreachable
+[check_unreachable.assertion.6] line 9 internal error: entered unreachable code: : FAILURE
+[check_unreachable.assertion.5] line 10 internal error: entered unreachable code: Error message: FAILURE
+[check_unreachable.assertion.4] line 11 internal error: entered unreachable code: "Unreachable message with arg {}", "str": FAILURE
+[check_unreachable.assertion.3] line 12 internal error: entered unreachable code: "{}", msg: FAILURE
+[check_unreachable.assertion.2] line 13 internal error: entered unreachable code: concat!("My", " error", " message"): FAILURE
+[check_unreachable.assertion.1] line 14 internal error: entered unreachable code: msg: FAILURE
+
+Trace for check_unreachable.assertion.6:
+
+State 12 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 13 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs3eqqiSGeWBX_15unreachable_msg=0 (00000000)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=0 (00000000)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs3eqqiSGeWBX_15unreachable_msg=0 (00000000)
+
+State 21 file /home/user/kani/unreachable_msg.rs function check_unreachable line 8 thread 0
+----------------------------------------------------
+  var_2=0 (00000000)
+
+Violated property:
+  file /home/user/kani/unreachable_msg.rs function check_unreachable line 9 thread 0
+  internal error: entered unreachable code: 
+  FALSE
+
+
+
+Trace for check_unreachable.assertion.5:
+
+State 12 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 13 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs3eqqiSGeWBX_15unreachable_msg=1 (00000001)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=1 (00000001)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs3eqqiSGeWBX_15unreachable_msg=1 (00000001)
+
+State 21 file /home/user/kani/unreachable_msg.rs function check_unreachable line 8 thread 0
+----------------------------------------------------
+  var_2=1 (00000001)
+
+Violated property:
+  file /home/user/kani/unreachable_msg.rs function check_unreachable line 10 thread 0
+  internal error: entered unreachable code: Error message
+  FALSE
+
+
+
+Trace for check_unreachable.assertion.4:
+
+State 12 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 13 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs3eqqiSGeWBX_15unreachable_msg=2 (00000010)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=2 (00000010)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs3eqqiSGeWBX_15unreachable_msg=2 (00000010)
+
+State 21 file /home/user/kani/unreachable_msg.rs function check_unreachable line 8 thread 0
+----------------------------------------------------
+  var_2=2 (00000010)
+
+Violated property:
+  file /home/user/kani/unreachable_msg.rs function check_unreachable line 11 thread 0
+  internal error: entered unreachable code: "Unreachable message with arg {}", "str"
+  FALSE
+
+
+
+Trace for check_unreachable.assertion.3:
+
+State 12 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 13 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs3eqqiSGeWBX_15unreachable_msg=3 (00000011)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=3 (00000011)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs3eqqiSGeWBX_15unreachable_msg=3 (00000011)
+
+State 21 file /home/user/kani/unreachable_msg.rs function check_unreachable line 8 thread 0
+----------------------------------------------------
+  var_2=3 (00000011)
+
+Violated property:
+  file /home/user/kani/unreachable_msg.rs function check_unreachable line 12 thread 0
+  internal error: entered unreachable code: "{}", msg
+  FALSE
+
+
+
+Trace for check_unreachable.assertion.2:
+
+State 12 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=4 (00000100)
+
+State 13 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs3eqqiSGeWBX_15unreachable_msg=4 (00000100)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=4 (00000100)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=4 (00000100)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=4 (00000100)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs3eqqiSGeWBX_15unreachable_msg=4 (00000100)
+
+State 21 file /home/user/kani/unreachable_msg.rs function check_unreachable line 8 thread 0
+----------------------------------------------------
+  var_2=4 (00000100)
+
+Violated property:
+  file /home/user/kani/unreachable_msg.rs function check_unreachable line 13 thread 0
+  internal error: entered unreachable code: concat!("My", " error", " message")
+  FALSE
+
+
+
+Trace for check_unreachable.assertion.1:
+
+State 12 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=5 (00000101)
+
+State 13 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs3eqqiSGeWBX_15unreachable_msg=5 (00000101)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=5 (00000101)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=5 (00000101)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=5 (00000101)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs3eqqiSGeWBX_15unreachable_msg=5 (00000101)
+
+State 21 file /home/user/kani/unreachable_msg.rs function check_unreachable line 8 thread 0
+----------------------------------------------------
+  var_2=5 (00000101)
+
+Violated property:
+  file /home/user/kani/unreachable_msg.rs function check_unreachable line 14 thread 0
+  internal error: entered unreachable code: msg
+  FALSE
+
+
+
+** 6 of 6 failed (7 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - check_unreachable
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.

@@ -1,0 +1,84 @@
+Kani Rust Verifier 0.67.0 (standalone)
+warning: Found the following unsupported constructs:
+             - caller_location (1)
+             - foreign function (1)
+         
+         Verification will fail if one or more of these constructs is reachable.
+         See https://model-checking.github.io/kani/rust-feature-support.html for more details.
+
+warning: 1 warning emitted
+
+Checking harness main...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/pointer_overflow__RNvCs22LcElKDuvE_16pointer_overflow4main.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Runtime Symex: 0.00368615s
+size of program expression: 213 steps
+slicing removed 144 assignments
+Generated 2 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 2.9049e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.000161846s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 2.682e-06s
+Solving with CaDiCaL 2.0.0
+131 variables, 132 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 2.7412e-05s
+Runtime decision procedure: 0.000207052s
+Building error trace
+
+** Results:
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/fmt/mod.rs function std::fmt::Arguments::<'_>::from_str
+[std::fmt::Arguments::<'_>::from_str.assertion.1] line 820 attempt to shift left with overflow: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/intrinsics/mod.rs function core::panicking::panic_nounwind_fmt
+[core::panicking::panic_nounwind_fmt.sanity_check.1] line 2449 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/intrinsics/mod.rs function std::ptr::const_ptr::<impl *const T>::offset::runtime_offset_nowrap::runtime
+[std::ptr::const_ptr::<impl *const T>::offset::runtime_offset_nowrap::runtime.unreachable.1] line 2437 unreachable code: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panic/location.rs function std::panic::Location::<'_>::caller
+[std::panic::Location::<'_>::caller.unsupported_construct.1] line 147 caller_location is not currently supported by Kani. Please post your example at https://github.com/model-checking/kani/issues/374: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panicking.rs function core::panicking::panic_nounwind_fmt::runtime
+[core::panicking::panic_nounwind_fmt::runtime.unsupported_construct.1] line 110 call to foreign "Rust" function `_RNvCs1hStedNDpZ2_7___rustc17rust_begin_unwind` is not currently supported by Kani. Please post your example at https://github.com/model-checking/kani/issues/new/choose: SUCCESS
+[core::panicking::panic_nounwind_fmt::runtime.sanity_check.1] line 122 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function std::ptr::const_ptr::<impl *const T>::offset::precondition_check
+[std::ptr::const_ptr::<impl *const T>::offset::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/work/kani/kani/library/kani/src/lib.rs function kani::mem::cbmc::same_allocation
+[kani::mem::cbmc::same_allocation.unsupported_construct.1] line 57 Kani does not support reasoning about pointer to unallocated memory: SUCCESS
+
+/home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::offset::<i32, *const i32, isize>
+[kani::rustc_intrinsics::offset::<i32, *const i32, isize>.safety_check.1] line 57 Offset in bytes overflows isize: FAILURE
+[kani::rustc_intrinsics::offset::<i32, *const i32, isize>.safety_check.2] line 57 Offset result and original pointer must point to the same allocation: SUCCESS
+
+/home/user/kani/pointer_overflow.rs function main
+[main.assertion.1] line 9 index out of bounds: the length is less than or equal to the given index: SUCCESS
+
+Trace for kani::rustc_intrinsics::offset::<i32, *const i32, isize>.safety_check.1:
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::offset::<i32, *const i32, isize> line 57 thread 0
+  Offset in bytes overflows isize
+  var_11 != FALSE
+
+
+
+** 1 of 11 failed (2 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - main
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.

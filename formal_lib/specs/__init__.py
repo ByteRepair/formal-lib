@@ -17,10 +17,14 @@ from .base import (
 from .cbmc import cbmc_spec
 from .clang import clang_spec
 from .esbmc import esbmc_spec
+from .kani import kani_spec
 from .pytest import pytest_spec
 
 SPECS: dict[str, IssueRegexSpec] = {
     "esbmc": esbmc_spec,
+    # kani must precede cbmc: Kani's `--output-format old` output also carries a
+    # `CBMC version` banner, so cbmc_spec.detect would otherwise claim it first.
+    "kani": kani_spec,
     "cbmc": cbmc_spec,
     "clang": clang_spec,
     "pytest": pytest_spec,
@@ -50,6 +54,7 @@ __all__ = [
     "detect_spec",
     "esbmc_spec",
     "format_match",
+    "kani_spec",
     "missing_hint",
     "pytest_spec",
 ]

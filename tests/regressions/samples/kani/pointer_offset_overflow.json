@@ -1,0 +1,14 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "safety_check",
+      "message": "Offset in bytes overflows isize. The Violated Property is: var_11 != FALSE",
+      "stack_trace": [],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    }
+  ],
+  "duration": 0.0
+}

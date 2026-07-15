@@ -1,0 +1,885 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "safety_check",
+      "message": "Offset result and original pointer must point to the same allocation. The Violated Property is: var_15 != FALSE",
+      "stack_trace": [],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "__CPROVER_dead_object=NULL (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 1,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[0]=1802201963 (01101011 01101011 01101011 01101011)"
+        },
+        {
+          "trace_index": 2,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[1]=1802202004 (01101011 01101011 01101011 10010100)"
+        },
+        {
+          "trace_index": 3,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[2]=1802201963 (01101011 01101011 01101011 01101011)"
+        },
+        {
+          "trace_index": 4,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[3]=1802202004 (01101011 01101011 01101011 10010100)"
+        },
+        {
+          "trace_index": 5,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[4]=1802202004 (01101011 01101011 01101011 10010100)"
+        },
+        {
+          "trace_index": 6,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[5]=1802202004 (01101011 01101011 01101011 10010100)"
+        },
+        {
+          "trace_index": 7,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[6]=1802202004 (01101011 01101011 01101011 10010100)"
+        },
+        {
+          "trace_index": 8,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[7]=-1802201964 (10010100 10010100 10010100 10010100)"
+        },
+        {
+          "trace_index": 9,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any_raw_internal::<usize>",
+          "line_idx": 348,
+          "assignment": "var_0=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 10,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any_raw_internal::<usize>",
+          "line_idx": 349,
+          "assignment": "goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internaljECsiP0C7vJtZae_9slice_oob=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 11,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any::<usize>",
+          "line_idx": 277,
+          "assignment": "var_0=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 12,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any::<usize>",
+          "line_idx": 278,
+          "assignment": "goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyjECsiP0C7vJtZae_9slice_oob=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 13,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 35,
+          "assignment": "from=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 14,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any_raw_internal::<usize>",
+          "line_idx": 348,
+          "assignment": "var_0=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 15,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any_raw_internal::<usize>",
+          "line_idx": 349,
+          "assignment": "goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internaljECsiP0C7vJtZae_9slice_oob=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 16,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any::<usize>",
+          "line_idx": 277,
+          "assignment": "var_0=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 17,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any::<usize>",
+          "line_idx": 278,
+          "assignment": "goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyjECsiP0C7vJtZae_9slice_oob=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 18,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 36,
+          "assignment": "to=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 19,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 37,
+          "assignment": "var_4=TRUE (00000001)"
+        },
+        {
+          "trace_index": 20,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 38,
+          "assignment": "var_6=TRUE (00000001)"
+        },
+        {
+          "trace_index": 21,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 39,
+          "assignment": "var_0.0=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 22,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 39,
+          "assignment": "var_0.1=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 23,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 40,
+          "assignment": "goto_symex$$return_value$$_RINvNtCs1xmhYfHElKw_4kani5slice9any_rangeKj8_ECsiP0C7vJtZae_9slice_oob.0=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 24,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 40,
+          "assignment": "goto_symex$$return_value$$_RINvNtCs1xmhYfHElKw_4kani5slice9any_rangeKj8_ECsiP0C7vJtZae_9slice_oob.1=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 25,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 88,
+          "assignment": "offset=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 26,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 126,
+          "assignment": "addr2=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 27,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "addr2=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 28,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_5=5ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101)"
+        },
+        {
+          "trace_index": 29,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 265,
+          "assignment": "var_4=TRUE (00000001)"
+        },
+        {
+          "trace_index": 30,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_0=TRUE (00000001)"
+        },
+        {
+          "trace_index": 31,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 273,
+          "assignment": "goto_symex$$return_value$$_RNvNtNtCs1xmhYfHElKw_4kani3mem4cbmc15same_allocation=TRUE (00000001)"
+        },
+        {
+          "trace_index": 32,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "var_0=TRUE (00000001)"
+        },
+        {
+          "trace_index": 33,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 128,
+          "assignment": "goto_symex$$return_value$$_RINvNtCs1xmhYfHElKw_4kani3mem24same_allocation_internallECsiP0C7vJtZae_9slice_oob=TRUE (00000001)"
+        },
+        {
+          "trace_index": 34,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 88,
+          "assignment": "_RINvNtNtCsci0VKyKEi6N_4core5slice5index24get_offset_len_noubchecklECsiP0C7vJtZae_9slice_oob$$1$$var_5$$ptr=(signed int *)(&arr!0@1 + 1) (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 35,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 89,
+          "assignment": "var_0.data=(signed int *)(&arr!0@1 + 1) (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 36,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 89,
+          "assignment": "var_0.len=0ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 37,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 90,
+          "assignment": "goto_symex$$return_value$$_RINvNtNtCsci0VKyKEi6N_4core5slice5index24get_offset_len_noubchecklECsiP0C7vJtZae_9slice_oob.data=(signed int *)(&arr!0@1 + 1) (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 38,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 90,
+          "assignment": "goto_symex$$return_value$$_RINvNtNtCsci0VKyKEi6N_4core5slice5index24get_offset_len_noubchecklECsiP0C7vJtZae_9slice_oob.len=0ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 39,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 9,
+          "assignment": "bytes.data=(signed int *)(&arr!0@1 + 1) (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 40,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "self.data=(signed int *)(&arr!0@1 + 1) (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 41,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_6=(signed int *)(&arr!0@1 + 1) (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 42,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "self=(signed int *)(&arr!0@1 + 1) (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 43,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 125,
+          "assignment": "addr1=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 44,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 126,
+          "assignment": "addr2=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100100)"
+        },
+        {
+          "trace_index": 45,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "addr1=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 46,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "addr2=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100100)"
+        },
+        {
+          "trace_index": 47,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "obj1=5ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101)"
+        },
+        {
+          "trace_index": 48,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_5=5ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101)"
+        },
+        {
+          "trace_index": 49,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 265,
+          "assignment": "var_4=TRUE (00000001)"
+        },
+        {
+          "trace_index": 50,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_7=TRUE (00000001)"
+        },
+        {
+          "trace_index": 51,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_9=TRUE (00000001)"
+        },
+        {
+          "trace_index": 52,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_0=FALSE (00000000)"
+        },
+        {
+          "trace_index": 53,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 273,
+          "assignment": "goto_symex$$return_value$$_RNvNtNtCs1xmhYfHElKw_4kani3mem4cbmc15same_allocation=FALSE (00000000)"
+        },
+        {
+          "trace_index": 54,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "var_0=FALSE (00000000)"
+        },
+        {
+          "trace_index": 55,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 128,
+          "assignment": "goto_symex$$return_value$$_RINvNtCs1xmhYfHElKw_4kani3mem24same_allocation_internallECsiP0C7vJtZae_9slice_oob=FALSE (00000000)"
+        }
+      ]
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: pointer outside object bounds in *var_5. The Violated Property is: (unsigned __CPROVER_bitvector[65])__CPROVER_OBJECT_SIZE(var_5) >= (unsigned __CPROVER_bitvector[65])__CPROVER_POINTER_OFFSET(var_5) + 4",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "__CPROVER_dead_object=NULL (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 1,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[0]=-1 (11111111 11111111 11111111 11111111)"
+        },
+        {
+          "trace_index": 2,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[1]=-256 (11111111 11111111 11111111 00000000)"
+        },
+        {
+          "trace_index": 3,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[2]=-1 (11111111 11111111 11111111 11111111)"
+        },
+        {
+          "trace_index": 4,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[3]=-256 (11111111 11111111 11111111 00000000)"
+        },
+        {
+          "trace_index": 5,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[4]=-256 (11111111 11111111 11111111 00000000)"
+        },
+        {
+          "trace_index": 6,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[5]=-256 (11111111 11111111 11111111 00000000)"
+        },
+        {
+          "trace_index": 7,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[6]=-256 (11111111 11111111 11111111 00000000)"
+        },
+        {
+          "trace_index": 8,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 8,
+          "assignment": "arr[7]=0 (00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 9,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any_raw_internal::<usize>",
+          "line_idx": 348,
+          "assignment": "var_0=7ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000111)"
+        },
+        {
+          "trace_index": 10,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any_raw_internal::<usize>",
+          "line_idx": 349,
+          "assignment": "goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internaljECsiP0C7vJtZae_9slice_oob=7ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000111)"
+        },
+        {
+          "trace_index": 11,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any::<usize>",
+          "line_idx": 277,
+          "assignment": "var_0=7ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000111)"
+        },
+        {
+          "trace_index": 12,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any::<usize>",
+          "line_idx": 278,
+          "assignment": "goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyjECsiP0C7vJtZae_9slice_oob=7ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000111)"
+        },
+        {
+          "trace_index": 13,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 35,
+          "assignment": "from=7ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000111)"
+        },
+        {
+          "trace_index": 14,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any_raw_internal::<usize>",
+          "line_idx": 348,
+          "assignment": "var_0=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 15,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any_raw_internal::<usize>",
+          "line_idx": 349,
+          "assignment": "goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internaljECsiP0C7vJtZae_9slice_oob=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 16,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any::<usize>",
+          "line_idx": 277,
+          "assignment": "var_0=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 17,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/lib.rs",
+          "name": "kani::any::<usize>",
+          "line_idx": 278,
+          "assignment": "goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyjECsiP0C7vJtZae_9slice_oob=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 18,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 36,
+          "assignment": "to=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 19,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 37,
+          "assignment": "var_4=TRUE (00000001)"
+        },
+        {
+          "trace_index": 20,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 38,
+          "assignment": "var_6=TRUE (00000001)"
+        },
+        {
+          "trace_index": 21,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 39,
+          "assignment": "var_0.0=7ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000111)"
+        },
+        {
+          "trace_index": 22,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 39,
+          "assignment": "var_0.1=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 23,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 40,
+          "assignment": "goto_symex$$return_value$$_RINvNtCs1xmhYfHElKw_4kani5slice9any_rangeKj8_ECsiP0C7vJtZae_9slice_oob.0=7ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000111)"
+        },
+        {
+          "trace_index": 24,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/arbitrary/slice.rs",
+          "name": "kani::slice::any_range::<8>",
+          "line_idx": 40,
+          "assignment": "goto_symex$$return_value$$_RINvNtCs1xmhYfHElKw_4kani5slice9any_rangeKj8_ECsiP0C7vJtZae_9slice_oob.1=8ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001000)"
+        },
+        {
+          "trace_index": 25,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 88,
+          "assignment": "offset=7ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000111)"
+        },
+        {
+          "trace_index": 26,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 126,
+          "assignment": "addr2=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 27,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "addr2=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 28,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_5=5ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101)"
+        },
+        {
+          "trace_index": 29,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 265,
+          "assignment": "var_4=TRUE (00000001)"
+        },
+        {
+          "trace_index": 30,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_0=TRUE (00000001)"
+        },
+        {
+          "trace_index": 31,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 273,
+          "assignment": "goto_symex$$return_value$$_RNvNtNtCs1xmhYfHElKw_4kani3mem4cbmc15same_allocation=TRUE (00000001)"
+        },
+        {
+          "trace_index": 32,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "var_0=TRUE (00000001)"
+        },
+        {
+          "trace_index": 33,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 128,
+          "assignment": "goto_symex$$return_value$$_RINvNtCs1xmhYfHElKw_4kani3mem24same_allocation_internallECsiP0C7vJtZae_9slice_oob=TRUE (00000001)"
+        },
+        {
+          "trace_index": 34,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 88,
+          "assignment": "_RINvNtNtCsci0VKyKEi6N_4core5slice5index24get_offset_len_noubchecklECsiP0C7vJtZae_9slice_oob$$1$$var_5$$ptr=arr!0@1 + 7 (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 35,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 89,
+          "assignment": "var_0.data=arr!0@1 + 7 (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 36,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 89,
+          "assignment": "var_0.len=1ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)"
+        },
+        {
+          "trace_index": 37,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 90,
+          "assignment": "goto_symex$$return_value$$_RINvNtNtCsci0VKyKEi6N_4core5slice5index24get_offset_len_noubchecklECsiP0C7vJtZae_9slice_oob.data=arr!0@1 + 7 (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 38,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/index.rs",
+          "name": "core::slice::index::get_offset_len_noubcheck::<i32>",
+          "line_idx": 90,
+          "assignment": "goto_symex$$return_value$$_RINvNtNtCsci0VKyKEi6N_4core5slice5index24get_offset_len_noubchecklECsiP0C7vJtZae_9slice_oob.len=1ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)"
+        },
+        {
+          "trace_index": 39,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 9,
+          "assignment": "bytes.data=arr!0@1 + 7 (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 40,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "self.data=arr!0@1 + 7 (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 41,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_6=arr!0@1 + 7 (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 42,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "self=arr!0@1 + 7 (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 43,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 125,
+          "assignment": "addr1=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 44,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 126,
+          "assignment": "addr2=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 45,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "addr1=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00011100)"
+        },
+        {
+          "trace_index": 46,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "addr2=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 47,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "obj1=5ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101)"
+        },
+        {
+          "trace_index": 48,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_5=5ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000101)"
+        },
+        {
+          "trace_index": 49,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 265,
+          "assignment": "var_4=TRUE (00000001)"
+        },
+        {
+          "trace_index": 50,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_7=TRUE (00000001)"
+        },
+        {
+          "trace_index": 51,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_9=TRUE (00000001)"
+        },
+        {
+          "trace_index": 52,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 56,
+          "assignment": "var_0=TRUE (00000001)"
+        },
+        {
+          "trace_index": 53,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::cbmc::same_allocation",
+          "line_idx": 273,
+          "assignment": "goto_symex$$return_value$$_RNvNtNtCs1xmhYfHElKw_4kani3mem4cbmc15same_allocation=TRUE (00000001)"
+        },
+        {
+          "trace_index": 54,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 127,
+          "assignment": "var_0=TRUE (00000001)"
+        },
+        {
+          "trace_index": 55,
+          "path": "/home/runner/work/kani/kani/library/kani_core/src/mem.rs",
+          "name": "kani::mem::same_allocation_internal::<i32>",
+          "line_idx": 128,
+          "assignment": "goto_symex$$return_value$$_RINvNtCs1xmhYfHElKw_4kani3mem24same_allocation_internallECsiP0C7vJtZae_9slice_oob=TRUE (00000001)"
+        },
+        {
+          "trace_index": 56,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_5=(signed int *)(&arr!0@1 + 1) (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 57,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_11=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 58,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_12=1407374883553312ul (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 59,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_14=0ul (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)"
+        },
+        {
+          "trace_index": 60,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_15=TRUE (00000001)"
+        },
+        {
+          "trace_index": 61,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_16=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 62,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_17=1407374883553312ul (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
+        },
+        {
+          "trace_index": 63,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_19=FALSE (00000000)"
+        },
+        {
+          "trace_index": 64,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_20=FALSE (00000000)"
+        },
+        {
+          "trace_index": 65,
+          "path": "/home/user/kani/slice_oob.rs",
+          "name": "check_out_of_bounds",
+          "line_idx": 10,
+          "assignment": "var_21=TRUE (00000001)"
+        }
+      ]
+    }
+  ],
+  "duration": 0.0
+}

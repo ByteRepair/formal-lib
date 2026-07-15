@@ -1,0 +1,56 @@
+Kani Rust Verifier 0.67.0 (standalone)
+Checking harness check_arith_overflow...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/arith_checks__RNvCs1FqvJdxeI4h_12arith_checks20check_arith_overflow.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+aborting path on assume(false) at file /home/user/kani/arith_checks.rs line 12 column 5 function check_arith_overflow thread 0
+Runtime Symex: 0.00310707s
+size of program expression: 68 steps
+slicing removed 50 assignments
+Generated 4 VCC(s), 2 remaining after simplification
+Runtime Postprocess Equation: 1.2419e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.00069167s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 2.959e-06s
+Solving with CaDiCaL 2.0.0
+1 variables, 0 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 2.7043e-05s
+Runtime decision procedure: 0.000744912s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+2 variables, 1 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 5.636e-06s
+Runtime decision procedure: 9.877e-06s
+
+** Results:
+/home/user/kani/arith_checks.rs function check_arith_overflow
+[check_arith_overflow.assertion.1] line 9 index out of bounds: the length is less than or equal to the given index: SUCCESS
+[check_arith_overflow.assertion.2] line 10 index out of bounds: the length is less than or equal to the given index: SUCCESS
+[check_arith_overflow.assertion.3] line 11 attempt to subtract with overflow: FAILURE
+[check_arith_overflow.assertion.4] line 12 internal error: entered unreachable code: Previous statement should fail: SUCCESS
+
+Trace for check_arith_overflow.assertion.3:
+
+Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 11 thread 0
+  attempt to subtract with overflow
+  !(var_12.1 != FALSE)
+
+
+
+** 1 of 4 failed (2 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - check_arith_overflow
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.

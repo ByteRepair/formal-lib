@@ -1,0 +1,259 @@
+Kani Rust Verifier 0.67.0 (standalone)
+warning: Found the following unsupported constructs:
+             - caller_location (1)
+             - foreign function (2)
+         
+         Verification will fail if one or more of these constructs is reachable.
+         See https://model-checking.github.io/kani/rust-feature-support.html for more details.
+
+warning: 1 warning emitted
+
+Checking harness main...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/cast_from_be_bytes__RNvCscvcOYehEGTn_18cast_from_be_bytes4main.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Runtime Symex: 0.0558343s
+size of program expression: 3301 steps
+slicing removed 2132 assignments
+Generated 125 VCC(s), 2 remaining after simplification
+Runtime Postprocess Equation: 0.000596002s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.00374715s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 4.895e-06s
+Solving with CaDiCaL 2.0.0
+4988 variables, 6161 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 2.1899e-05s
+Runtime decision procedure: 0.00384452s
+
+** Results:
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc/src/boxed.rs function std::boxed::Box::<[u8]>::into_raw_with_allocator
+[std::boxed::Box::<[u8]>::into_raw_with_allocator.pointer_dereference.1] line 1485 dereference failure: pointer NULL in *var_4: SUCCESS
+[std::boxed::Box::<[u8]>::into_raw_with_allocator.pointer_dereference.2] line 1485 dereference failure: pointer invalid in *var_4: SUCCESS
+[std::boxed::Box::<[u8]>::into_raw_with_allocator.pointer_dereference.3] line 1485 dereference failure: deallocated dynamic object in *var_4: SUCCESS
+[std::boxed::Box::<[u8]>::into_raw_with_allocator.pointer_dereference.4] line 1485 dereference failure: dead object in *var_4: SUCCESS
+[std::boxed::Box::<[u8]>::into_raw_with_allocator.pointer_dereference.5] line 1485 dereference failure: pointer outside object bounds in *var_4: SUCCESS
+[std::boxed::Box::<[u8]>::into_raw_with_allocator.pointer_dereference.6] line 1485 dereference failure: invalid integer address in *var_4: SUCCESS
+[std::boxed::Box::<[u8]>::into_raw_with_allocator.safety_check.1] line 1485 misaligned pointer to reference cast: address must be a multiple of its type's alignment: SUCCESS
+[std::boxed::Box::<[u8]>::into_raw_with_allocator.safety_check.2] line 1485 dereference failure: pointer invalid: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc/src/macros.rs function main
+[main.pointer_dereference.1] line 53 dereference failure: pointer NULL in *var_22: SUCCESS
+[main.pointer_dereference.2] line 53 dereference failure: pointer invalid in *var_22: SUCCESS
+[main.pointer_dereference.3] line 53 dereference failure: deallocated dynamic object in *var_22: SUCCESS
+[main.pointer_dereference.4] line 53 dereference failure: dead object in *var_22: SUCCESS
+[main.pointer_dereference.5] line 53 dereference failure: pointer outside object bounds in *var_22: SUCCESS
+[main.pointer_dereference.6] line 53 dereference failure: invalid integer address in *var_22: SUCCESS
+[main.safety_check.1] line 53 null pointer dereference occurred: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc/src/raw_vec/mod.rs function alloc::raw_vec::RawVecInner::current_memory
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.1] line 523 dereference failure: pointer NULL in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.2] line 523 dereference failure: pointer invalid in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.3] line 523 dereference failure: deallocated dynamic object in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.4] line 523 dereference failure: dead object in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.5] line 523 dereference failure: pointer outside object bounds in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.6] line 523 dereference failure: invalid integer address in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.19] line 524 dereference failure: dead object in *((unsigned long int *)((unsigned char *)&temp_1 + 8)): SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.7] line 531 dereference failure: pointer NULL in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.8] line 531 dereference failure: pointer invalid in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.9] line 531 dereference failure: deallocated dynamic object in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.10] line 531 dereference failure: dead object in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.11] line 531 dereference failure: pointer outside object bounds in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.12] line 531 dereference failure: invalid integer address in self->cap: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.13] line 533 dereference failure: pointer NULL in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.14] line 533 dereference failure: pointer invalid in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.15] line 533 dereference failure: deallocated dynamic object in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.16] line 533 dereference failure: dead object in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.17] line 533 dereference failure: pointer outside object bounds in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::current_memory.pointer_dereference.18] line 533 dereference failure: invalid integer address in self->ptr: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc/src/raw_vec/mod.rs function alloc::raw_vec::RawVecInner::deallocate
+[alloc::raw_vec::RawVecInner::deallocate.unreachable.1] line 830 unreachable code: SUCCESS
+[alloc::raw_vec::RawVecInner::deallocate.pointer_dereference.1] line 832 dereference failure: dead object in *((unsigned long int *)((unsigned char *)&var_3 + 8)): SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc/src/raw_vec/mod.rs function alloc::raw_vec::RawVecInner::non_null::<u8>
+[alloc::raw_vec::RawVecInner::non_null::<u8>.pointer_dereference.1] line 504 dereference failure: pointer NULL in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::non_null::<u8>.pointer_dereference.2] line 504 dereference failure: pointer invalid in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::non_null::<u8>.pointer_dereference.3] line 504 dereference failure: deallocated dynamic object in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::non_null::<u8>.pointer_dereference.4] line 504 dereference failure: dead object in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::non_null::<u8>.pointer_dereference.5] line 504 dereference failure: pointer outside object bounds in self->ptr: SUCCESS
+[alloc::raw_vec::RawVecInner::non_null::<u8>.pointer_dereference.6] line 504 dereference failure: invalid integer address in self->ptr: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc/src/slice.rs function std::slice::<impl [u8]>::into_vec::<std::alloc::Global>
+[std::slice::<impl [u8]>::into_vec::<std::alloc::Global>.safety_check.1] line 480 misaligned pointer to reference cast: address must be a multiple of its type's alignment: SUCCESS
+[std::slice::<impl [u8]>::into_vec::<std::alloc::Global>.safety_check.2] line 480 dereference failure: pointer invalid: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc/src/vec/mod.rs function <std::vec::Vec<u8> as std::ops::Drop>::drop
+[<std::vec::Vec<u8> as std::ops::Drop>::drop.pointer_dereference.1] line 4076 dereference failure: pointer NULL in self->len: SUCCESS
+[<std::vec::Vec<u8> as std::ops::Drop>::drop.pointer_dereference.2] line 4076 dereference failure: pointer invalid in self->len: SUCCESS
+[<std::vec::Vec<u8> as std::ops::Drop>::drop.pointer_dereference.3] line 4076 dereference failure: deallocated dynamic object in self->len: SUCCESS
+[<std::vec::Vec<u8> as std::ops::Drop>::drop.pointer_dereference.4] line 4076 dereference failure: dead object in self->len: SUCCESS
+[<std::vec::Vec<u8> as std::ops::Drop>::drop.pointer_dereference.5] line 4076 dereference failure: pointer outside object bounds in self->len: SUCCESS
+[<std::vec::Vec<u8> as std::ops::Drop>::drop.pointer_dereference.6] line 4076 dereference failure: invalid integer address in self->len: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/alloc/src/vec/mod.rs function std::vec::Vec::<u8>::as_slice
+[std::vec::Vec::<u8>::as_slice.pointer_dereference.1] line 1597 dereference failure: pointer NULL in self->len: SUCCESS
+[std::vec::Vec::<u8>::as_slice.pointer_dereference.2] line 1597 dereference failure: pointer invalid in self->len: SUCCESS
+[std::vec::Vec::<u8>::as_slice.pointer_dereference.3] line 1597 dereference failure: deallocated dynamic object in self->len: SUCCESS
+[std::vec::Vec::<u8>::as_slice.pointer_dereference.4] line 1597 dereference failure: dead object in self->len: SUCCESS
+[std::vec::Vec::<u8>::as_slice.pointer_dereference.5] line 1597 dereference failure: pointer outside object bounds in self->len: SUCCESS
+[std::vec::Vec::<u8>::as_slice.pointer_dereference.6] line 1597 dereference failure: invalid integer address in self->len: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/alloc/layout.rs function std::alloc::Layout::align
+[std::alloc::Layout::align.pointer_dereference.1] line 152 dereference failure: pointer NULL in self->align: SUCCESS
+[std::alloc::Layout::align.pointer_dereference.2] line 152 dereference failure: pointer invalid in self->align: SUCCESS
+[std::alloc::Layout::align.pointer_dereference.3] line 152 dereference failure: deallocated dynamic object in self->align: SUCCESS
+[std::alloc::Layout::align.pointer_dereference.4] line 152 dereference failure: dead object in self->align: SUCCESS
+[std::alloc::Layout::align.pointer_dereference.5] line 152 dereference failure: pointer outside object bounds in self->align: SUCCESS
+[std::alloc::Layout::align.pointer_dereference.6] line 152 dereference failure: invalid integer address in self->align: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/alloc/layout.rs function std::alloc::Layout::is_size_align_valid
+[std::alloc::Layout::is_size_align_valid.unreachable.1] line 68 unreachable code: SUCCESS
+[std::alloc::Layout::is_size_align_valid.pointer_dereference.1] line 69 dereference failure: dead object in *((unsigned long int *)&var_4): SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/alloc/layout.rs function std::alloc::Layout::max_size_for_align
+[std::alloc::Layout::max_size_for_align.arithmetic_overflow.1] line 95 attempt to compute `unchecked_sub` which would overflow: SUCCESS
+[std::alloc::Layout::max_size_for_align.assertion.1] line 95 attempt to add with overflow: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/alloc/layout.rs function std::alloc::Layout::size
+[std::alloc::Layout::size.pointer_dereference.1] line 140 dereference failure: pointer NULL in self->size: SUCCESS
+[std::alloc::Layout::size.pointer_dereference.2] line 140 dereference failure: pointer invalid in self->size: SUCCESS
+[std::alloc::Layout::size.pointer_dereference.3] line 140 dereference failure: deallocated dynamic object in self->size: SUCCESS
+[std::alloc::Layout::size.pointer_dereference.4] line 140 dereference failure: dead object in self->size: SUCCESS
+[std::alloc::Layout::size.pointer_dereference.5] line 140 dereference failure: pointer outside object bounds in self->size: SUCCESS
+[std::alloc::Layout::size.pointer_dereference.6] line 140 dereference failure: invalid integer address in self->size: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/fmt/builders.rs function core::fmt::builders::PadAdapter::<'_, '_>::wrap::<'_, '_>::{closure#0}
+[core::fmt::builders::PadAdapter::<'_, '_>::wrap::<'_, '_>::{closure#0}.sanity_check.1] line 26 Kani-internal sanity check: Correct CBMC vtable size for StructTag("tag-_318316341002789937844443197556935641341") (MIR type RigidTy(Adt(AdtDef(DefId { id: 624, name: "core::fmt::builders::PadAdapter" }), GenericArgs([Lifetime(Region { kind: ReErased }), Lifetime(Region { kind: ReErased })])))). Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/fmt/mod.rs function std::fmt::Arguments::<'_>::from_str
+[std::fmt::Arguments::<'_>::from_str.assertion.1] line 820 attempt to shift left with overflow: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/intrinsics/mod.rs function core::panicking::panic_nounwind_fmt
+[core::panicking::panic_nounwind_fmt.sanity_check.1] line 2449 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/error.rs function <std::num::TryFromIntError as std::fmt::Debug>::fmt
+[<std::num::TryFromIntError as std::fmt::Debug>::fmt.sanity_check.1] line 10 Kani-internal sanity check: Correct CBMC vtable size for Pointer { typ: StructTag("tag-Unit") } (MIR type RigidTy(Ref(Region { kind: ReErased }, Ty { id: 18, kind: RigidTy(Tuple([])) }, Not))). Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/uint_macros.rs function core::num::<impl usize>::unchecked_mul
+[core::num::<impl usize>::unchecked_mul.arithmetic_overflow.1] line 1117 attempt to compute `unchecked_mul` which would overflow: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/option.rs function std::option::Option::<&[u8; 8]>::ok_or::<std::array::TryFromSliceError>
+[std::option::Option::<&[u8; 8]>::ok_or::<std::array::TryFromSliceError>.pointer_dereference.1] line 1338 dereference failure: dead object in *((unsigned char **)&self): SUCCESS
+[std::option::Option::<&[u8; 8]>::ok_or::<std::array::TryFromSliceError>.unreachable.1] line 1338 unreachable code: SUCCESS
+[std::option::Option::<&[u8; 8]>::ok_or::<std::array::TryFromSliceError>.pointer_dereference.2] line 1340 dereference failure: dead object in *((unsigned char **)&temp_1): SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panic/location.rs function std::panic::Location::<'_>::caller
+[std::panic::Location::<'_>::caller.unsupported_construct.1] line 147 caller_location is not currently supported by Kani. Please post your example at https://github.com/model-checking/kani/issues/374: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panicking.rs function core::panicking::panic_nounwind_fmt::runtime
+[core::panicking::panic_nounwind_fmt::runtime.unsupported_construct.1] line 110 call to foreign "Rust" function `_RNvCs1hStedNDpZ2_7___rustc17rust_begin_unwind` is not currently supported by Kani. Please post your example at https://github.com/model-checking/kani/issues/new/choose: SUCCESS
+[core::panicking::panic_nounwind_fmt::runtime.sanity_check.1] line 122 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/alignment.rs function std::ptr::Alignment::new
+[std::ptr::Alignment::new.pointer_dereference.1] line 64 dereference failure: dead object in *((unsigned long int *)&temp_1): SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs function std::ptr::const_ptr::<impl *const ()>::is_aligned_to
+[std::ptr::const_ptr::<impl *const ()>::is_aligned_to.assertion.2] line 1374 This is a placeholder message; Kani doesn't support message formatted at runtime: SUCCESS
+[std::ptr::const_ptr::<impl *const ()>::is_aligned_to.assertion.1] line 1377 attempt to subtract with overflow: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/mod.rs function std::ptr::drop_in_place::<alloc::raw_vec::RawVec<u8>>
+[std::ptr::drop_in_place::<alloc::raw_vec::RawVec<u8>>.safety_check.1] line 805 misaligned pointer to reference cast: address must be a multiple of its type's alignment: SUCCESS
+[std::ptr::drop_in_place::<alloc::raw_vec::RawVec<u8>>.safety_check.2] line 805 dereference failure: pointer invalid: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/mod.rs function std::ptr::drop_in_place::<std::vec::Vec<u8>>
+[std::ptr::drop_in_place::<std::vec::Vec<u8>>.safety_check.1] line 805 misaligned pointer to reference cast: address must be a multiple of its type's alignment: SUCCESS
+[std::ptr::drop_in_place::<std::vec::Vec<u8>>.safety_check.2] line 805 dereference failure: pointer invalid: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/result.rs function std::result::Result::<&[u8; 8], std::array::TryFromSliceError>::copied
+[std::result::Result::<&[u8; 8], std::array::TryFromSliceError>::copied.pointer_dereference.1] line 1717 dereference failure: dead object in *((unsigned char **)&self): SUCCESS
+[std::result::Result::<&[u8; 8], std::array::TryFromSliceError>::copied.unreachable.1] line 1717 unreachable code: SUCCESS
+[std::result::Result::<&[u8; 8], std::array::TryFromSliceError>::copied.pointer_dereference.2] line 1718 dereference failure: pointer NULL in *var_5: SUCCESS
+[std::result::Result::<&[u8; 8], std::array::TryFromSliceError>::copied.pointer_dereference.3] line 1718 dereference failure: pointer invalid in *var_5: SUCCESS
+[std::result::Result::<&[u8; 8], std::array::TryFromSliceError>::copied.pointer_dereference.4] line 1718 dereference failure: deallocated dynamic object in *var_5: SUCCESS
+[std::result::Result::<&[u8; 8], std::array::TryFromSliceError>::copied.pointer_dereference.5] line 1718 dereference failure: dead object in *var_5: SUCCESS
+[std::result::Result::<&[u8; 8], std::array::TryFromSliceError>::copied.pointer_dereference.6] line 1718 dereference failure: pointer outside object bounds in *var_5: SUCCESS
+[std::result::Result::<&[u8; 8], std::array::TryFromSliceError>::copied.pointer_dereference.7] line 1718 dereference failure: invalid integer address in *var_5: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/result.rs function std::result::Result::<[u8; 8], std::array::TryFromSliceError>::unwrap
+[std::result::Result::<[u8; 8], std::array::TryFromSliceError>::unwrap.unreachable.1] line 1231 unreachable code: SUCCESS
+[std::result::Result::<[u8; 8], std::array::TryFromSliceError>::unwrap.sanity_check.1] line 1233 Kani-internal sanity check: Correct CBMC vtable size for StructTag("tag-_254962015006346427832721307148407582332") (MIR type RigidTy(Adt(AdtDef(DefId { id: 379, name: "std::array::TryFromSliceError" }), GenericArgs([])))). Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+[std::result::Result::<[u8; 8], std::array::TryFromSliceError>::unwrap.sanity_check.2] line 1233 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/result.rs function std::result::Result::<usize, std::num::TryFromIntError>::expect
+[std::result::Result::<usize, std::num::TryFromIntError>::expect.sanity_check.1] line 1185 Kani-internal sanity check: Correct CBMC vtable size for StructTag("tag-_321011115446266303818723333843652093965") (MIR type RigidTy(Adt(AdtDef(DefId { id: 701, name: "std::num::TryFromIntError" }), GenericArgs([])))). Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/result.rs function std::result::unwrap_failed
+[std::result::unwrap_failed.assertion.1] line 1867 This is a placeholder message; Kani doesn't support message formatted at runtime: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/mod.rs function core::slice::<impl [u8]>::as_array::<8>
+[core::slice::<impl [u8]>::as_array::<8>.safety_check.1] line 854 misaligned pointer to reference cast: address must be a multiple of its type's alignment: SUCCESS
+[core::slice::<impl [u8]>::as_array::<8>.safety_check.2] line 854 dereference failure: pointer invalid: SUCCESS
+[core::slice::<impl [u8]>::as_array::<8>.pointer_dereference.1] line 857 dereference failure: dead object in *((unsigned char **)&temp_1): SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts::<'_, u8>
+[std::slice::from_raw_parts::<'_, u8>.safety_check.1] line 139 misaligned pointer to reference cast: address must be a multiple of its type's alignment: SUCCESS
+[std::slice::from_raw_parts::<'_, u8>.safety_check.2] line 139 dereference failure: pointer invalid: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function core::num::<impl usize>::unchecked_mul::precondition_check
+[core::num::<impl usize>::unchecked_mul::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function core::ub_checks::is_valid_allocation_size
+[core::ub_checks::is_valid_allocation_size.arithmetic_overflow.1] line 149 attempt to divide by zero: SUCCESS
+[core::ub_checks::is_valid_allocation_size.assertion.1] line 149 attempt to divide by zero: SUCCESS
+[core::ub_checks::is_valid_allocation_size.division-by-zero.1] line 149 division by zero in var_4 / size: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function std::alloc::Layout::from_size_align_unchecked::precondition_check
+[std::alloc::Layout::from_size_align_unchecked::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function std::ptr::Alignment::new_unchecked::precondition_check
+[std::ptr::Alignment::new_unchecked::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function std::ptr::NonNull::<T>::new_unchecked::precondition_check
+[std::ptr::NonNull::<T>::new_unchecked::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function std::slice::from_raw_parts::precondition_check
+[std::slice::from_raw_parts::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function std::vec::Vec::<T, A>::from_raw_parts_in::precondition_check
+[std::vec::Vec::<T, A>::from_raw_parts_in::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/yiannis/.kani/kani-0.67.0/library/kani/kani_lib.c function __rust_dealloc
+[__rust_dealloc.assertion.1] line 83 Alignment is power of two: SUCCESS
+[__rust_dealloc.assertion.2] line 85 rust_dealloc must be called on an object whose allocated size matches its layout: SUCCESS
+[__rust_dealloc.precondition_instance.1] line 87 free argument must be NULL or valid pointer: SUCCESS
+[__rust_dealloc.precondition_instance.2] line 87 free argument must be dynamic object: SUCCESS
+[__rust_dealloc.precondition_instance.3] line 87 free argument has offset zero: SUCCESS
+[__rust_dealloc.precondition_instance.4] line 87 double free: SUCCESS
+[__rust_dealloc.precondition_instance.5] line 87 free called for new[] object: SUCCESS
+[__rust_dealloc.precondition_instance.6] line 87 free called for stack-allocated object: SUCCESS
+
+<builtin-library-malloc> function malloc
+[malloc.assertion.1] line 31 max allocation size exceeded: SUCCESS
+[malloc.assertion.2] line 36 max allocation may fail: SUCCESS
+
+** 0 of 127 failed (1 iterations)
+VERIFICATION SUCCESSFUL
+Manual Harness Summary:
+Complete - 1 successfully verified harnesses, 0 failures, 1 total.
