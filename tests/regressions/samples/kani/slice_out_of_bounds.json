@@ -20,56 +20,56 @@
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[0]=1802201963 (01101011 01101011 01101011 01101011)"
+          "assignment": "arr[0]=-1 (11111111 11111111 11111111 11111111)"
         },
         {
           "trace_index": 2,
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[1]=1802202004 (01101011 01101011 01101011 10010100)"
+          "assignment": "arr[1]=-1073741824 (11000000 00000000 00000000 00000000)"
         },
         {
           "trace_index": 3,
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[2]=1802201963 (01101011 01101011 01101011 01101011)"
+          "assignment": "arr[2]=-1 (11111111 11111111 11111111 11111111)"
         },
         {
           "trace_index": 4,
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[3]=1802202004 (01101011 01101011 01101011 10010100)"
+          "assignment": "arr[3]=-256 (11111111 11111111 11111111 00000000)"
         },
         {
           "trace_index": 5,
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[4]=1802202004 (01101011 01101011 01101011 10010100)"
+          "assignment": "arr[4]=-1 (11111111 11111111 11111111 11111111)"
         },
         {
           "trace_index": 6,
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[5]=1802202004 (01101011 01101011 01101011 10010100)"
+          "assignment": "arr[5]=-1 (11111111 11111111 11111111 11111111)"
         },
         {
           "trace_index": 7,
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[6]=1802202004 (01101011 01101011 01101011 10010100)"
+          "assignment": "arr[6]=-256 (11111111 11111111 11111111 00000000)"
         },
         {
           "trace_index": 8,
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[7]=-1802201964 (10010100 10010100 10010100 10010100)"
+          "assignment": "arr[7]=0 (00000000 00000000 00000000 00000000)"
         },
         {
           "trace_index": 9,
@@ -421,7 +421,7 @@
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "__CPROVER_dead_object=NULL (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000)"
+          "assignment": "__CPROVER_dead_object=(const void *)&temp_1!0@1 (00000000 00000011 00000000 00000000 00000000 00000000 00000000 00000000)"
         },
         {
           "trace_index": 1,
@@ -435,21 +435,21 @@
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[1]=-256 (11111111 11111111 11111111 00000000)"
+          "assignment": "arr[1]=-1073741824 (11000000 00000000 00000000 00000000)"
         },
         {
           "trace_index": 3,
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[2]=-1 (11111111 11111111 11111111 11111111)"
+          "assignment": "arr[2]=-1056964608 (11000001 00000000 00000000 00000000)"
         },
         {
           "trace_index": 4,
           "path": "/home/user/kani/slice_oob.rs",
           "name": "check_out_of_bounds",
           "line_idx": 8,
-          "assignment": "arr[3]=-256 (11111111 11111111 11111111 00000000)"
+          "assignment": "arr[3]=-1056964608 (11000001 00000000 00000000 00000000)"
         },
         {
           "trace_index": 5,
@@ -842,41 +842,6 @@
           "name": "check_out_of_bounds",
           "line_idx": 10,
           "assignment": "var_15=TRUE (00000001)"
-        },
-        {
-          "trace_index": 61,
-          "path": "/home/user/kani/slice_oob.rs",
-          "name": "check_out_of_bounds",
-          "line_idx": 10,
-          "assignment": "var_16=&{  } (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
-        },
-        {
-          "trace_index": 62,
-          "path": "/home/user/kani/slice_oob.rs",
-          "name": "check_out_of_bounds",
-          "line_idx": 10,
-          "assignment": "var_17=1407374883553312ul (00000000 00000101 00000000 00000000 00000000 00000000 00000000 00100000)"
-        },
-        {
-          "trace_index": 63,
-          "path": "/home/user/kani/slice_oob.rs",
-          "name": "check_out_of_bounds",
-          "line_idx": 10,
-          "assignment": "var_19=FALSE (00000000)"
-        },
-        {
-          "trace_index": 64,
-          "path": "/home/user/kani/slice_oob.rs",
-          "name": "check_out_of_bounds",
-          "line_idx": 10,
-          "assignment": "var_20=FALSE (00000000)"
-        },
-        {
-          "trace_index": 65,
-          "path": "/home/user/kani/slice_oob.rs",
-          "name": "check_out_of_bounds",
-          "line_idx": 10,
-          "assignment": "var_21=TRUE (00000001)"
         }
       ]
     }

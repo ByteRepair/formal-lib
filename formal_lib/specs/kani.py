@@ -32,11 +32,23 @@ kani_spec = replace(
     cbmc_spec,
     # Kani prints its own banner above CBMC's; detect on that.
     detect=r"^Kani Rust Verifier",
-    # Recognise success in both Kani's native format (`VERIFICATION:- SUCCESSFUL`)
-    # and its old/CBMC format (`VERIFICATION SUCCESSFUL`). Matching both means a
-    # passing run in either format is reported correctly and does not trip the
-    # missing-flag hint below (which keys off `not successful and not issues`).
-    success=r"^VERIFICATION(?::-)? SUCCESSFUL$",
+    # Derive the verdict from the per-check statuses in CBMC's `** Results:` section,
+    # NOT the top-line `VERIFICATION` verdict. In old format Kani does not post-process
+    # its assertion-reachability probes, so a *passing* run still prints `VERIFICATION
+    # FAILED`: each `reachability_check` property "fails" precisely because the assertion
+    # is reachable (normal). Keying off the real per-check statuses lets Kani keep
+    # reachability checks enabled — they catch unreachable, vacuously-passing assertions,
+    # so disabling them would weaken verification — while still reporting correctly.
+    #
+    # negate_success: a match means FAILURE. A real failure is either a `** Results:`
+    # line for a non-`reachability_check` check with status FAILURE, or the native-format
+    # `VERIFICATION:- FAILED` line (native format has no such Results lines and is already
+    # correctly post-processed by Kani, so its verdict line is trustworthy).
+    success=(
+        r"^\[[^\]]*\.(?!reachability_check\.)[a-z_]+\.\d+\][^\n]*: FAILURE$"
+        r"|^VERIFICATION:- FAILED$"
+    ),
+    negate_success=True,
     # Same trace-block boundaries as CBMC, with two Kani adjustments:
     #  * skip the `reachability_check` properties Kani injects (its native format
     #    hides them; they are not real bugs), and

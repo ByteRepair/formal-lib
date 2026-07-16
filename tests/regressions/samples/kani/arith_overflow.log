@@ -9,47 +9,113 @@ Generic Property Instrumentation
 Running with 16 object bits, 48 offset bits (user-specified)
 Starting Bounded Model Checking
 aborting path on assume(false) at file /home/user/kani/arith_checks.rs line 12 column 5 function check_arith_overflow thread 0
-Runtime Symex: 0.00310707s
-size of program expression: 68 steps
+Runtime Symex: 0.00154846s
+size of program expression: 71 steps
 slicing removed 50 assignments
-Generated 4 VCC(s), 2 remaining after simplification
-Runtime Postprocess Equation: 1.2419e-05s
+Generated 7 VCC(s), 5 remaining after simplification
+Runtime Postprocess Equation: 1.1833e-05s
 Passing problem to propositional reduction
 converting SSA
-Runtime Convert SSA: 0.00069167s
+Runtime Convert SSA: 6.7219e-05s
 Running propositional reduction
 Post-processing
-Runtime Post-process: 2.959e-06s
+Runtime Post-process: 2.554e-06s
 Solving with CaDiCaL 2.0.0
 1 variables, 0 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 2.7043e-05s
-Runtime decision procedure: 0.000744912s
+Runtime Solver: 2.3837e-05s
+Runtime decision procedure: 0.000108499s
 Building error trace
 Running propositional reduction
 Solving with CaDiCaL 2.0.0
 2 variables, 1 clauses
 SAT checker: instance is UNSATISFIABLE
-Runtime Solver: 5.636e-06s
-Runtime decision procedure: 9.877e-06s
+Runtime Solver: 5.463e-06s
+Runtime decision procedure: 9.97e-06s
 
 ** Results:
 /home/user/kani/arith_checks.rs function check_arith_overflow
-[check_arith_overflow.assertion.1] line 9 index out of bounds: the length is less than or equal to the given index: SUCCESS
-[check_arith_overflow.assertion.2] line 10 index out of bounds: the length is less than or equal to the given index: SUCCESS
-[check_arith_overflow.assertion.3] line 11 attempt to subtract with overflow: FAILURE
+[check_arith_overflow.assertion.1] line 9 [KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_0] index out of bounds: the length is less than or equal to the given index: SUCCESS
+[check_arith_overflow.reachability_check.1] line 9 KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_0: FAILURE
+[check_arith_overflow.assertion.2] line 10 [KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_1] index out of bounds: the length is less than or equal to the given index: SUCCESS
+[check_arith_overflow.reachability_check.2] line 10 KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_1: FAILURE
+[check_arith_overflow.assertion.3] line 11 [KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_2] attempt to subtract with overflow: FAILURE
+[check_arith_overflow.reachability_check.3] line 11 KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_2: FAILURE
 [check_arith_overflow.assertion.4] line 12 internal error: entered unreachable code: Previous statement should fail: SUCCESS
+
+Trace for check_arith_overflow.reachability_check.1:
+
+Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 9 thread 0
+  KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_0
+  FALSE
+
+
+
+Trace for check_arith_overflow.reachability_check.2:
+
+Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 9 thread 0
+  KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_0
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 10 thread 0
+  KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_1
+  FALSE
+
+
 
 Trace for check_arith_overflow.assertion.3:
 
 Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 9 thread 0
+  KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_0
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 10 thread 0
+  KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_1
+  FALSE
+
+
+Violated property:
   file /home/user/kani/arith_checks.rs function check_arith_overflow line 11 thread 0
-  attempt to subtract with overflow
+  KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 11 thread 0
+  [KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_2] attempt to subtract with overflow
   !(var_12.1 != FALSE)
 
 
 
-** 1 of 4 failed (2 iterations)
+Trace for check_arith_overflow.reachability_check.3:
+
+Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 9 thread 0
+  KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_0
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 10 thread 0
+  KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_1
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/arith_checks.rs function check_arith_overflow line 11 thread 0
+  KANI_CHECK_ID_arith_checks.136e2f422fc5237b::arith_checks_2
+  FALSE
+
+
+
+** 4 of 7 failed (2 iterations)
 VERIFICATION FAILED
 Manual Harness Summary:
 Verification failed for - check_arith_overflow

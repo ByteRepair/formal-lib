@@ -76,6 +76,38 @@ SUMMARY:
 VERIFICATION:- SUCCESSFUL
 """
 
+# A PASSING harness in old format with reachability checks enabled. Every real
+# check is SUCCESS, but the injected reachability_check "fails" (the assertion is
+# reachable), so CBMC prints `VERIFICATION FAILED`. The verdict must come from the
+# real per-check statuses, not that misleading line.
+_OLD_FMT_PASS_REACH_ON = """Kani Rust Verifier 0.67.0 (standalone)
+Checking harness check_ok...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+
+** Results:
+/src/ok.rs function check_ok
+[check_ok.assertion.1] line 5 [KANI_CHECK_ID_ok::ok_0] assertion failed: x == y: SUCCESS
+[check_ok.reachability_check.1] line 5 KANI_CHECK_ID_ok::ok_0: FAILURE
+
+Trace for check_ok.reachability_check.1:
+
+State 1 file /src/ok.rs function check_ok line 5 thread 0
+----------------------------------------------------
+  var=1 (00000001)
+
+Violated property:
+  file /src/ok.rs function check_ok line 5 thread 0
+  KANI_CHECK_ID_ok::ok_0
+  FALSE
+
+
+** 1 of 2 failed (2 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - check_ok
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.
+"""
+
 
 def _parse(log: str):
     return IssueSpecOutputParser(kani_spec).parse_output(log)
@@ -122,15 +154,26 @@ def test_error_type_is_property_class_from_trace_header() -> None:
     assert _parse(_OLD_FMT_FAILURE).issues[0].error_type == "assertion"
 
 
-def test_reachability_check_traces_are_dropped() -> None:
-    """Kani injects reachability_check properties (hidden in its native output).
-    They must not surface as issues."""
+def test_reachability_check_is_neither_an_issue_nor_a_failure() -> None:
+    """A run whose only failing property is a reachability_check has passed: the
+    probe "fails" precisely because the assertion is reachable. It must not surface
+    as an issue (block lookahead) nor flip the verdict (success lookahead)."""
     reachability_only = _OLD_FMT_FAILURE.replace(
         "check_overflow.assertion.1", "check_overflow.reachability_check.1"
     )
     result = _parse(reachability_only)
 
-    assert result.successful is False
+    assert result.successful is True
+    assert result.issues == []
+
+
+def test_passing_harness_with_reachability_probe_is_successful() -> None:
+    """With reachability checks enabled, a passing harness still prints
+    `VERIFICATION FAILED` in old format. The verdict must be read from the real
+    per-check statuses (all SUCCESS) and reported as successful, with no issues."""
+    result = _parse(_OLD_FMT_PASS_REACH_ON)
+
+    assert result.successful is True
     assert result.issues == []
 
 
@@ -159,9 +202,9 @@ def test_native_format_failure_emits_flag_hint() -> None:
 
 
 def test_native_format_success_is_successful_without_hint() -> None:
-    """A passing native-format run must be recognised as successful (the success
-    pattern matches both `VERIFICATION:- SUCCESSFUL` and old-format
-    `VERIFICATION SUCCESSFUL`) and must not spuriously emit the hint."""
+    """A passing native-format run has no `VERIFICATION:- FAILED` line and no
+    failing Results check, so it is recognised as successful and must not
+    spuriously emit the hint."""
     result = _parse(_NATIVE_FMT_SUCCESS)
 
     assert result.successful is True

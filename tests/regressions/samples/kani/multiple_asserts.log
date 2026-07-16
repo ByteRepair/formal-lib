@@ -8,37 +8,41 @@ Removal of function pointers and virtual functions
 Generic Property Instrumentation
 Running with 16 object bits, 48 offset bits (user-specified)
 Starting Bounded Model Checking
-Runtime Symex: 0.00223992s
-size of program expression: 204 steps
+Runtime Symex: 0.00426153s
+size of program expression: 208 steps
 slicing removed 113 assignments
-Generated 4 VCC(s), 2 remaining after simplification
-Runtime Postprocess Equation: 1.8311e-05s
+Generated 8 VCC(s), 6 remaining after simplification
+Runtime Postprocess Equation: 2.8069e-05s
 Passing problem to propositional reduction
 converting SSA
-Runtime Convert SSA: 0.000120825s
+Runtime Convert SSA: 0.000204096s
 Running propositional reduction
 Post-processing
-Runtime Post-process: 2.403e-06s
+Runtime Post-process: 3.475e-06s
 Solving with CaDiCaL 2.0.0
 24 variables, 42 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 2.4553e-05s
-Runtime decision procedure: 0.000164943s
+Runtime Solver: 4.1742e-05s
+Runtime decision procedure: 0.00028703s
 Building error trace
 Running propositional reduction
 Solving with CaDiCaL 2.0.0
 25 variables, 43 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 7.514e-06s
-Runtime decision procedure: 1.6598e-05s
+Runtime Solver: 1.3821e-05s
+Runtime decision procedure: 3.2827e-05s
 Building error trace
 
 ** Results:
 /home/user/kani/multiple_asserts.rs function main
-[main.assertion.1] line 10 attempt to add with overflow: SUCCESS
-[main.assertion.2] line 10 assertion failed: 1 + 1 == 1: FAILURE
-[main.assertion.3] line 12 attempt to add with overflow: SUCCESS
-[main.assertion.4] line 12 "This one should fail too": FAILURE
+[main.assertion.1] line 10 [KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_0] attempt to add with overflow: SUCCESS
+[main.assertion.2] line 10 [KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_1] assertion failed: 1 + 1 == 1: FAILURE
+[main.reachability_check.1] line 10 KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_0: FAILURE
+[main.reachability_check.2] line 10 KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_1: FAILURE
+[main.assertion.3] line 12 [KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_2] attempt to add with overflow: SUCCESS
+[main.assertion.4] line 12 [KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_3] "This one should fail too": FAILURE
+[main.reachability_check.3] line 12 KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_2: FAILURE
+[main.reachability_check.4] line 12 KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_3: FAILURE
 
 Trace for main.assertion.2:
 
@@ -92,8 +96,140 @@ State 29 file /home/user/kani/multiple_asserts.rs function main line 8 thread 0
 
 Violated property:
   file /home/user/kani/multiple_asserts.rs function main line 10 thread 0
-  assertion failed: 1 + 1 == 1
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_0
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 10 thread 0
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_1
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 10 thread 0
+  [KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_1] assertion failed: 1 + 1 == 1
   var_3 != FALSE
+
+
+
+Trace for main.reachability_check.1:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECsc9NOOmS9atC_16multiple_asserts=1 (00000001)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=1 (00000001)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 106 thread 0
+----------------------------------------------------
+  byte=1 (00000001)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 107 thread 0
+----------------------------------------------------
+  var_3=TRUE (00000001)
+
+Assumption:
+  file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs line 107 column 17 function <bool as kani::Arbitrary>::any
+  var_3 != FALSE
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 108 thread 0
+----------------------------------------------------
+  var_0=TRUE (00000001)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 109 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXCs1xmhYfHElKw_4kanibNtB2_9Arbitrary3any=TRUE (00000001)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<bool> line 278 thread 0
+----------------------------------------------------
+  var_0=TRUE (00000001)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<bool> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anybECsc9NOOmS9atC_16multiple_asserts=TRUE (00000001)
+
+State 29 file /home/user/kani/multiple_asserts.rs function main line 8 thread 0
+----------------------------------------------------
+  x=TRUE (00000001)
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 10 thread 0
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_0
+  FALSE
+
+
+
+Trace for main.reachability_check.2:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECsc9NOOmS9atC_16multiple_asserts=1 (00000001)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=1 (00000001)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 106 thread 0
+----------------------------------------------------
+  byte=1 (00000001)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 107 thread 0
+----------------------------------------------------
+  var_3=TRUE (00000001)
+
+Assumption:
+  file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs line 107 column 17 function <bool as kani::Arbitrary>::any
+  var_3 != FALSE
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 108 thread 0
+----------------------------------------------------
+  var_0=TRUE (00000001)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 109 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXCs1xmhYfHElKw_4kanibNtB2_9Arbitrary3any=TRUE (00000001)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<bool> line 278 thread 0
+----------------------------------------------------
+  var_0=TRUE (00000001)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<bool> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anybECsc9NOOmS9atC_16multiple_asserts=TRUE (00000001)
+
+State 29 file /home/user/kani/multiple_asserts.rs function main line 8 thread 0
+----------------------------------------------------
+  x=TRUE (00000001)
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 10 thread 0
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_0
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 10 thread 0
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_1
+  FALSE
 
 
 
@@ -149,12 +285,144 @@ State 29 file /home/user/kani/multiple_asserts.rs function main line 8 thread 0
 
 Violated property:
   file /home/user/kani/multiple_asserts.rs function main line 12 thread 0
-  "This one should fail too"
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 12 thread 0
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_3
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 12 thread 0
+  [KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_3] "This one should fail too"
   var_9 != FALSE
 
 
 
-** 2 of 4 failed (3 iterations)
+Trace for main.reachability_check.3:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECsc9NOOmS9atC_16multiple_asserts=0 (00000000)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=0 (00000000)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 106 thread 0
+----------------------------------------------------
+  byte=0 (00000000)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 107 thread 0
+----------------------------------------------------
+  var_3=TRUE (00000001)
+
+Assumption:
+  file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs line 107 column 17 function <bool as kani::Arbitrary>::any
+  var_3 != FALSE
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 108 thread 0
+----------------------------------------------------
+  var_0=FALSE (00000000)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 109 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXCs1xmhYfHElKw_4kanibNtB2_9Arbitrary3any=FALSE (00000000)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<bool> line 278 thread 0
+----------------------------------------------------
+  var_0=FALSE (00000000)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<bool> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anybECsc9NOOmS9atC_16multiple_asserts=FALSE (00000000)
+
+State 29 file /home/user/kani/multiple_asserts.rs function main line 8 thread 0
+----------------------------------------------------
+  x=FALSE (00000000)
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 12 thread 0
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_2
+  FALSE
+
+
+
+Trace for main.reachability_check.4:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECsc9NOOmS9atC_16multiple_asserts=0 (00000000)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=0 (00000000)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 106 thread 0
+----------------------------------------------------
+  byte=0 (00000000)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 107 thread 0
+----------------------------------------------------
+  var_3=TRUE (00000001)
+
+Assumption:
+  file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs line 107 column 17 function <bool as kani::Arbitrary>::any
+  var_3 != FALSE
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 108 thread 0
+----------------------------------------------------
+  var_0=FALSE (00000000)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <bool as kani::Arbitrary>::any line 109 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXCs1xmhYfHElKw_4kanibNtB2_9Arbitrary3any=FALSE (00000000)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<bool> line 278 thread 0
+----------------------------------------------------
+  var_0=FALSE (00000000)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<bool> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anybECsc9NOOmS9atC_16multiple_asserts=FALSE (00000000)
+
+State 29 file /home/user/kani/multiple_asserts.rs function main line 8 thread 0
+----------------------------------------------------
+  x=FALSE (00000000)
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 12 thread 0
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/multiple_asserts.rs function main line 12 thread 0
+  KANI_CHECK_ID_multiple_asserts.8d9cf8384102632e::multiple_asserts_3
+  FALSE
+
+
+
+** 6 of 8 failed (3 iterations)
 VERIFICATION FAILED
 Manual Harness Summary:
 Verification failed for - main

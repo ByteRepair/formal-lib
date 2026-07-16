@@ -17,27 +17,28 @@ Removal of function pointers and virtual functions
 Generic Property Instrumentation
 Running with 16 object bits, 48 offset bits (user-specified)
 Starting Bounded Model Checking
-Runtime Symex: 0.00368615s
-size of program expression: 213 steps
+Runtime Symex: 0.00603144s
+size of program expression: 214 steps
 slicing removed 144 assignments
-Generated 2 VCC(s), 1 remaining after simplification
-Runtime Postprocess Equation: 2.9049e-05s
+Generated 3 VCC(s), 2 remaining after simplification
+Runtime Postprocess Equation: 2.8986e-05s
 Passing problem to propositional reduction
 converting SSA
-Runtime Convert SSA: 0.000161846s
+Runtime Convert SSA: 0.000240271s
 Running propositional reduction
 Post-processing
-Runtime Post-process: 2.682e-06s
+Runtime Post-process: 3.501e-06s
 Solving with CaDiCaL 2.0.0
 131 variables, 132 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 2.7412e-05s
-Runtime decision procedure: 0.000207052s
+Runtime Solver: 5.6613e-05s
+Runtime decision procedure: 0.000333753s
 Building error trace
 
 ** Results:
 /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/fmt/mod.rs function std::fmt::Arguments::<'_>::from_str
-[std::fmt::Arguments::<'_>::from_str.assertion.1] line 820 attempt to shift left with overflow: SUCCESS
+[std::fmt::Arguments::<'_>::from_str.assertion.1] line 820 [KANI_CHECK_ID_pointer_overflow.17d06235c4e5492c::pointer_overflow_1] attempt to shift left with overflow: SUCCESS
+[std::fmt::Arguments::<'_>::from_str.reachability_check.1] line 820 KANI_CHECK_ID_pointer_overflow.17d06235c4e5492c::pointer_overflow_1: SUCCESS
 
 /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/intrinsics/mod.rs function core::panicking::panic_nounwind_fmt
 [core::panicking::panic_nounwind_fmt.sanity_check.1] line 2449 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
@@ -66,9 +67,16 @@ https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCES
 [kani::rustc_intrinsics::offset::<i32, *const i32, isize>.safety_check.2] line 57 Offset result and original pointer must point to the same allocation: SUCCESS
 
 /home/user/kani/pointer_overflow.rs function main
-[main.assertion.1] line 9 index out of bounds: the length is less than or equal to the given index: SUCCESS
+[main.assertion.1] line 9 [KANI_CHECK_ID_pointer_overflow.17d06235c4e5492c::pointer_overflow_0] index out of bounds: the length is less than or equal to the given index: SUCCESS
+[main.reachability_check.1] line 9 KANI_CHECK_ID_pointer_overflow.17d06235c4e5492c::pointer_overflow_0: FAILURE
 
 Trace for kani::rustc_intrinsics::offset::<i32, *const i32, isize>.safety_check.1:
+
+Violated property:
+  file /home/user/kani/pointer_overflow.rs function main line 9 thread 0
+  KANI_CHECK_ID_pointer_overflow.17d06235c4e5492c::pointer_overflow_0
+  FALSE
+
 
 Violated property:
   file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::offset::<i32, *const i32, isize> line 57 thread 0
@@ -77,7 +85,16 @@ Violated property:
 
 
 
-** 1 of 11 failed (2 iterations)
+Trace for main.reachability_check.1:
+
+Violated property:
+  file /home/user/kani/pointer_overflow.rs function main line 9 thread 0
+  KANI_CHECK_ID_pointer_overflow.17d06235c4e5492c::pointer_overflow_0
+  FALSE
+
+
+
+** 2 of 13 failed (2 iterations)
 VERIFICATION FAILED
 Manual Harness Summary:
 Verification failed for - main

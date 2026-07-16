@@ -14,57 +14,57 @@ aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 1
 aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 11 column 14 function check_unreachable thread 0
 aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 10 column 14 function check_unreachable thread 0
 aborting path on assume(false) at file /home/user/kani/unreachable_msg.rs line 9 column 14 function check_unreachable thread 0
-Runtime Symex: 0.0107936s
+Runtime Symex: 0.00696267s
 size of program expression: 481 steps
 slicing removed 229 assignments
 Generated 6 VCC(s), 6 remaining after simplification
-Runtime Postprocess Equation: 4.8758e-05s
+Runtime Postprocess Equation: 6.936e-05s
 Passing problem to propositional reduction
 converting SSA
-Runtime Convert SSA: 0.000275531s
+Runtime Convert SSA: 0.000410034s
 Running propositional reduction
 Post-processing
-Runtime Post-process: 3.126e-06s
+Runtime Post-process: 4.507e-06s
 Solving with CaDiCaL 2.0.0
 40 variables, 138 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 3.1817e-05s
-Runtime decision procedure: 0.000346183s
+Runtime Solver: 4.5594e-05s
+Runtime decision procedure: 0.000512197s
 Building error trace
 Running propositional reduction
 Solving with CaDiCaL 2.0.0
 41 variables, 139 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 1.8777e-05s
-Runtime decision procedure: 2.7302e-05s
+Runtime Solver: 3.1294e-05s
+Runtime decision procedure: 4.7918e-05s
 Building error trace
 Running propositional reduction
 Solving with CaDiCaL 2.0.0
 42 variables, 140 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 7.522e-06s
-Runtime decision procedure: 1.3623e-05s
+Runtime Solver: 1.6304e-05s
+Runtime decision procedure: 2.9992e-05s
 Building error trace
 Running propositional reduction
 Solving with CaDiCaL 2.0.0
 43 variables, 141 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 6.528e-06s
-Runtime decision procedure: 1.2102e-05s
+Runtime Solver: 1.594e-05s
+Runtime decision procedure: 2.9873e-05s
 Building error trace
 Running propositional reduction
 Solving with CaDiCaL 2.0.0
 44 variables, 142 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 6.51e-06s
-Runtime decision procedure: 1.1115e-05s
+Runtime Solver: 1.4791e-05s
+Runtime decision procedure: 2.6931e-05s
 Building error trace
 Running propositional reduction
 Solving with CaDiCaL 2.0.0
 45 variables, 143 clauses
 SAT checker: instance is SATISFIABLE
-Runtime Solver: 4.712e-06s
-Runtime decision procedure: 1.2336e-05s
+Runtime Solver: 1.1382e-05s
+Runtime decision procedure: 2.8475e-05s
 Building error trace
 
 ** Results:
