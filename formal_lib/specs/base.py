@@ -243,12 +243,23 @@ class IssueRegexSpec:
     header (e.g. ESBMC's ``Violated property:`` block, clang's diagnostic
     header). When set, ``Issue`` properties prefer this location over the
     stack trace's last frame."""
-    success: str = ""
-    """Regex pattern for determining verification success from output text.
-    Matched with re.MULTILINE against the full output."""
-    negate_success: bool = False
-    """When False, a match means success. When True, a match means failure
-    (i.e. success is the absence of the pattern)."""
+    success: str | None = None
+    """Regex whose match confirms the run PASSED — a positive verdict line such as
+    ESBMC/CBMC's ``VERIFICATION SUCCESSFUL``. ``None`` means the verifier has no
+    positive success signal, so this gate is skipped. Matched with re.MULTILINE.
+
+    The verdict is fail-closed on this gate: when set and it does *not* match, the
+    run is reported as failed."""
+    failure: str | None = None
+    """Regex whose match forces the verdict to FAILED. Use it for verifiers with no
+    positive success signal, or whose failures don't always surface as issues (e.g.
+    Kani run without ``--trace``) so the pattern gates those cases. ``None`` skips it.
+    Matched with re.MULTILINE.
+
+    ``success`` and ``failure`` are independent gates layered on the data-driven
+    baseline (see :meth:`IssueSpecOutputParser._is_successful`): a run passes iff it
+    has no error-severity issue, ``success`` (if set) matched, and ``failure`` (if
+    set) did not."""
     cache_properties: CachePropertiesFn | None = field(default=None)
     """Optional function to compute cache properties from verify_source args.
     When None, default properties are used."""

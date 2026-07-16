@@ -24,8 +24,9 @@ def _pytest_cache_properties(
 pytest_spec: IssueRegexSpec = IssueRegexSpec(
     # Detect pytest by its distinctive session header.
     detect=r"^={5,} test session starts ={5,}$",
-    success=r"(?:FAILED|ERROR)",
-    negate_success=True,
+    # pytest has no reliable positive success line (a summary can mix passed with
+    # failed/error), so the verdict is the failure pattern plus the error-issue baseline.
+    failure=r"(?:FAILED|ERROR)",
     # Match both collection ERROR blocks and test FAILURE blocks
     # Test failure: "_____ test_name _____" (underscores, space, identifier, space, underscores)
     # Collection error: "_____ ERROR collecting path _____"
