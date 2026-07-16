@@ -34,22 +34,26 @@ cbmc_spec: IssueRegexSpec = IssueRegexSpec(
         # ensures no subsequent VP exists (CBMC accumulates VPs from previous traces).
         # _parse_traces uses re.MULTILINE only for stack traces (no DOTALL), so [\s\S]*
         # is used in the lookahead to span newlines.
-        block=r"Violated property:\n\s+file\s+\S+\s+function\s+\S+\s+line\s+\d+[^\n]*(?![\s\S]*Violated property:)",
+        block=r"Violated property:\n\s+file\s+\S+\s+function\s+.+?\s+line\s+\d+[^\n]*(?![\s\S]*Violated property:)",
         # Anchored to line start to avoid matching State header lines.
-        trace_entry=r"^\s+file\s+\S+\s+function\s+\S+\s+line\s+\d+[^\n]*",
+        trace_entry=r"^\s+file\s+\S+\s+function\s+.+?\s+line\s+\d+[^\n]*",
         trace_index=r"^",
         path=r"file\s+(\S+)",
-        name=r"function\s+(\S+)",
+        # Non-greedy up to " line " so names containing spaces are captured whole
+        # (CBMC C++ demangled templates; Rust generics like `foo::<'_, i32>` via Kani).
+        name=r"function\s+(.+?)\s+line",
         line_index=r"line\s+(\d+)",
     ),
     counterexample_spec=CounterexampleRegexSpec(
         # States between trace header and first "Violated property:".
         block=r"(?:Trace for [^\n]+|Counterexample):\n(.*?)(?=Violated property:|\Z)",
         # Each state entry: header + separator + assignment.
-        trace_entry=r"State\s+\d+\s+file\s+\S+\s+function\s+\S+\s+line\s+\d+[^\n]*thread\s+\d+\n[-]+\n.*?(?=\nState\s|\nViolated|\n\n|\Z)",
+        trace_entry=r"State\s+\d+\s+file\s+\S+\s+function\s+.+?\s+line\s+\d+[^\n]*thread\s+\d+\n[-]+\n.*?(?=\nState\s|\nViolated|\n\n|\Z)",
         trace_index=r"State\s+(\d+)",
         path=r"file\s+(\S+)",
-        name=r"function\s+(\S+)",
+        # Non-greedy up to " line " so names containing spaces are captured whole
+        # (CBMC C++ demangled templates; Rust generics like `foo::<'_, i32>` via Kani).
+        name=r"function\s+(.+?)\s+line",
         line_index=r"line\s+(\d+)",
         # Require at least one char so states with no assignment return None.
         assignment=r"\n[-]+\n(.+)",

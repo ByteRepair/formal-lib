@@ -1,0 +1,688 @@
+Kani Rust Verifier 0.67.0 (standalone)
+Checking harness main...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/float_nan__RNvCs4WuiiXbkpP5_9float_nan4main.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Unwinding loop _RNvCs4WuiiXbkpP5_9float_nan4main.0 iteration 1 file /home/user/kani/float_nan.rs line 7 column 5 function main thread 0
+Unwinding loop _RNvCs4WuiiXbkpP5_9float_nan4main.0 iteration 2 file /home/user/kani/float_nan.rs line 7 column 5 function main thread 0
+Runtime Symex: 0.0110239s
+size of program expression: 568 steps
+slicing removed 324 assignments
+Generated 20 VCC(s), 14 remaining after simplification
+Runtime Postprocess Equation: 7.9418e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.000388046s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 6.634e-06s
+Solving with CaDiCaL 2.0.0
+31 variables, 94 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 4.5558e-05s
+Runtime decision procedure: 0.000489263s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+32 variables, 95 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 3.5391e-05s
+Runtime decision procedure: 5.7585e-05s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+33 variables, 96 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 1.7751e-05s
+Runtime decision procedure: 3.9578e-05s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+34 variables, 97 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 1.9165e-05s
+Runtime decision procedure: 4.4103e-05s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+35 variables, 98 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 1.0943e-05s
+Runtime decision procedure: 2.9325e-05s
+Building error trace
+
+** Results:
+/home/user/kani/float_nan.rs function main
+[main.NaN.9] line 14 NaN on / in 1.0f / var_9: SUCCESS
+[main.NaN.10] line 14 NaN on / in 0.0f / var_11: FAILURE
+[main.assertion.5] line 14 [KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_4] assertion failed: 1.0 / f != 0.0 / f: SUCCESS
+[main.reachability_check.5] line 14 KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_4: FAILURE
+[main.NaN.7] line 16 NaN on / in 1.0f / var_17: SUCCESS
+[main.NaN.8] line 16 NaN on / in 0.0f / var_19: FAILURE
+[main.assertion.4] line 16 [KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_3] assertion failed: !(1.0 / f == 0.0 / f): SUCCESS
+[main.reachability_check.4] line 16 KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_3: FAILURE
+[main.NaN.5] line 18 NaN on / in 1.0f / var_24: SUCCESS
+[main.NaN.6] line 18 NaN on / in 0.0f / var_26: FAILURE
+[main.assertion.3] line 18 [KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_2] assertion failed: 1.0 / f == 0.0 / f: FAILURE
+[main.reachability_check.3] line 18 KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_2: FAILURE
+[main.NaN.3] line 20 NaN on / in 0.0f / var_31: FAILURE
+[main.NaN.4] line 20 NaN on / in 0.0f / var_33: FAILURE
+[main.assertion.2] line 20 [KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_1] assertion failed: 0.0 / f == 0.0 / f: FAILURE
+[main.reachability_check.2] line 20 KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_1: FAILURE
+[main.NaN.1] line 22 NaN on / in 0.0f / var_38: FAILURE
+[main.NaN.2] line 22 NaN on / in 0.0f / var_40: FAILURE
+[main.assertion.1] line 22 [KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_0] assertion failed: 0.0 / f != 0.0 / f: SUCCESS
+[main.reachability_check.1] line 22 KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_0: FAILURE
+
+Trace for main.NaN.10:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=0 (00000000)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=0 (00000000)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=0 (00000000)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=0 (00000000)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 14 thread 0
+  NaN on / in 0.0f / var_11
+  !IEEE_FLOAT_EQUAL(var_11, 0.0f) && !isinf(var_11)
+
+
+
+Trace for main.reachability_check.5:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=0 (00000000)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=0 (00000000)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=0 (00000000)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=0 (00000000)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=0 (00000000)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 14 thread 0
+  NaN on / in 0.0f / var_11
+  !IEEE_FLOAT_EQUAL(var_11, 0.0f) && !isinf(var_11)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 14 thread 0
+  KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_4
+  FALSE
+
+
+
+Trace for main.NaN.8:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=1 (00000001)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=1 (00000001)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=1 (00000001)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=1 (00000001)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 16 thread 0
+  NaN on / in 0.0f / var_19
+  !IEEE_FLOAT_EQUAL(var_19, 0.0f) && !isinf(var_19)
+
+
+
+Trace for main.reachability_check.4:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=1 (00000001)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=1 (00000001)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=1 (00000001)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=1 (00000001)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=1 (00000001)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 16 thread 0
+  NaN on / in 0.0f / var_19
+  !IEEE_FLOAT_EQUAL(var_19, 0.0f) && !isinf(var_19)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 16 thread 0
+  KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_3
+  FALSE
+
+
+
+Trace for main.NaN.6:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=2 (00000010)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=2 (00000010)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=2 (00000010)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=2 (00000010)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 18 thread 0
+  NaN on / in 0.0f / var_26
+  !IEEE_FLOAT_EQUAL(var_26, 0.0f) && !isinf(var_26)
+
+
+
+Trace for main.assertion.3:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=2 (00000010)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=2 (00000010)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=2 (00000010)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=2 (00000010)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 18 thread 0
+  NaN on / in 0.0f / var_26
+  !IEEE_FLOAT_EQUAL(var_26, 0.0f) && !isinf(var_26)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 18 thread 0
+  KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 18 thread 0
+  [KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_2] assertion failed: 1.0 / f == 0.0 / f
+  var_20 != FALSE
+
+
+
+Trace for main.reachability_check.3:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=2 (00000010)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=2 (00000010)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=2 (00000010)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=2 (00000010)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=2 (00000010)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 18 thread 0
+  NaN on / in 0.0f / var_26
+  !IEEE_FLOAT_EQUAL(var_26, 0.0f) && !isinf(var_26)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 18 thread 0
+  KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_2
+  FALSE
+
+
+
+Trace for main.NaN.3:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=3 (00000011)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=3 (00000011)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=3 (00000011)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=3 (00000011)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  NaN on / in 0.0f / var_31
+  !IEEE_FLOAT_EQUAL(var_31, 0.0f) && !isinf(var_31)
+
+
+
+Trace for main.NaN.4:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=3 (00000011)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=3 (00000011)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=3 (00000011)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=3 (00000011)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  NaN on / in 0.0f / var_31
+  !IEEE_FLOAT_EQUAL(var_31, 0.0f) && !isinf(var_31)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  NaN on / in 0.0f / var_33
+  !IEEE_FLOAT_EQUAL(var_33, 0.0f) && !isinf(var_33)
+
+
+
+Trace for main.assertion.2:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=3 (00000011)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=3 (00000011)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=3 (00000011)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=3 (00000011)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  NaN on / in 0.0f / var_31
+  !IEEE_FLOAT_EQUAL(var_31, 0.0f) && !isinf(var_31)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  NaN on / in 0.0f / var_33
+  !IEEE_FLOAT_EQUAL(var_33, 0.0f) && !isinf(var_33)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_1
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  [KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_1] assertion failed: 0.0 / f == 0.0 / f
+  var_27 != FALSE
+
+
+
+Trace for main.reachability_check.2:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=3 (00000011)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=3 (00000011)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=3 (00000011)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=3 (00000011)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=3 (00000011)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  NaN on / in 0.0f / var_31
+  !IEEE_FLOAT_EQUAL(var_31, 0.0f) && !isinf(var_31)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  NaN on / in 0.0f / var_33
+  !IEEE_FLOAT_EQUAL(var_33, 0.0f) && !isinf(var_33)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 20 thread 0
+  KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_1
+  FALSE
+
+
+
+Trace for main.NaN.1:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=255 (11111111)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=255 (11111111)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=255 (11111111)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=255 (11111111)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 22 thread 0
+  NaN on / in 0.0f / var_38
+  !IEEE_FLOAT_EQUAL(var_38, 0.0f) && !isinf(var_38)
+
+
+
+Trace for main.NaN.2:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=255 (11111111)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=255 (11111111)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=255 (11111111)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=255 (11111111)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 22 thread 0
+  NaN on / in 0.0f / var_38
+  !IEEE_FLOAT_EQUAL(var_38, 0.0f) && !isinf(var_38)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 22 thread 0
+  NaN on / in 0.0f / var_40
+  !IEEE_FLOAT_EQUAL(var_40, 0.0f) && !isinf(var_40)
+
+
+
+Trace for main.reachability_check.1:
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 349 thread 0
+----------------------------------------------------
+  var_0=255 (11111111)
+
+State 18 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_internal::<u8> line 350 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani16any_raw_internalhECs4WuiiXbkpP5_9float_nan=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 39 thread 0
+----------------------------------------------------
+  var_0=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any line 40 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs7_Cs1xmhYfHElKw_4kanihNtB5_9Arbitrary3any=255 (11111111)
+
+State 23 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 278 thread 0
+----------------------------------------------------
+  var_0=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<u8> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyhECs4WuiiXbkpP5_9float_nan=255 (11111111)
+
+State 26 file /home/user/kani/float_nan.rs function main line 11 thread 0
+----------------------------------------------------
+  var_4=255 (11111111)
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 22 thread 0
+  NaN on / in 0.0f / var_38
+  !IEEE_FLOAT_EQUAL(var_38, 0.0f) && !isinf(var_38)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 22 thread 0
+  NaN on / in 0.0f / var_40
+  !IEEE_FLOAT_EQUAL(var_40, 0.0f) && !isinf(var_40)
+
+
+Violated property:
+  file /home/user/kani/float_nan.rs function main line 22 thread 0
+  KANI_CHECK_ID_float_nan.399414012dc6b1f5::float_nan_0
+  FALSE
+
+
+
+** 14 of 20 failed (6 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - main
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.

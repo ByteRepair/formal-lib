@@ -18,6 +18,7 @@ The following backends are supported:
 - CBMC
 - Clang
 - PyTest
+- Kani
 
 ## Frontend
 
@@ -124,7 +125,8 @@ if not result.successful:
 
 ## Cite
 
-If you use formal-lib in your work, please cite it using the following BibTeX entry:
+If you use formal-lib in your work, please cite it using the following BibTeX
+entry:
 
 ```bib
 @misc{charalambous2026formallib,

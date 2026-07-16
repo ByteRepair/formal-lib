@@ -1,0 +1,47 @@
+Kani Rust Verifier 0.67.0 (standalone)
+Checking harness check_assert...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/one_assert__RNvCs1gu7dml64z_10one_assert12check_assert.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Runtime Symex: 0.00094664s
+size of program expression: 94 steps
+slicing removed 52 assignments
+Generated 2 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 6.843e-06s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 3.3191e-05s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 4.219e-06s
+Solving with CaDiCaL 2.0.0
+1 variables, 0 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 2.6505e-05s
+Runtime decision procedure: 7.3126e-05s
+Building error trace
+
+** Results:
+/home/user/kani/one_assert.rs function check_assert
+[check_assert.assertion.1] line 8 [KANI_CHECK_ID_one_assert.3ce1a277e81e0d::one_assert_0] assertion failed: x == y: SUCCESS
+[check_assert.reachability_check.1] line 8 KANI_CHECK_ID_one_assert.3ce1a277e81e0d::one_assert_0: FAILURE
+
+Trace for check_assert.reachability_check.1:
+
+Violated property:
+  file /home/user/kani/one_assert.rs function check_assert line 8 thread 0
+  KANI_CHECK_ID_one_assert.3ce1a277e81e0d::one_assert_0
+  FALSE
+
+
+
+** 1 of 2 failed (2 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - check_assert
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.

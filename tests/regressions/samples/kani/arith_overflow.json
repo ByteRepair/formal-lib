@@ -1,0 +1,21 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "assertion",
+      "message": "attempt to subtract with overflow. The Violated Property is: !(var_12.1 != FALSE)",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/arith_checks.rs",
+          "name": "check_arith_overflow",
+          "line_idx": 10
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    }
+  ],
+  "duration": 0.0
+}

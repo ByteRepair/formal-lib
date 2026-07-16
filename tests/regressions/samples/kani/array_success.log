@@ -1,0 +1,181 @@
+Kani Rust Verifier 0.67.0 (standalone)
+warning: variant `A` is never constructed
+ --> /home/user/kani/array_64.rs:7:5
+  |
+6 | enum Foo {
+  |      --- variant in this enum
+7 |     A,
+  |     ^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: 1 warning emitted
+
+Checking harness main...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/array_64__RNvCs1IwShWiqapt_8array_644main.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Unwinding loop memcmp.0 iteration 1 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 2 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 3 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 4 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 5 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 6 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 7 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 8 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 9 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 10 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 11 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 12 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 13 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 14 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 15 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 16 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 17 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 18 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 19 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 20 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 21 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 22 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 23 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 24 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 25 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 26 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 27 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 28 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 29 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 30 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 31 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 32 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 33 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 34 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 35 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 36 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 37 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 38 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 39 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 40 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 41 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 42 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 43 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 44 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 45 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 46 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 47 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 48 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 49 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 50 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 51 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 52 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 53 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 54 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 55 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 56 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 57 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 58 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 59 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 60 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 61 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 62 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 63 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 64 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Unwinding loop memcmp.0 iteration 65 file <builtin-library-memcmp> line 25 function memcmp thread 0
+Runtime Symex: 0.0605078s
+size of program expression: 954 steps
+slicing removed 682 assignments
+Generated 820 VCC(s), 1 remaining after simplification
+Runtime Postprocess Equation: 0.000254773s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.000949291s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 4.359e-06s
+Solving with CaDiCaL 2.0.0
+651 variables, 660 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 4.3595e-05s
+Runtime decision procedure: 0.0010428s
+Building error trace
+
+** Results:
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs function std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.1] line 2090 dereference failure: pointer NULL in *self: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.2] line 2090 dereference failure: pointer invalid in *self: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.3] line 2090 dereference failure: deallocated dynamic object in *self: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.4] line 2090 dereference failure: dead object in *self: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.5] line 2090 dereference failure: pointer outside object bounds in *self: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.6] line 2090 dereference failure: invalid integer address in *self: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.7] line 2090 dereference failure: pointer NULL in *other: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.8] line 2090 dereference failure: pointer invalid in *other: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.9] line 2090 dereference failure: deallocated dynamic object in *other: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.10] line 2090 dereference failure: dead object in *other: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.11] line 2090 dereference failure: pointer outside object bounds in *other: SUCCESS
+[std::cmp::impls::<impl std::cmp::PartialEq for &[u8; 65]>::eq.pointer_dereference.12] line 2090 dereference failure: invalid integer address in *other: SUCCESS
+
+/home/user/kani/array_64.rs function <Foo as std::cmp::PartialEq>::eq
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.1] line 5 dereference failure: pointer NULL in self->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.2] line 5 dereference failure: pointer invalid in self->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.3] line 5 dereference failure: deallocated dynamic object in self->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.4] line 5 dereference failure: dead object in self->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.5] line 5 dereference failure: pointer outside object bounds in self->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.6] line 5 dereference failure: invalid integer address in self->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.7] line 5 dereference failure: pointer NULL in other->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.8] line 5 dereference failure: pointer invalid in other->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.9] line 5 dereference failure: deallocated dynamic object in other->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.10] line 5 dereference failure: dead object in other->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.11] line 5 dereference failure: pointer outside object bounds in other->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.12] line 5 dereference failure: invalid integer address in other->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.13] line 5 dereference failure: pointer NULL in var_13->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.14] line 5 dereference failure: pointer invalid in var_13->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.15] line 5 dereference failure: deallocated dynamic object in var_13->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.16] line 5 dereference failure: dead object in var_13->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.17] line 5 dereference failure: pointer outside object bounds in var_13->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.18] line 5 dereference failure: invalid integer address in var_13->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.19] line 5 dereference failure: pointer NULL in var_14->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.20] line 5 dereference failure: pointer invalid in var_14->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.21] line 5 dereference failure: deallocated dynamic object in var_14->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.22] line 5 dereference failure: dead object in var_14->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.23] line 5 dereference failure: pointer outside object bounds in var_14->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.pointer_dereference.24] line 5 dereference failure: invalid integer address in var_14->case: SUCCESS
+[<Foo as std::cmp::PartialEq>::eq.unreachable.1] line 5 unreachable code: SUCCESS
+
+/home/user/kani/array_64.rs function main
+[main.assertion.1] line 15 [KANI_CHECK_ID_array_64.140366b7612140a5::array_64_0] assertion failed: x == y: SUCCESS
+[main.reachability_check.1] line 15 KANI_CHECK_ID_array_64.140366b7612140a5::array_64_0: FAILURE
+
+<builtin-library-memcmp> function memcmp
+[memcmp.precondition.1] line 19 memcmp region 1 readable: SUCCESS
+[memcmp.precondition.2] line 21 memcpy region 2 readable: SUCCESS
+[memcmp.pointer_dereference.1] line 27 dereference failure: pointer NULL in *tmp_post_sc1: SUCCESS
+[memcmp.pointer_dereference.2] line 27 dereference failure: pointer invalid in *tmp_post_sc1: SUCCESS
+[memcmp.pointer_dereference.3] line 27 dereference failure: deallocated dynamic object in *tmp_post_sc1: SUCCESS
+[memcmp.pointer_dereference.4] line 27 dereference failure: dead object in *tmp_post_sc1: SUCCESS
+[memcmp.pointer_dereference.5] line 27 dereference failure: pointer outside object bounds in *tmp_post_sc1: SUCCESS
+[memcmp.pointer_dereference.6] line 27 dereference failure: invalid integer address in *tmp_post_sc1: SUCCESS
+[memcmp.pointer_dereference.7] line 27 dereference failure: pointer NULL in *tmp_post_sc2: SUCCESS
+[memcmp.pointer_dereference.8] line 27 dereference failure: pointer invalid in *tmp_post_sc2: SUCCESS
+[memcmp.pointer_dereference.9] line 27 dereference failure: deallocated dynamic object in *tmp_post_sc2: SUCCESS
+[memcmp.pointer_dereference.10] line 27 dereference failure: dead object in *tmp_post_sc2: SUCCESS
+[memcmp.pointer_dereference.11] line 27 dereference failure: pointer outside object bounds in *tmp_post_sc2: SUCCESS
+[memcmp.pointer_dereference.12] line 27 dereference failure: invalid integer address in *tmp_post_sc2: SUCCESS
+
+Trace for main.reachability_check.1:
+
+Violated property:
+  file /home/user/kani/array_64.rs function main line 15 thread 0
+  KANI_CHECK_ID_array_64.140366b7612140a5::array_64_0
+  FALSE
+
+
+
+** 1 of 53 failed (2 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - main
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.

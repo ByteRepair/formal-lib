@@ -15,7 +15,7 @@ from pathlib import Path
 import pytest
 
 SAMPLES_DIR = Path(__file__).parent / "samples"
-KNOWN_SPECS = {"esbmc", "clang", "pytest", "cbmc"}
+KNOWN_SPECS = {"esbmc", "clang", "pytest", "cbmc", "kani"}
 
 
 def discover_samples() -> list[tuple[str, Path, Path]]:

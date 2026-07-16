@@ -1,0 +1,773 @@
+Kani Rust Verifier 0.67.0 (standalone)
+warning: Found the following unsupported constructs:
+             - caller_location (1)
+             - foreign function (1)
+         
+         Verification will fail if one or more of these constructs is reachable.
+         See https://model-checking.github.io/kani/rust-feature-support.html for more details.
+
+warning: 1 warning emitted
+
+Checking harness main...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /home/user/kani/slice_from_raw__RNvCs3DZ3aN4BZyT_14slice_from_raw4main.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Runtime Symex: 0.00716715s
+size of program expression: 279 steps
+slicing removed 157 assignments
+Generated 20 VCC(s), 17 remaining after simplification
+Runtime Postprocess Equation: 4.9717e-05s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.000672588s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 0.000509746s
+Solving with CaDiCaL 2.0.0
+796 variables, 1235 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.000581407s
+Runtime decision procedure: 0.00133248s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+797 variables, 1236 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 3.7518e-05s
+Runtime decision procedure: 7.0487e-05s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+798 variables, 1237 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 5.097e-06s
+Runtime decision procedure: 1.1511e-05s
+
+** Results:
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/fmt/mod.rs function std::fmt::Arguments::<'_>::from_str
+[std::fmt::Arguments::<'_>::from_str.assertion.1] line 820 [KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_1] attempt to shift left with overflow: SUCCESS
+[std::fmt::Arguments::<'_>::from_str.reachability_check.1] line 820 KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_1: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/intrinsics/mod.rs function core::panicking::panic_nounwind_fmt
+[core::panicking::panic_nounwind_fmt.sanity_check.1] line 2449 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panic/location.rs function std::panic::Location::<'_>::caller
+[std::panic::Location::<'_>::caller.unsupported_construct.1] line 147 caller_location is not currently supported by Kani. Please post your example at https://github.com/model-checking/kani/issues/374: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panicking.rs function core::panicking::panic_nounwind_fmt::runtime
+[core::panicking::panic_nounwind_fmt::runtime.unsupported_construct.1] line 110 call to foreign "Rust" function `_RNvCs1hStedNDpZ2_7___rustc17rust_begin_unwind` is not currently supported by Kani. Please post your example at https://github.com/model-checking/kani/issues/new/choose: SUCCESS
+[core::panicking::panic_nounwind_fmt::runtime.sanity_check.1] line 122 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs function std::ptr::const_ptr::<impl *const ()>::is_aligned_to
+[std::ptr::const_ptr::<impl *const ()>::is_aligned_to.assertion.2] line 1374 This is a placeholder message; Kani doesn't support message formatted at runtime: SUCCESS
+[std::ptr::const_ptr::<impl *const ()>::is_aligned_to.assertion.1] line 1377 [KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_5] attempt to subtract with overflow: SUCCESS
+[std::ptr::const_ptr::<impl *const ()>::is_aligned_to.reachability_check.1] line 1377 KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_5: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32>
+[std::slice::from_raw_parts_mut::<'_, i32>.safety_check.1] line 194 misaligned pointer to reference cast: address must be a multiple of its type's alignment: SUCCESS
+[std::slice::from_raw_parts_mut::<'_, i32>.safety_check.2] line 194 dereference failure: pointer invalid: FAILURE
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function core::ub_checks::is_valid_allocation_size
+[core::ub_checks::is_valid_allocation_size.arithmetic_overflow.1] line 149 attempt to divide by zero: SUCCESS
+[core::ub_checks::is_valid_allocation_size.assertion.1] line 149 [KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_0] attempt to divide by zero: SUCCESS
+[core::ub_checks::is_valid_allocation_size.division-by-zero.1] line 149 division by zero in var_4 / size: SUCCESS
+[core::ub_checks::is_valid_allocation_size.reachability_check.1] line 149 KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_0: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function std::slice::from_raw_parts_mut::precondition_check
+[std::slice::from_raw_parts_mut::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/user/kani/slice_from_raw.rs function main
+[main.assertion.1] line 14 [KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2] index out of bounds: the length is less than or equal to the given index: SUCCESS
+[main.pointer_dereference.1] line 14 dereference failure: pointer NULL in slice.data[var_4]: FAILURE
+[main.pointer_dereference.2] line 14 dereference failure: pointer invalid in slice.data[var_4]: UNKNOWN
+[main.pointer_dereference.3] line 14 dereference failure: deallocated dynamic object in slice.data[var_4]: FAILURE
+[main.pointer_dereference.4] line 14 dereference failure: dead object in slice.data[var_4]: FAILURE
+[main.pointer_dereference.5] line 14 dereference failure: pointer outside object bounds in slice.data[var_4]: FAILURE
+[main.pointer_dereference.6] line 14 dereference failure: invalid integer address in slice.data[var_4]: FAILURE
+[main.reachability_check.1] line 14 KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2: FAILURE
+[main.assertion.2] line 15 [KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_3] index out of bounds: the length is less than or equal to the given index: UNKNOWN
+[main.assertion.3] line 15 [KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_4] assertion failed: slice[9999] == 0: UNKNOWN
+[main.pointer_dereference.7] line 15 dereference failure: pointer NULL in slice.data[var_13]: FAILURE
+[main.pointer_dereference.8] line 15 dereference failure: pointer invalid in slice.data[var_13]: UNKNOWN
+[main.pointer_dereference.9] line 15 dereference failure: deallocated dynamic object in slice.data[var_13]: FAILURE
+[main.pointer_dereference.10] line 15 dereference failure: dead object in slice.data[var_13]: FAILURE
+[main.pointer_dereference.11] line 15 dereference failure: pointer outside object bounds in slice.data[var_13]: FAILURE
+[main.pointer_dereference.12] line 15 dereference failure: invalid integer address in slice.data[var_13]: FAILURE
+[main.reachability_check.2] line 15 KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_3: FAILURE
+[main.reachability_check.3] line 15 KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_4: FAILURE
+
+Trace for std::slice::from_raw_parts_mut::<'_, i32>.safety_check.2:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+
+Trace for main.pointer_dereference.1:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+
+Trace for main.pointer_dereference.3:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+
+Trace for main.pointer_dereference.4:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+
+Trace for main.pointer_dereference.5:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer outside object bounds in slice.data[var_4]
+  (unsigned __CPROVER_bitvector[65])__CPROVER_OBJECT_SIZE(slice.data) >= (unsigned __CPROVER_bitvector[65])(__CPROVER_POINTER_OFFSET(slice.data) + var_4 * 4ul) + 4
+
+
+
+Trace for main.pointer_dereference.6:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: invalid integer address in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_4 == ((int *)NULL)
+
+
+
+Trace for main.reachability_check.1:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+
+Trace for main.pointer_dereference.7:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: invalid integer address in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_4 == ((int *)NULL)
+
+
+State 28 file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+----------------------------------------------------
+  byte_extract_little_endian(__CPROVER_memory, 44656l, signed int)=byte_extract_little_endian({ [44656l]=0, [44657l]=0, [44658l]=0, [44659l]=0 }, 44656l, signed int) (?)
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_3
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: pointer NULL in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+
+Trace for main.pointer_dereference.9:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: invalid integer address in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_4 == ((int *)NULL)
+
+
+State 28 file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+----------------------------------------------------
+  byte_extract_little_endian(__CPROVER_memory, 44656l, signed int)=byte_extract_little_endian({ [44656l]=0, [44657l]=0, [44658l]=0, [44659l]=0 }, 44656l, signed int) (?)
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_3
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: pointer NULL in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+
+Trace for main.pointer_dereference.10:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: invalid integer address in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_4 == ((int *)NULL)
+
+
+State 28 file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+----------------------------------------------------
+  byte_extract_little_endian(__CPROVER_memory, 44656l, signed int)=byte_extract_little_endian({ [44656l]=0, [44657l]=0, [44658l]=0, [44659l]=0 }, 44656l, signed int) (?)
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_3
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: pointer NULL in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: dead object in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+
+Trace for main.pointer_dereference.11:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer outside object bounds in slice.data[var_4]
+  (unsigned __CPROVER_bitvector[65])__CPROVER_OBJECT_SIZE(slice.data) >= (unsigned __CPROVER_bitvector[65])(__CPROVER_POINTER_OFFSET(slice.data) + var_4 * 4ul) + 4
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: invalid integer address in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_4 == ((int *)NULL)
+
+
+State 28 file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+----------------------------------------------------
+  byte_extract_little_endian(__CPROVER_memory, 44656l, signed int)=byte_extract_little_endian({ [44656l]=0, [44657l]=0, [44658l]=0, [44659l]=0 }, 44656l, signed int) (?)
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_3
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: pointer NULL in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: dead object in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: pointer outside object bounds in slice.data[var_13]
+  (unsigned __CPROVER_bitvector[65])__CPROVER_OBJECT_SIZE(slice.data) >= (unsigned __CPROVER_bitvector[65])(__CPROVER_POINTER_OFFSET(slice.data) + var_13 * 4ul) + 4
+
+
+
+Trace for main.pointer_dereference.12:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: invalid integer address in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_4 == ((int *)NULL)
+
+
+State 28 file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+----------------------------------------------------
+  byte_extract_little_endian(__CPROVER_memory, 44656l, signed int)=byte_extract_little_endian({ [44656l]=0, [44657l]=0, [44658l]=0, [44659l]=0 }, 44656l, signed int) (?)
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_3
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: pointer NULL in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: dead object in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: invalid integer address in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_13 == ((int *)NULL)
+
+
+
+Trace for main.reachability_check.2:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: invalid integer address in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_4 == ((int *)NULL)
+
+
+State 28 file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+----------------------------------------------------
+  byte_extract_little_endian(__CPROVER_memory, 44656l, signed int)=byte_extract_little_endian({ [44656l]=0, [44657l]=0, [44658l]=0, [44659l]=0 }, 44656l, signed int) (?)
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_3
+  FALSE
+
+
+
+Trace for main.reachability_check.3:
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs function std::slice::from_raw_parts_mut::<'_, i32> line 194 thread 0
+  dereference failure: pointer invalid
+  sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_2
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: pointer NULL in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: dead object in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+  dereference failure: invalid integer address in slice.data[var_4]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_4 == ((int *)NULL)
+
+
+State 28 file /home/user/kani/slice_from_raw.rs function main line 14 thread 0
+----------------------------------------------------
+  byte_extract_little_endian(__CPROVER_memory, 44656l, signed int)=byte_extract_little_endian({ [44656l]=0, [44657l]=0, [44658l]=0, [44659l]=0 }, 44656l, signed int) (?)
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_3
+  FALSE
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: pointer NULL in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: deallocated dynamic object in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: dead object in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))
+
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  dereference failure: invalid integer address in slice.data[var_13]
+  !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_13 == ((int *)NULL)
+
+
+State 36 file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+----------------------------------------------------
+  var_12=0 (00000000 00000000 00000000 00000000)
+
+State 37 file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+----------------------------------------------------
+  var_11=TRUE (00000001)
+
+State 38 file /home/runner/work/kani/kani/library/std/src/lib.rs function main line 44 thread 0
+----------------------------------------------------
+  var_10=FALSE (00000000)
+
+State 39 file /home/runner/work/kani/kani/library/std/src/lib.rs function main line 44 thread 0
+----------------------------------------------------
+  var_9=TRUE (00000001)
+
+Violated property:
+  file /home/user/kani/slice_from_raw.rs function main line 15 thread 0
+  KANI_CHECK_ID_slice_from_raw.2a745ee7f0620461::slice_from_raw_4
+  FALSE
+
+
+
+** 14 of 34 failed (3 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - main
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.
