@@ -1,0 +1,171 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "safety_check",
+      "message": "dereference failure: pointer invalid. The Violated Property is: sizeof(int) /*4*/  * var_8.len == 0 || R_OK((void *)var_8.data, sizeof(int) /*4*/  * var_8.len)",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/raw.rs",
+          "name": "std::slice::from_raw_parts_mut::<'_, i32>",
+          "line_idx": 193
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: pointer NULL in slice.data[var_4]. The Violated Property is: !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 13
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: deallocated dynamic object in slice.data[var_4]. The Violated Property is: !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 13
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: dead object in slice.data[var_4]. The Violated Property is: !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 13
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: pointer outside object bounds in slice.data[var_4]. The Violated Property is: (unsigned __CPROVER_bitvector[65])__CPROVER_OBJECT_SIZE(slice.data) >= (unsigned __CPROVER_bitvector[65])(__CPROVER_POINTER_OFFSET(slice.data) + var_4 * 4ul) + 4",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 13
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: invalid integer address in slice.data[var_4]. The Violated Property is: !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_4 == ((int *)NULL)",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 13
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: pointer NULL in slice.data[var_13]. The Violated Property is: !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data))",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 14
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: deallocated dynamic object in slice.data[var_13]. The Violated Property is: !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_deallocated))",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 14
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: dead object in slice.data[var_13]. The Violated Property is: !(__CPROVER_POINTER_OBJECT(slice.data) == __CPROVER_POINTER_OBJECT(__CPROVER_dead_object))",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 14
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: pointer outside object bounds in slice.data[var_13]. The Violated Property is: (unsigned __CPROVER_bitvector[65])__CPROVER_OBJECT_SIZE(slice.data) >= (unsigned __CPROVER_bitvector[65])(__CPROVER_POINTER_OFFSET(slice.data) + var_13 * 4ul) + 4",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 14
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    },
+    {
+      "error_type": "pointer_dereference",
+      "message": "dereference failure: invalid integer address in slice.data[var_13]. The Violated Property is: !(__CPROVER_POINTER_OBJECT(((int *)NULL)) == __CPROVER_POINTER_OBJECT(slice.data)) || slice.data + var_13 == ((int *)NULL)",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/user/kani/slice_from_raw.rs",
+          "name": "main",
+          "line_idx": 14
+        }
+      ],
+      "severity": "error",
+      "error_location": null,
+      "counterexample": []
+    }
+  ],
+  "duration": 0.0
+}

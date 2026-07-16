@@ -4,7 +4,14 @@
     {
       "error_type": "safety_check",
       "message": "Offset in bytes overflows isize. The Violated Property is: var_11 != FALSE",
-      "stack_trace": [],
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "/home/runner/work/kani/kani/library/kani/src/lib.rs",
+          "name": "kani::rustc_intrinsics::offset::<i32, *const i32, isize>",
+          "line_idx": 56
+        }
+      ],
       "severity": "error",
       "error_location": null,
       "counterexample": []
