@@ -45,7 +45,7 @@ kani_spec = replace(
     # `VERIFICATION:- FAILED` line (native format has no such Results lines and is already
     # correctly post-processed by Kani, so its verdict line is trustworthy).
     success=(
-        r"^\[[^\]]*\.(?!reachability_check\.)[a-z_]+\.\d+\][^\n]*: FAILURE$"
+        r"^\[[^\]]*\.(?!reachability_check\.)[A-Za-z][\w-]*\.\d+\][^\n]*: FAILURE$"
         r"|^VERIFICATION:- FAILED$"
     ),
     negate_success=True,
@@ -65,8 +65,9 @@ kani_spec = replace(
     # the trace header, e.g. `Trace for check_overflow.assertion.1:` -> "assertion".
     # Use a greedy `.+` (not `\S+`) so it spans function names that contain spaces and
     # angle brackets, e.g. `Trace for kani::...::offset::<i32, *const i32,
-    # isize>.safety_check.1:` -> "safety_check".
-    error_type=r"Trace for .+\.([a-z_]+)\.\d+:",
+    # isize>.safety_check.1:` -> "safety_check". The class charset allows uppercase and
+    # hyphens for CBMC-style classes such as `NaN` and `division-by-zero`.
+    error_type=r"Trace for .+\.([A-Za-z][\w-]*)\.\d+:",
     # Reuse CBMC's "last Violated property" capture (Kani emits a second, readable
     # Violated property block per assertion), then strip the KANI_CHECK_ID marker.
     message=format_match(_kani_message)(

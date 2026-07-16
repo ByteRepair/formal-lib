@@ -109,6 +109,33 @@ Complete - 0 successfully verified harnesses, 1 failures, 1 total.
 """
 
 
+# Old format with an uppercase property class (`NaN`) as its only failure. Guards
+# against a class charset too narrow to match it — which would both mislabel the
+# error_type and (via the shared verdict pattern) misreport the run as passing.
+_OLD_FMT_NAN_FAIL = """Kani Rust Verifier 0.67.0 (standalone)
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+
+** Results:
+/src/nan.rs function check_nan
+[check_nan.NaN.1] line 6 NaN on + in x + y: FAILURE
+
+Trace for check_nan.NaN.1:
+
+State 21 file /src/nan.rs function check_nan line 6 thread 0
+----------------------------------------------------
+  x=0.0f (00000000 00000000 00000000 00000000)
+
+Violated property:
+  file /src/nan.rs function check_nan line 6 thread 0
+  NaN on + in x + y
+  !(var_2 != FALSE)
+
+
+** 1 of 1 failed (1 iterations)
+VERIFICATION FAILED
+"""
+
+
 def _parse(log: str):
     return IssueSpecOutputParser(kani_spec).parse_output(log)
 
@@ -152,6 +179,17 @@ def test_error_type_is_property_class_from_trace_header() -> None:
     """Kani lowers everything to CBMC assertions; error_type is the property class
     read from the `Trace for <fn>.<class>.<n>:` header, not CBMC's first-word rule."""
     assert _parse(_OLD_FMT_FAILURE).issues[0].error_type == "assertion"
+
+
+def test_uppercase_property_class_and_verdict() -> None:
+    """An uppercase class (`NaN`) must be captured as the error_type, and a run
+    whose only failure is such a check must be reported as failed — the class
+    charset feeds both error_type and the verdict pattern."""
+    result = _parse(_OLD_FMT_NAN_FAIL)
+
+    assert result.successful is False
+    assert len(result.issues) == 1
+    assert result.issues[0].error_type == "NaN"
 
 
 def test_reachability_check_is_neither_an_issue_nor_a_failure() -> None:
