@@ -5,10 +5,9 @@ from formal_lib.specs.base import IssueRegexSpec, StackTraceRegexSpec
 clang_spec: IssueRegexSpec = IssueRegexSpec(
     # Detect clang/gcc diagnostics by the "file:line:col: error/warning:" pattern.
     detect=r"^[^\s:]+:\d+:\d+:\s+(?:error|warning):",
-    # No positive success signal (a clean compile is silent), so the verdict is the
-    # failure pattern — an `error:` diagnostic — plus the parser's error-issue
-    # baseline. Warnings are issues but never fail the build.
-    failure=r":\d+:\s+error:",
+    # No verdict pattern: a clang `error:` diagnostic is extracted as an error-severity
+    # issue, so the parser's data-driven baseline already fails the run. Warnings are
+    # issues too, but severity "warning", so they never fail the build.
     # Each diagnostic is a block: "file:line:col: type: message\n<source>\n<indicator>"
     # Match the diagnostic line plus optional following source/indicator lines.
     block=r"^[^\s:]+:\d+:\d+:\s+(?:error|warning):[^\n]*\n(?:[^\n]*\n[^\s:]*[~^ ]*\n?)?",

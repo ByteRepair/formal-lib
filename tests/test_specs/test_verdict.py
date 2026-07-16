@@ -2,10 +2,8 @@
 
 """Tests for the verdict logic in IssueSpecOutputParser._is_successful.
 
-The verdict is a data-driven baseline (no error-severity issue) gated by the spec's
-optional `success` (positive, fail-closed) and `failure` (gate) patterns. These use a
-tiny synthetic spec: a line `ISSUE <severity>` becomes one issue of that severity, and
-`PASS` / `FAIL` markers drive the patterns.
+Uses a tiny synthetic spec: a line ``ISSUE <severity>`` becomes one issue of that
+severity, and ``PASS`` / ``FAIL`` markers drive the ``success`` / ``failure`` patterns.
 """
 
 from formal_lib import IssueSpecOutputParser
@@ -38,7 +36,6 @@ def test_no_patterns_error_issue_fails() -> None:
 
 
 def test_no_patterns_warning_issue_passes() -> None:
-    """A warning-severity issue must not flip the verdict."""
     assert _verdict("ISSUE warning") is True
 
 
@@ -51,7 +48,6 @@ def test_no_patterns_no_issue_passes() -> None:
 
 
 def test_mixed_warning_and_error_fails() -> None:
-    """A single error-severity issue fails the run even alongside non-error issues."""
     assert _verdict("ISSUE warning\nISSUE error") is False
 
 

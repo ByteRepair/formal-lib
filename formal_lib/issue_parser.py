@@ -61,15 +61,13 @@ class IssueSpecOutputParser:
         )
 
     def _is_successful(self, output: str, issues: list[Issue]) -> bool:
-        """Determine the verdict from a data-driven baseline gated by the spec's
-        optional ``success`` / ``failure`` patterns.
+        """Return whether the run passed: no error-severity issue, and — when the
+        spec sets them — the ``success`` pattern matched and the ``failure`` pattern
+        did not. Warning/info issues never flip the verdict.
 
-        The run passed iff there is no error-severity issue AND — when the spec
-        provides them — the positive ``success`` pattern matched and the ``failure``
-        pattern did not. Warning/info issues never flip the verdict. The three
-        checks are independent gates, so a miss in one (a failure whose pattern
-        didn't match, or one the issue extractor dropped) is still caught by
-        another; only a simultaneous miss reports a false success.
+        The error-issue baseline and the ``failure`` pattern are independent failure
+        signals, so a failure missed by one is still caught by the other; ``success``
+        is a fail-closed positive requirement (its absence fails the run).
         """
         spec = self.regex_spec
         if any(issue.severity == "error" for issue in issues):
