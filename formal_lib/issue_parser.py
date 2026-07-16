@@ -33,22 +33,17 @@ class IssueSpecOutputParser:
     ) -> VerifierOutput:
         # Strip ANSI escape codes in case the tool emits colored output.
         output = ANSI_ESCAPE_PATTERN.sub("", output)
-
-        # Determine success from the spec's success pattern.
         spec = self.regex_spec
-        if spec.success:
-            matched = bool(re.search(spec.success, output, re.MULTILINE))
-            successful = not matched if spec.negate_success else matched
-        else:
-            successful = True
 
-        # Extract all issue blocks from the output
-        issue_blocks: list[str] = []
-        for match in re.finditer(spec.block, output, re.DOTALL | re.MULTILINE):
-            issue_blocks.append(match.group(0))
-
-        # Parse each issue block to extract individual issues
+        # Extract issue blocks, then parse each into an issue. The verdict's
+        # data-driven baseline reads issue severities, so issues are parsed first.
+        issue_blocks: list[str] = [
+            match.group(0)
+            for match in re.finditer(spec.block, output, re.DOTALL | re.MULTILINE)
+        ]
         issues: list[Issue] = [self._parse_issue(block) for block in issue_blocks]
+
+        successful = self._is_successful(output, issues)
 
         # Collect hints from annotated blocks that failed to match.
         hints: list[str] = []
@@ -64,6 +59,26 @@ class IssueSpecOutputParser:
             duration=duration,
             hints=hints,
         )
+
+    def _is_successful(self, output: str, issues: list[Issue]) -> bool:
+        """Return whether the run passed: no error-severity issue, and — when the
+        spec sets them — the ``success`` pattern matched and the ``failure`` pattern
+        did not. Warning/info issues never flip the verdict.
+
+        The error-issue baseline and the ``failure`` pattern are independent failure
+        signals, so a failure missed by one is still caught by the other; ``success``
+        is a fail-closed positive requirement (its absence fails the run).
+        """
+        spec = self.regex_spec
+        if any(issue.severity == "error" for issue in issues):
+            return False
+        if spec.success is not None and not re.search(
+            spec.success, output, re.MULTILINE
+        ):
+            return False
+        if spec.failure is not None and re.search(spec.failure, output, re.MULTILINE):
+            return False
+        return True
 
     @staticmethod
     def _get_hint(pattern: str) -> str:

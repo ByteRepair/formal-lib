@@ -1,0 +1,20 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "error",
+      "message": "\u2018zzz\u2019 undeclared (first use in this function)",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "err.c",
+          "name": null,
+          "line_idx": 0
+        }
+      ],
+      "severity": "error",
+      "error_location": null
+    }
+  ],
+  "duration": 0.0
+}

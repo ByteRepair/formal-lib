@@ -1,0 +1,5 @@
+err.c: In function ‘main’:
+err.c:1:23: error: ‘zzz’ undeclared (first use in this function)
+    1 | int main(void){return zzz;}
+      |                       ^~~
+err.c:1:23: note: each undeclared identifier is reported only once for each function it appears in
