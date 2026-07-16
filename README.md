@@ -20,20 +20,6 @@ The following backends are supported:
 - PyTest
 - Kani
 
-> **Note on Kani:** Kani runs CBMC internally, and `pf` parses that CBMC output,
-> so Kani must be run in the legacy format with the trace enabled:
->
-> ```bash
-> pf -- kani file.rs -Z unstable-options --output-format old --cbmc-args --trace
-> ```
->
-> `--output-format old --cbmc-args --trace` exposes CBMC's counterexample. `pf`
-> reads the verdict from the individual check results, so a passing run is
-> reported correctly even though old-format Kani prints `VERIFICATION FAILED` for
-> it — this keeps Kani's reachability checks enabled, which catch unreachable,
-> vacuously-passing assertions. Run without these flags, `pf` still reports the
-> pass/fail result but prints a hint listing the flags needed for the details.
-
 ## Frontend
 
 `pf` (Pretty Format) is a CLI frontend for `formal-lib`. It can be invoked from
