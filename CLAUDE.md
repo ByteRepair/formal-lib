@@ -49,6 +49,7 @@ The library uses a **specification-driven regex parsing** pattern with three lay
 
 - **Unit tests** in `tests/test_specs/` — cover only behaviour a regression fixture can't express: auto-detection, missing-flag hints (excluded from serialized output), derived-property logic (`function_name`/`error_location` precedence), and verdict combinations driven by synthetic specs. Anything that's "parse a real log with a registered backend and check the structured output" belongs in the regression suite, not here.
 - **Regression tests** in `tests/regressions/` — data-driven: drop a `.log` and matching `.json` into `tests/regressions/samples/<spec>/` and the test auto-discovers them. The `.json` is the expected CLI JSON output minus the `output` field. Marked with `@pytest.mark.regression`, excluded from default pytest runs.
+  - The `.log` must be **genuine verifier output** (captured from a real run), and the `.json` must be the **exact** structured output the parser produces from that log — generate it by running `pf` (`python -m formal_lib --backend <spec> --format json-compact`) against the log and stripping the `output` field, then read it to confirm it faithfully reflects the log. Never hand-write or hallucinate field values (messages, line numbers, trace entries, severities): every value in the `.json` must be traceable to something actually present in the `.log`. If the generated output looks wrong, the fix is in the spec/parser, not in editing the `.json` to what you wish it said.
 
 ## Adding a New Verifier Backend
 
