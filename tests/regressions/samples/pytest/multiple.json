@@ -1,0 +1,76 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "AssertionError",
+      "message": "assert 2048 == 208",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "tests/test_ai_models.py",
+          "name": null,
+          "line_idx": 26
+        }
+      ],
+      "severity": "error",
+      "error_location": null
+    },
+    {
+      "error_type": "AssertionError",
+      "message": "assert 0 != 0",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "tests/test_esbmc.py",
+          "name": null,
+          "line_idx": 78
+        }
+      ],
+      "severity": "error",
+      "error_location": null
+    },
+    {
+      "error_type": "AssertionError",
+      "message": "assert '[Counterexample]' not in 'esbmc --int...ound (k = 5)'",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "tests/test_esbmc.py",
+          "name": null,
+          "line_idx": 85
+        }
+      ],
+      "severity": "error",
+      "error_location": null
+    },
+    {
+      "error_type": "AssertionError",
+      "message": "assert 'Compilation Error' != 'Compilation Error'",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "tests/test_esbmc.py",
+          "name": null,
+          "line_idx": 135
+        }
+      ],
+      "severity": "error",
+      "error_location": null
+    },
+    {
+      "error_type": "AssertionError",
+      "message": "Different singleton classes should not share the same instance",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "tests/test_singleton.py",
+          "name": null,
+          "line_idx": 45
+        }
+      ],
+      "severity": "error",
+      "error_location": null
+    }
+  ],
+  "duration": 0.0
+}
