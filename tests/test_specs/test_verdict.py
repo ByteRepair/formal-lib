@@ -42,8 +42,17 @@ def test_no_patterns_warning_issue_passes() -> None:
     assert _verdict("ISSUE warning") is True
 
 
+def test_no_patterns_info_issue_passes() -> None:
+    assert _verdict("ISSUE info") is True
+
+
 def test_no_patterns_no_issue_passes() -> None:
     assert _verdict("nothing to see") is True
+
+
+def test_mixed_warning_and_error_fails() -> None:
+    """A single error-severity issue fails the run even alongside non-error issues."""
+    assert _verdict("ISSUE warning\nISSUE error") is False
 
 
 # --- success pattern: positive confirmation, fail-closed ---
@@ -77,5 +86,7 @@ def test_error_issue_catches_a_missed_failure_pattern() -> None:
 # --- both patterns ---
 
 def test_both_patterns_failure_wins() -> None:
+    """When a spec sets BOTH patterns (no shipping spec does today, but the API
+    allows it), the failure gate wins over a matching success line."""
     assert _verdict("PASS", success=r"PASS", failure=r"FAIL") is True
     assert _verdict("PASS\nFAIL", success=r"PASS", failure=r"FAIL") is False
