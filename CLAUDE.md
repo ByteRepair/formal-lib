@@ -47,7 +47,7 @@ The library uses a **specification-driven regex parsing** pattern with three lay
 
 ## Testing
 
-- **Unit tests** in `tests/test_specs/` — test individual spec parsers against sample data in `tests/test_specs/data/`
+- **Unit tests** in `tests/test_specs/` — cover only behaviour a regression fixture can't express: auto-detection, missing-flag hints (excluded from serialized output), derived-property logic (`function_name`/`error_location` precedence), and verdict combinations driven by synthetic specs. Anything that's "parse a real log with a registered backend and check the structured output" belongs in the regression suite, not here.
 - **Regression tests** in `tests/regressions/` — data-driven: drop a `.log` and matching `.json` into `tests/regressions/samples/<spec>/` and the test auto-discovers them. The `.json` is the expected CLI JSON output minus the `output` field. Marked with `@pytest.mark.regression`, excluded from default pytest runs.
 
 ## Adding a New Verifier Backend

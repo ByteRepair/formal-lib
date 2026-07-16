@@ -1,0 +1,20 @@
+{
+  "successful": false,
+  "issues": [
+    {
+      "error_type": "SyntaxError",
+      "message": "'(' was never closed",
+      "stack_trace": [
+        {
+          "trace_index": 0,
+          "path": "../../.local/share/hatch/env/virtual/esbmc-ai/9ZN5XdZG/hatch-test.py3.12/lib/python3.12/site-packages/_pytest/python.py",
+          "name": "importtestmodule",
+          "line_idx": 497
+        }
+      ],
+      "severity": "error",
+      "error_location": null
+    }
+  ],
+  "duration": 0.0
+}
