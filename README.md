@@ -18,6 +18,19 @@ The following backends are supported:
 - CBMC
 - Clang
 - PyTest
+- Kani
+
+> **Note on Kani:** Kani runs CBMC internally, and `pf` parses that CBMC output,
+> so Kani must be run in the legacy format with the trace enabled:
+>
+> ```bash
+> pf -- kani file.rs -Z unstable-options --no-assertion-reach-checks --output-format old --cbmc-args --trace
+> ```
+>
+> `--output-format old --cbmc-args --trace` exposes CBMC's counterexample, and
+> `--no-assertion-reach-checks` stops Kani's reachability checks from marking a
+> successful run as failed. Run without these flags, `pf` still reports the
+> pass/fail result but prints a hint listing the flags needed for the details.
 
 ## Frontend
 
@@ -124,7 +137,8 @@ if not result.successful:
 
 ## Cite
 
-If you use formal-lib in your work, please cite it using the following BibTeX entry:
+If you use formal-lib in your work, please cite it using the following BibTeX
+entry:
 
 ```bib
 @misc{charalambous2026formallib,
