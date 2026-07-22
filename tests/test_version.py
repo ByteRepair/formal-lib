@@ -93,6 +93,13 @@ def test_as_range() -> None:
     assert as_range(r) is r
 
 
+def test_range_str() -> None:
+    assert str(VersionRange.parse("v1-v2")) == "v1-v2"
+    assert str(VersionRange.parse("v6.7.1")) == "v6.7.1"
+    assert str(VersionRange.parse("-v3")) == "-v3"
+    assert str(VersionRange()) == "any version"
+
+
 # --- spec conflict checker ---
 
 _NO_TRACE = StackTraceRegexSpec(
@@ -112,6 +119,13 @@ def _spec(*versions: Version | VersionRange) -> IssueRegexSpec:
     if versions:  # no args -> keep the default all-versions range
         spec.versions = list(versions)
     return spec
+
+
+def test_spec_supports() -> None:
+    spec = _spec(Version.parse("2"), VersionRange.parse("v5-v6"))
+    assert spec.supports(Version.parse("2"))
+    assert spec.supports(VersionRange.parse("v6-v9"))
+    assert not spec.supports(VersionRange.parse("v3-v4.9"))
 
 
 def test_disjoint_specs_do_not_conflict() -> None:

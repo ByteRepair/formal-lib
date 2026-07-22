@@ -15,29 +15,21 @@ from itertools import combinations
 
 from formal_lib.specs import SPECS
 from formal_lib.specs.base import IssueRegexSpec
-from formal_lib.version import Version, VersionRange, as_range
 
 
-def _describe(versions: list[Version | VersionRange]) -> str:
-    """Render a supported-versions list; the all-unbounded default reads "any version"."""
-    return ", ".join(
-        "any version" if v == VersionRange() else str(v) for v in versions
-    )
+def _versions(spec: IssueRegexSpec) -> str:
+    return ", ".join(str(v) for v in spec.versions)
 
 
-def find_conflicts(specs: dict[str, list[IssueRegexSpec]] = SPECS) -> list[str]:
+def find_conflicts(specs: dict[str, list[IssueRegexSpec]]) -> list[str]:
     """Return one message per pair of same-backend specs with overlapping versions."""
     conflicts: list[str] = []
     for backend, backend_specs in specs.items():
         for (i, first), (j, second) in combinations(enumerate(backend_specs), 2):
-            if any(
-                as_range(a).overlaps(b)
-                for a in first.versions
-                for b in second.versions
-            ):
+            if any(first.supports(v) for v in second.versions):
                 conflicts.append(
-                    f"{backend}: spec #{i} [{_describe(first.versions)}] overlaps "
-                    f"spec #{j} [{_describe(second.versions)}]"
+                    f"{backend}: spec #{i} [{_versions(first)}] overlaps "
+                    f"spec #{j} [{_versions(second)}]"
                 )
     return conflicts
 
@@ -60,9 +52,9 @@ def main() -> None:
         for backend, backend_specs in SPECS.items():
             print(f"{backend}:")
             for i, spec in enumerate(backend_specs):
-                print(f"  spec #{i}: {_describe(spec.versions)}")
+                print(f"  spec #{i}: {_versions(spec)}")
 
-    conflicts = find_conflicts()
+    conflicts = find_conflicts(SPECS)
     for conflict in conflicts:
         print(f"spec conflict: {conflict}", file=sys.stderr)
     if conflicts:

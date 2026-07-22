@@ -14,7 +14,8 @@ bound), ``-v6.10.0`` (no lower bound), or ``v6.7.1`` (exact version).
 import re
 from dataclasses import dataclass
 
-_VERSION = r"v\d+(?:\.\d+)*"
+_VERSION_BODY = r"\d+(?:\.\d+)*"
+_VERSION = rf"v{_VERSION_BODY}"
 VERSION_RANGE_PATTERN = re.compile(rf"{_VERSION}-(?:{_VERSION})?|-{_VERSION}|{_VERSION}")
 """Grammar for a version-range category name; use with ``fullmatch``. A bare
 ``-`` (unbounded on both sides) is deliberately rejected — an unconstrained
@@ -42,7 +43,7 @@ class Version:
     def parse(cls, text: str) -> "Version":
         """Parse ``6.7.1`` or ``v6.7.1`` into a Version."""
         body = text.removeprefix("v")
-        if not re.fullmatch(r"\d+(?:\.\d+)*", body):
+        if not re.fullmatch(_VERSION_BODY, body):
             raise ValueError(f"invalid version: {text!r}")
         return cls(tuple(int(part) for part in body.split(".")))
 
@@ -94,6 +95,8 @@ class VersionRange:
         )
 
     def __str__(self) -> str:
+        if self.lower is None and self.upper is None:
+            return "any version"
         if self.lower is not None and self.lower == self.upper:
             return f"v{self.lower}"
         lower = f"v{self.lower}" if self.lower is not None else ""

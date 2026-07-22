@@ -19,7 +19,6 @@ from .clang import clang_spec
 from .esbmc import esbmc_spec
 from .kani import kani_spec
 from .pytest import pytest_spec
-from formal_lib.version import Version, VersionRange
 
 SPECS: dict[str, list[IssueRegexSpec]] = {
     "esbmc": [esbmc_spec],
@@ -35,12 +34,23 @@ holds one spec per supported version range (list newest versions first); ranges
 within a backend must not overlap (checked by ``hatch run check-specs``)."""
 
 
+def _first_detected(specs: list[IssueRegexSpec], output: str) -> IssueRegexSpec | None:
+    """First spec whose ``detect`` pattern matches the output, or None.
+
+    The one definition of detect-matching, so auto-detection and backend-scoped
+    resolution can never pick different specs for the same log."""
+    for spec in specs:
+        if spec.detect and re.search(spec.detect, output, re.MULTILINE):
+            return spec
+    return None
+
+
 def detect_spec(output: str) -> IssueRegexSpec:
     """Auto-detect which spec matches the output using each spec's detect pattern."""
     for specs in SPECS.values():
-        for spec in specs:
-            if spec.detect and re.search(spec.detect, output, re.MULTILINE):
-                return spec
+        spec = _first_detected(specs, output)
+        if spec is not None:
+            return spec
     names = ", ".join(SPECS)
     raise ValueError(f"could not detect backend from output (known: {names})")
 
@@ -50,10 +60,9 @@ def resolve_spec(backend: str, output: str) -> IssueRegexSpec:
     whose ``detect`` pattern matches the output wins; when none match, fall back
     to the first registered (the newest) spec."""
     specs = SPECS[backend]
-    for spec in specs:
-        if spec.detect and re.search(spec.detect, output, re.MULTILINE):
-            return spec
-    return specs[0]
+    if len(specs) == 1:
+        return specs[0]
+    return _first_detected(specs, output) or specs[0]
 
 
 __all__ = [
@@ -64,8 +73,6 @@ __all__ = [
     "IssueRegexSpec",
     "SPECS",
     "StackTraceRegexSpec",
-    "Version",
-    "VersionRange",
     "cbmc_spec",
     "clang_spec",
     "detect_spec",

@@ -22,19 +22,20 @@ import pytest
 from formal_lib.issue_parser import IssueSpecOutputParser
 from formal_lib.specs import SPECS
 from formal_lib.specs.base import IssueRegexSpec
-from formal_lib.version import VERSION_RANGE_PATTERN, VersionRange, as_range
+from formal_lib.version import VERSION_RANGE_PATTERN, VersionRange
 
 SAMPLES_DIR = Path(__file__).parent / "samples"
 
 
-ORPHANED: list[str] = []
-"""Version-constrained samples whose range overlaps no spec of their backend —
-silently dropping them would shrink the suite, so a test asserts this is empty."""
+def discover_samples() -> tuple[list, list[str]]:
+    """Discover .log/.json pairs, pairing each with the specs it applies to.
 
-
-def discover_samples() -> list[tuple[str, IssueRegexSpec, Path, Path]]:
-    """Discover .log/.json pairs and pair each with the specs it applies to."""
+    Also returns the orphaned samples: version-constrained samples whose range
+    overlaps no spec of their backend — silently dropping them would shrink the
+    suite, so a test asserts the list is empty.
+    """
     cases = []
+    orphaned: list[str] = []
     for backend_dir in sorted(SAMPLES_DIR.iterdir()):
         specs = SPECS.get(backend_dir.name)
         if not backend_dir.is_dir() or not specs:
@@ -55,22 +56,21 @@ def discover_samples() -> list[tuple[str, IssueRegexSpec, Path, Path]]:
             matched = [
                 spec
                 for spec in specs
-                if constraint is None
-                or any(as_range(v).overlaps(constraint) for v in spec.versions)
+                if constraint is None or spec.supports(constraint)
             ]
             if not matched:
-                ORPHANED.append(f"{backend_dir.name}/{relative}")
+                orphaned.append(f"{backend_dir.name}/{relative}")
                 continue
+            sample_id = f"{backend_dir.name}/{relative.with_suffix('')}"
             for spec in matched:
-                sample_id = f"{backend_dir.name}/{relative.with_suffix('')}"
+                spec_id = sample_id
                 if len(matched) > 1:
-                    versions = ",".join(str(v) for v in spec.versions)
-                    sample_id += f"@{versions}"
-                cases.append((sample_id, spec, log_file, json_file))
-    return cases
+                    spec_id += "@" + ",".join(str(v) for v in spec.versions)
+                cases.append(pytest.param(spec, log_file, json_file, id=spec_id))
+    return cases, orphaned
 
 
-SAMPLES = discover_samples()
+SAMPLES, ORPHANED = discover_samples()
 
 
 @pytest.mark.regression
@@ -80,11 +80,7 @@ def test_no_orphaned_samples() -> None:
 
 
 @pytest.mark.regression
-@pytest.mark.parametrize(
-    "spec, log_file, json_file",
-    [case[1:] for case in SAMPLES],
-    ids=[case[0] for case in SAMPLES],
-)
+@pytest.mark.parametrize("spec, log_file, json_file", SAMPLES)
 def test_sample_output_matches_expected(
     spec: IssueRegexSpec, log_file: Path, json_file: Path
 ) -> None:

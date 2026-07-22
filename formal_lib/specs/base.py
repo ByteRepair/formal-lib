@@ -7,7 +7,7 @@ from typing import Any, Protocol
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from formal_lib.version import Version, VersionRange
+from formal_lib.version import Version, VersionRange, as_range
 
 
 class AnnotatedPattern(str):
@@ -268,3 +268,11 @@ class IssueRegexSpec:
     cache_properties: CachePropertiesFn | None = field(default=None)
     """Optional function to compute cache properties from verify_source args.
     When None, default properties are used."""
+
+    def supports(self, target: Version | VersionRange) -> bool:
+        """Whether any entry in ``versions`` overlaps ``target``.
+
+        The single interpretation of the ``versions`` field — shared by the
+        conflict checker and the regression suite's version-directory scoping
+        so the two can never disagree about which specs a version maps to."""
+        return any(as_range(v).overlaps(target) for v in self.versions)
