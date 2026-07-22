@@ -8,11 +8,13 @@ from formal_lib.issue import Issue, VerifierIssue
 from formal_lib.specs import (
     SPECS,
     detect_spec,
+    resolve_spec,
     cbmc_spec,
     clang_spec,
     esbmc_spec,
     pytest_spec,
 )
+from formal_lib.version import Version, VersionRange
 
 __all__ = [
     "__version__",
@@ -22,7 +24,10 @@ __all__ = [
     "Issue",
     "VerifierIssue",
     "SPECS",
+    "Version",
+    "VersionRange",
     "detect_spec",
+    "resolve_spec",
     "cbmc_spec",
     "clang_spec",
     "esbmc_spec",

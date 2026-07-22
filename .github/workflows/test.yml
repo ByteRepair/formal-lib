@@ -26,3 +26,11 @@ jobs:
       - uses: ./.github/actions/setup-hatch
       - name: Run regression tests
         run: hatch test -- tests/regressions/ -m regression -o "addopts="
+
+  spec-conflicts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.0
+      - uses: ./.github/actions/setup-hatch
+      - name: Check spec version conflicts
+        run: hatch run check-specs -v

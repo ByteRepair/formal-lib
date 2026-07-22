@@ -7,6 +7,8 @@ from typing import Any, Protocol
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from formal_lib.version import Version, VersionRange, as_range
+
 
 class AnnotatedPattern(str):
     """A regex pattern string annotated with a hint for when it fails to match."""
@@ -236,6 +238,14 @@ class IssueRegexSpec:
     detect: str = ""
     """Regex pattern to detect if output was produced by this verifier.
     Matched against the full output with MULTILINE. Empty means no auto-detection."""
+    versions: list[Version | VersionRange] = field(default_factory=lambda: [VersionRange()])
+    """Verifier versions this spec's patterns are written for: exact ``Version``
+    entries and/or inclusive ``VersionRange`` entries (a ``None`` bound means
+    unbounded on that side). The default single unbounded range means "all
+    versions". When a verifier changes its output format, register a second spec
+    under the same backend name in ``SPECS`` and constrain both specs' versions —
+    within one backend no two specs may support the same version (checked by
+    ``hatch run check-specs``)."""
     counterexample_spec: CounterexampleRegexSpec | None = None
     """Optional nested specification for parsing counterexample traces."""
     error_location: ErrorLocationRegexSpec | None = None
@@ -258,3 +268,11 @@ class IssueRegexSpec:
     cache_properties: CachePropertiesFn | None = field(default=None)
     """Optional function to compute cache properties from verify_source args.
     When None, default properties are used."""
+
+    def supports(self, target: Version | VersionRange) -> bool:
+        """Whether any entry in ``versions`` overlaps ``target``.
+
+        The single interpretation of the ``versions`` field — shared by the
+        conflict checker and the regression suite's version-directory scoping
+        so the two can never disagree about which specs a version maps to."""
+        return any(as_range(v).overlaps(target) for v in self.versions)

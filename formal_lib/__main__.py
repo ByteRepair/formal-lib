@@ -9,7 +9,7 @@ from time import perf_counter
 from formal_lib.issue import VerifierIssue
 from formal_lib.issue_parser import IssueSpecOutputParser
 from formal_lib.verifier_output import VerifierOutput
-from formal_lib.specs import SPECS, detect_spec
+from formal_lib.specs import SPECS, detect_spec, resolve_spec
 
 
 def pretty_print(result: VerifierOutput) -> None:
@@ -90,7 +90,7 @@ def main() -> None:
         duration = 0.0
 
     try:
-        spec = SPECS[args.backend] if args.backend else detect_spec(output)
+        spec = resolve_spec(args.backend, output) if args.backend else detect_spec(output)
     except ValueError as e:
         parser.error(str(e))
 

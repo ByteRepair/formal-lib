@@ -36,6 +36,7 @@ urls.Source = "https://github.com/ByteRepair/formal-lib"
 scripts.pf = "formal_lib.__main__:main"
 
 [tool.hatch]
+envs.default.scripts.check-specs = "python -m formal_lib.specs.conflicts {args}"
 envs.types.extra-dependencies = [
   "mypy>=1.0.0",
   "pytest",

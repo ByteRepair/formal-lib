@@ -20,6 +20,20 @@ The following backends are supported:
 - PyTest
 - Kani
 
+### Spec Versioning
+
+Each backend is parsed by a spec that declares which verifier versions it
+supports, as exact versions and/or inclusive version ranges (a missing bound
+means the range is unbounded on that side; the default is all versions). When
+a verifier changes its output format, a new spec is added for the new versions
+alongside the old one. Within a backend, no two specs may support the same
+version (a spec conflict). Check this with:
+
+```bash
+hatch run check-specs     # fails on any spec conflict
+hatch run check-specs -v  # also lists every spec and the versions it supports
+```
+
 ## Frontend
 
 `pf` (Pretty Format) is a CLI frontend for `formal-lib`. It can be invoked from
