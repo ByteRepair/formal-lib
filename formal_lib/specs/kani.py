@@ -56,7 +56,7 @@ kani_spec = replace(
     #    a hint telling the user which flags expose the counterexample, mirroring
     #    CBMC's `--trace` hint.
     block=missing_hint("Needs --output-format old --cbmc-args --trace")(
-        r"(?:Trace for (?!\S+\.reachability_check\.)[^\n]+|Counterexample):\n"
+        r"(?:Trace for (?![^\n]+\.reachability_check\.)[^\n]+|Counterexample):\n"
         r".*?(?=Trace for [^\n]+:\n|Counterexample:\n|\*\* \d+ of \d+|\Z)"
     ),
     # Kani lowers every check to an assertion, so CBMC's first-word-of-description
