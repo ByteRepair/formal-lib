@@ -1,0 +1,1132 @@
+Kani Rust Verifier 0.67.0 (standalone)
+warning: Found the following unsupported constructs:
+             - caller_location (1)
+             - foreign function (1)
+         
+         Verification will fail if one or more of these constructs is reachable.
+         See https://model-checking.github.io/kani/rust-feature-support.html for more details.
+
+warning: 1 warning emitted
+
+Checking harness main...
+CBMC version 6.8.0 (cbmc-6.8.0) 64-bit x86_64 linux
+Reading GOTO program from file /tmp/reach/closure_reach__RNvCs2bcUpbe8o9D_13closure_reach4main.out
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Unwinding loop _RINvXs2E_NtNtCsci0VKyKEi6N_4core5slice4iterINtB7_4IterhENtNtNtNtBb_4iter6traits8iterator8Iterator4foldmNCINvNtNtBY_8adapters3map8map_foldRhmmNCNvCs2bcUpbe8o9D_13closure_reach4main0NCINvXsy_NtBW_5accummNtB31_3Sum3sumINtB1I_3MapBF_B2f_EE0E0EB2j_.0 iteration 1 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs line 252 column 17 function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> thread 0
+Runtime Symex: 0.0314971s
+size of program expression: 1885 steps
+slicing removed 1256 assignments
+Generated 59 VCC(s), 10 remaining after simplification
+Runtime Postprocess Equation: 0.000164275s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.0024865s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 2.545e-06s
+Solving with CaDiCaL 2.0.0
+6073 variables, 5883 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 7.3553e-05s
+Runtime decision procedure: 0.00265646s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+6074 variables, 5884 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 4.562e-05s
+Runtime decision procedure: 7.7176e-05s
+Building error trace
+Running propositional reduction
+Solving with CaDiCaL 2.0.0
+6075 variables, 5885 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 1.0156e-05s
+Runtime decision procedure: 1.862e-05s
+
+** Results:
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/fmt/mod.rs function std::fmt::Arguments::<'_>::from_str
+[std::fmt::Arguments::<'_>::from_str.assertion.1] line 820 [KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_6] attempt to shift left with overflow: SUCCESS
+[std::fmt::Arguments::<'_>::from_str.reachability_check.1] line 820 KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_6: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/intrinsics/mod.rs function core::panicking::panic_nounwind_fmt
+[core::panicking::panic_nounwind_fmt.sanity_check.1] line 2449 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}
+[<u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}.assertion.1] line 53 [KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_7] attempt to add with overflow: SUCCESS
+[<u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}.reachability_check.1] line 204 KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_7: FAILURE
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/uint_macros.rs function core::num::<impl usize>::unchecked_add
+[core::num::<impl usize>::unchecked_add.arithmetic_overflow.1] line 729 attempt to compute `unchecked_add` which would overflow: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panic/location.rs function std::panic::Location::<'_>::caller
+[std::panic::Location::<'_>::caller.unsupported_construct.1] line 147 caller_location is not currently supported by Kani. Please post your example at https://github.com/model-checking/kani/issues/374: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panicking.rs function core::panicking::panic_nounwind_fmt::runtime
+[core::panicking::panic_nounwind_fmt::runtime.unsupported_construct.1] line 110 call to foreign "Rust" function `_RNvCs1hStedNDpZ2_7___rustc17rust_begin_unwind` is not currently supported by Kani. Please post your example at https://github.com/model-checking/kani/issues/new/choose: SUCCESS
+[core::panicking::panic_nounwind_fmt::runtime.sanity_check.1] line 122 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs function std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer.1] line 712 same object violation in this >= origin: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.1] line 712 pointer relation: pointer NULL in this: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.2] line 712 pointer relation: pointer invalid in this: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.3] line 712 pointer relation: deallocated dynamic object in this: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.4] line 712 pointer relation: dead object in this: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.5] line 712 pointer relation: pointer outside object bounds in this: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.6] line 712 pointer relation: invalid integer address in this: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.7] line 712 pointer relation: pointer NULL in origin: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.8] line 712 pointer relation: pointer invalid in origin: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.9] line 712 pointer relation: deallocated dynamic object in origin: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.10] line 712 pointer relation: dead object in origin: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.11] line 712 pointer relation: pointer outside object bounds in origin: SUCCESS
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::runtime_ptr_ge::runtime.pointer_arithmetic.12] line 712 pointer relation: invalid integer address in origin: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs function std::ptr::const_ptr::<impl *const u8>::offset_from_unsigned
+[std::ptr::const_ptr::<impl *const u8>::offset_from_unsigned.assertion.1] line 727 assertion failed: 0 < pointee_size && pointee_size <= isize::MAX as usize: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/non_null.rs function <std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.1] line 1692 dereference failure: pointer NULL in *self: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.2] line 1692 dereference failure: pointer invalid in *self: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.3] line 1692 dereference failure: deallocated dynamic object in *self: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.4] line 1692 dereference failure: dead object in *self: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.5] line 1692 dereference failure: pointer outside object bounds in *self: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.6] line 1692 dereference failure: invalid integer address in *self: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.7] line 1692 dereference failure: pointer NULL in *other: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.8] line 1692 dereference failure: pointer invalid in *other: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.9] line 1692 dereference failure: deallocated dynamic object in *other: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.10] line 1692 dereference failure: dead object in *other: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.11] line 1692 dereference failure: pointer outside object bounds in *other: SUCCESS
+[<std::ptr::NonNull<u8> as std::cmp::PartialEq>::eq.pointer_dereference.12] line 1692 dereference failure: invalid integer address in *other: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}>
+[<std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}>.safety_check.1] line 255 misaligned pointer to reference cast: address must be a multiple of its type's alignment: SUCCESS
+[<std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}>.safety_check.2] line 255 dereference failure: pointer invalid: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function core::num::<impl usize>::unchecked_add::precondition_check
+[core::num::<impl usize>::unchecked_add::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ub_checks.rs function std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::precondition_check
+[std::ptr::const_ptr::<impl *const T>::offset_from_unsigned::precondition_check.sanity_check.1] line 73 Kani-internal sanity check: Unexpected return from Never function. Please report failures:
+https://github.com/model-checking/kani/issues/new?template=bug_report.md: SUCCESS
+
+/home/runner/work/kani/kani/library/kani/src/lib.rs function <usize as kani::rustc_intrinsics::ToISize>::to_isize
+[<usize as kani::rustc_intrinsics::ToISize>::to_isize.assertion.1] line 57 internal error: entered unreachable code: SUCCESS
+[<usize as kani::rustc_intrinsics::ToISize>::to_isize.safety_check.1] line 57 Offset value overflows isize: SUCCESS
+
+/home/runner/work/kani/kani/library/kani/src/lib.rs function kani::mem::cbmc::same_allocation
+[kani::mem::cbmc::same_allocation.unsupported_construct.1] line 57 Kani does not support reasoning about pointer to unallocated memory: SUCCESS
+
+/home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::offset::<u8, *const u8, usize>
+[kani::rustc_intrinsics::offset::<u8, *const u8, usize>.safety_check.1] line 57 Offset in bytes overflows isize: SUCCESS
+[kani::rustc_intrinsics::offset::<u8, *const u8, usize>.safety_check.2] line 57 Offset result and original pointer must point to the same allocation: SUCCESS
+
+/home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::offset::<u8, *mut u8, usize>
+[kani::rustc_intrinsics::offset::<u8, *mut u8, usize>.safety_check.1] line 57 Offset in bytes overflows isize: SUCCESS
+[kani::rustc_intrinsics::offset::<u8, *mut u8, usize>.safety_check.2] line 57 Offset result and original pointer must point to the same allocation: SUCCESS
+
+/home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8>
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.assertion.1] line 57 [KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_1] Cannot compute offset of a ZST: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.1] line 57 KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_1: FAILURE
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.2] line 57 KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_2: FAILURE
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.3] line 57 KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_3: FAILURE
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.4] line 57 KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_4: FAILURE
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.5] line 57 KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_5: FAILURE
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.safety_check.1] line 57 Offset result and original pointer should point to the same allocation: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.safety_check.2] line 57 Expected the distance between the pointers, in bytes, to be a
+                        multiple of the size of `T`: SUCCESS
+
+/home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from_unsigned::<u8>
+[kani::rustc_intrinsics::ptr_offset_from_unsigned::<u8>.safety_check.1] line 57 Expected non-negative distance between pointers: SUCCESS
+
+/home/runner/work/kani/kani/library/kani_core/src/models.rs function <usize as kani::rustc_intrinsics::ToISize>::to_isize
+[<usize as kani::rustc_intrinsics::ToISize>::to_isize.unreachable.1] line 176 unreachable code: SUCCESS
+
+/home/runner/work/kani/kani/library/kani_core/src/models.rs function kani::rustc_intrinsics::ptr_offset_from::<u8>
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.arithmetic_overflow.1] line 93 attempt to calculate the remainder with overflow: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.arithmetic_overflow.2] line 93 attempt to calculate the remainder with a divisor of zero: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.assertion.2] line 93 [KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_2] attempt to calculate the remainder with a divisor of zero: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.assertion.3] line 93 [KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_3] attempt to calculate the remainder with overflow: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.division-by-zero.1] line 93 division by zero in offset_bytes % t_size: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.arithmetic_overflow.3] line 97 attempt to divide with overflow: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.arithmetic_overflow.4] line 97 attempt to divide by zero: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.assertion.4] line 97 [KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_4] attempt to divide by zero: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.assertion.5] line 97 [KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_5] attempt to divide with overflow: SUCCESS
+[kani::rustc_intrinsics::ptr_offset_from::<u8>.division-by-zero.2] line 97 division by zero in offset_bytes / t_size: SUCCESS
+
+closure_reach.rs function main
+[main.assertion.1] line 5 [KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_0] sum of two bytes fits: SUCCESS
+[main.reachability_check.1] line 5 KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_0: FAILURE
+
+closure_reach.rs function main::{closure#0}
+[main::{closure#0}.pointer_dereference.1] line 4 dereference failure: pointer NULL in *x: SUCCESS
+[main::{closure#0}.pointer_dereference.2] line 4 dereference failure: pointer invalid in *x: SUCCESS
+[main::{closure#0}.pointer_dereference.3] line 4 dereference failure: deallocated dynamic object in *x: SUCCESS
+[main::{closure#0}.pointer_dereference.4] line 4 dereference failure: dead object in *x: SUCCESS
+[main::{closure#0}.pointer_dereference.5] line 4 dereference failure: pointer outside object bounds in *x: SUCCESS
+[main::{closure#0}.pointer_dereference.6] line 4 dereference failure: invalid integer address in *x: SUCCESS
+
+Trace for <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}.reachability_check.1:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 22 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 25 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 29 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 30 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 31 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 32 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 34 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[0]=255 (11111111)
+
+State 35 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[1]=255 (11111111)
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_1
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_2
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_3
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_4
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_5
+  FALSE
+
+
+State 209 function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> thread 0
+----------------------------------------------------
+  temp_0=1 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+Assumption:
+  temp_0 != 0
+
+State 247 file closure_reach.rs function main::{closure#0} line 4 thread 0
+----------------------------------------------------
+  var_3=255 (11111111)
+
+State 248 file closure_reach.rs function main::{closure#0} line 4 thread 0
+----------------------------------------------------
+  var_0=255 (00000000 00000000 00000000 11111111)
+
+State 249 file closure_reach.rs function main::{closure#0} line 4 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNCNvCs2bcUpbe8o9D_13closure_reach4main0B3_=255 (00000000 00000000 00000000 11111111)
+
+State 251 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  var_6=255 (00000000 00000000 00000000 11111111)
+
+State 252 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  var_5.1=255 (00000000 00000000 00000000 11111111)
+
+State 255 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  b=255 (00000000 00000000 00000000 11111111)
+
+State 256 function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} thread 0
+----------------------------------------------------
+  temp_0.result=255 (00000000 00000000 00000000 11111111)
+
+State 257 function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} thread 0
+----------------------------------------------------
+  tmp_statement_expression.0=255 (00000000 00000000 00000000 11111111)
+
+State 258 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 53 thread 0
+----------------------------------------------------
+  var_4.0=255 (00000000 00000000 00000000 11111111)
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 204 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_7
+  FALSE
+
+
+
+Trace for kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.1:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 22 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 25 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 29 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 30 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 31 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 32 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 34 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[0]=255 (11111111)
+
+State 35 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[1]=255 (11111111)
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_1
+  FALSE
+
+
+
+Trace for kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.2:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 22 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 25 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 29 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 30 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 31 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 32 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 34 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[0]=255 (11111111)
+
+State 35 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[1]=255 (11111111)
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_1
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_2
+  FALSE
+
+
+
+Trace for kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.3:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 22 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 25 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 29 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 30 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 31 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 32 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 34 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[0]=255 (11111111)
+
+State 35 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[1]=255 (11111111)
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_1
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_2
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_3
+  FALSE
+
+
+
+Trace for kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.4:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 22 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 25 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 29 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 30 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 31 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 32 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 34 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[0]=255 (11111111)
+
+State 35 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[1]=255 (11111111)
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_1
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_2
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_3
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_4
+  FALSE
+
+
+
+Trace for kani::rustc_intrinsics::ptr_offset_from::<u8>.reachability_check.5:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 22 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 25 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 29 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 30 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 31 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 32 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 34 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[0]=255 (11111111)
+
+State 35 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[1]=255 (11111111)
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_1
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_2
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_3
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_4
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_5
+  FALSE
+
+
+
+Trace for main.reachability_check.1:
+
+State 14 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 15 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 356 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 16 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 17 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any_raw_array::<u8, 2> line 357 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani13any_raw_arrayhKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 19 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 20 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 42 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 21 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 22 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <u8 as kani::Arbitrary>::any_array::<2> line 43 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs7_Cs1xmhYfHElKw_4kanihNtB6_9Arbitrary9any_arrayKj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 24 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 25 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 130 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 26 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 27 file /home/runner/work/kani/kani/library/kani_core/src/arbitrary.rs function <[u8; 2] as kani::Arbitrary>::any line 131 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNvXs0_Cs1xmhYfHElKw_4kaniAhj2_NtB5_9Arbitrary3anyCs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 29 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[0]=255 (11111111)
+
+State 30 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 278 thread 0
+----------------------------------------------------
+  var_0[1]=255 (11111111)
+
+State 31 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[0]=255 (11111111)
+
+State 32 file /home/runner/work/kani/kani/library/kani_core/src/lib.rs function kani::any::<[u8; 2]> line 279 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvCs1xmhYfHElKw_4kani3anyAhj2_ECs2bcUpbe8o9D_13closure_reach[1]=255 (11111111)
+
+State 34 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[0]=255 (11111111)
+
+State 35 file closure_reach.rs function main line 3 thread 0
+----------------------------------------------------
+  b[1]=255 (11111111)
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_1
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_2
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_3
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_4
+  FALSE
+
+
+Violated property:
+  file /home/runner/work/kani/kani/library/kani/src/lib.rs function kani::rustc_intrinsics::ptr_offset_from::<u8> line 57 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_5
+  FALSE
+
+
+State 209 function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> thread 0
+----------------------------------------------------
+  temp_0=1 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+Assumption:
+  temp_0 != 0
+
+State 247 file closure_reach.rs function main::{closure#0} line 4 thread 0
+----------------------------------------------------
+  var_3=255 (11111111)
+
+State 248 file closure_reach.rs function main::{closure#0} line 4 thread 0
+----------------------------------------------------
+  var_0=255 (00000000 00000000 00000000 11111111)
+
+State 249 file closure_reach.rs function main::{closure#0} line 4 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNCNvCs2bcUpbe8o9D_13closure_reach4main0B3_=255 (00000000 00000000 00000000 11111111)
+
+State 251 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  var_6=255 (00000000 00000000 00000000 11111111)
+
+State 252 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  var_5.1=255 (00000000 00000000 00000000 11111111)
+
+State 255 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  b=255 (00000000 00000000 00000000 11111111)
+
+State 256 function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} thread 0
+----------------------------------------------------
+  temp_0.result=255 (00000000 00000000 00000000 11111111)
+
+State 257 function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} thread 0
+----------------------------------------------------
+  tmp_statement_expression.0=255 (00000000 00000000 00000000 11111111)
+
+State 258 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 53 thread 0
+----------------------------------------------------
+  var_4.0=255 (00000000 00000000 00000000 11111111)
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 204 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_7
+  FALSE
+
+
+State 260 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 53 thread 0
+----------------------------------------------------
+  var_0=255 (00000000 00000000 00000000 11111111)
+
+State 261 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 53 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNCINvXsy_NtNtNtCsci0VKyKEi6N_4core4iter6traits5accummNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtNtBe_5slice4iter4IterhENCNvCs2bcUpbe8o9D_13closure_reach4main0EE0B20_=255 (00000000 00000000 00000000 11111111)
+
+State 263 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  var_0=255 (00000000 00000000 00000000 11111111)
+
+State 264 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNCINvNtNtNtCsci0VKyKEi6N_4core4iter8adapters3map8map_foldRhmmNCNvCs2bcUpbe8o9D_13closure_reach4main0NCINvXsy_NtNtB8_6traits5accummNtB1K_3Sum3sumINtB4_3MapINtNtNtBa_5slice4iter4IterhEBY_EE0E0B12_=255 (00000000 00000000 00000000 11111111)
+
+State 266 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> line 255 thread 0
+----------------------------------------------------
+  var_19=255 (00000000 00000000 00000000 11111111)
+
+State 267 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> line 255 thread 0
+----------------------------------------------------
+  acc=255 (00000000 00000000 00000000 11111111)
+
+State 278 function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> thread 0
+----------------------------------------------------
+  temp_0=1 (00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001)
+
+Assumption:
+  temp_0 != 0
+
+State 280 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> line 255 thread 0
+----------------------------------------------------
+  var_22=255 (00000000 00000000 00000000 11111111)
+
+State 352 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> line 255 thread 0
+----------------------------------------------------
+  var_21.0=255 (00000000 00000000 00000000 11111111)
+
+State 355 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> line 255 thread 0
+----------------------------------------------------
+  acc=255 (00000000 00000000 00000000 11111111)
+
+State 358 file closure_reach.rs function main::{closure#0} line 4 thread 0
+----------------------------------------------------
+  var_3=255 (11111111)
+
+State 359 file closure_reach.rs function main::{closure#0} line 4 thread 0
+----------------------------------------------------
+  var_0=255 (00000000 00000000 00000000 11111111)
+
+State 360 file closure_reach.rs function main::{closure#0} line 4 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNCNvCs2bcUpbe8o9D_13closure_reach4main0B3_=255 (00000000 00000000 00000000 11111111)
+
+State 362 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  var_6=255 (00000000 00000000 00000000 11111111)
+
+State 363 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  var_5.0=255 (00000000 00000000 00000000 11111111)
+
+State 364 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  var_5.1=255 (00000000 00000000 00000000 11111111)
+
+State 367 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  a=255 (00000000 00000000 00000000 11111111)
+
+State 368 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  b=255 (00000000 00000000 00000000 11111111)
+
+State 369 function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} thread 0
+----------------------------------------------------
+  temp_0.result=510 (00000000 00000000 00000001 11111110)
+
+State 370 function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} thread 0
+----------------------------------------------------
+  temp_0.overflowed=FALSE (0)
+
+State 371 function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} thread 0
+----------------------------------------------------
+  tmp_statement_expression.0=510 (00000000 00000000 00000001 11111110)
+
+State 372 function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} thread 0
+----------------------------------------------------
+  tmp_statement_expression.1=FALSE (00000000)
+
+State 373 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 53 thread 0
+----------------------------------------------------
+  var_4.0=510 (00000000 00000000 00000001 11111110)
+
+State 374 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 53 thread 0
+----------------------------------------------------
+  var_4.1=FALSE (00000000)
+
+Violated property:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 204 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_7
+  FALSE
+
+
+Assumption:
+  file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs line 53 column 28 function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}
+  !(var_4.1 != FALSE)
+
+State 378 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 53 thread 0
+----------------------------------------------------
+  var_0=510 (00000000 00000000 00000001 11111110)
+
+State 379 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0} line 53 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNCINvXsy_NtNtNtCsci0VKyKEi6N_4core4iter6traits5accummNtB8_3Sum3sumINtNtNtBc_8adapters3map3MapINtNtNtBe_5slice4iter4IterhENCNvCs2bcUpbe8o9D_13closure_reach4main0EE0B20_=510 (00000000 00000000 00000001 11111110)
+
+State 381 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  var_0=510 (00000000 00000000 00000001 11111110)
+
+State 382 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function std::iter::adapters::map::map_fold::<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0} line 88 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RNCINvNtNtNtCsci0VKyKEi6N_4core4iter8adapters3map8map_foldRhmmNCNvCs2bcUpbe8o9D_13closure_reach4main0NCINvXsy_NtNtB8_6traits5accummNtB1K_3Sum3sumINtB4_3MapINtNtNtBa_5slice4iter4IterhEBY_EE0E0B12_=510 (00000000 00000000 00000001 11111110)
+
+State 384 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> line 255 thread 0
+----------------------------------------------------
+  var_19=510 (00000000 00000000 00000001 11111110)
+
+State 385 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> line 255 thread 0
+----------------------------------------------------
+  acc=510 (00000000 00000000 00000001 11111110)
+
+State 395 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> line 264 thread 0
+----------------------------------------------------
+  var_0=510 (00000000 00000000 00000001 11111110)
+
+State 396 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs function <std::slice::Iter<'_, u8> as std::iter::Iterator>::fold::<u32, {closure@std::iter::adapters::map::map_fold<&u8, u32, u32, {closure@closure_reach.rs:4:31: 4:34}, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}>::{closure#0}}> line 265 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs2E_NtNtCsci0VKyKEi6N_4core5slice4iterINtB7_4IterhENtNtNtNtBb_4iter6traits8iterator8Iterator4foldmNCINvNtNtBY_8adapters3map8map_foldRhmmNCNvCs2bcUpbe8o9D_13closure_reach4main0NCINvXsy_NtBW_5accummNtB31_3Sum3sumINtB1I_3MapBF_B2f_EE0E0EB2j_=510 (00000000 00000000 00000001 11111110)
+
+State 399 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function <std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}> as std::iter::Iterator>::fold::<u32, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}> line 128 thread 0
+----------------------------------------------------
+  var_0=510 (00000000 00000000 00000001 11111110)
+
+State 400 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/map.rs function <std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}> as std::iter::Iterator>::fold::<u32, {closure@<u32 as std::iter::Sum>::sum<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>>::{closure#0}}> line 129 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXs0_NtNtNtCsci0VKyKEi6N_4core4iter8adapters3mapINtB6_3MapINtNtNtBc_5slice4iter4IterhENCNvCs2bcUpbe8o9D_13closure_reach4main0ENtNtNtBa_6traits8iterator8Iterator4foldmNCINvXsy_NtB27_5accummNtB2Q_3Sum3sumBN_E0EB1t_=510 (00000000 00000000 00000001 11111110)
+
+State 402 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>> line 50 thread 0
+----------------------------------------------------
+  var_0=510 (00000000 00000000 00000001 11111110)
+
+State 403 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/accum.rs function <u32 as std::iter::Sum>::sum::<std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}>> line 55 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvXsy_NtNtNtCsci0VKyKEi6N_4core4iter6traits5accummNtB6_3Sum3sumINtNtNtBa_8adapters3map3MapINtNtNtBc_5slice4iter4IterhENCNvCs2bcUpbe8o9D_13closure_reach4main0EEB1Y_=510 (00000000 00000000 00000001 11111110)
+
+State 405 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/iterator.rs function <std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}> as std::iter::Iterator>::sum::<u32> line 3581 thread 0
+----------------------------------------------------
+  var_0=510 (00000000 00000000 00000001 11111110)
+
+State 406 file /home/runner/.rustup/toolchains/nightly-2025-11-21-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/iterator.rs function <std::iter::Map<std::slice::Iter<'_, u8>, {closure@closure_reach.rs:4:31: 4:34}> as std::iter::Iterator>::sum::<u32> line 3582 thread 0
+----------------------------------------------------
+  goto_symex$$return_value$$_RINvYINtNtNtNtCsci0VKyKEi6N_4core4iter8adapters3map3MapINtNtNtBc_5slice4iter4IterhENCNvCs2bcUpbe8o9D_13closure_reach4main0ENtNtNtBa_6traits8iterator8Iterator3summEB1n_=510 (00000000 00000000 00000001 11111110)
+
+State 408 file closure_reach.rs function main line 4 thread 0
+----------------------------------------------------
+  s=510 (00000000 00000000 00000001 11111110)
+
+State 409 file closure_reach.rs function main line 5 thread 0
+----------------------------------------------------
+  var_8=TRUE (00000001)
+
+Violated property:
+  file closure_reach.rs function main line 5 thread 0
+  KANI_CHECK_ID_closure_reach.19669f424f7a6637::closure_reach_0
+  FALSE
+
+
+
+** 7 of 74 failed (3 iterations)
+VERIFICATION FAILED
+Manual Harness Summary:
+Verification failed for - main
+Complete - 0 successfully verified harnesses, 1 failures, 1 total.
